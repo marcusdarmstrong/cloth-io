@@ -95,6 +95,10 @@ nav {
   margin-left: -1.5rem;
 }
 
+.comments .separator {
+  margin-left: 1.5rem;
+}
+
 .comment {
   padding-top: 1rem;
   margin-left: .5rem;
