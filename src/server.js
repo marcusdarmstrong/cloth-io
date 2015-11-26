@@ -19,18 +19,18 @@ app.get('/', (req, res) => {
   res.send(layout('Hi', App));
 });
 
-app.get('/p/.*', (req, res) => {
+app.get(/\/p\/.*/, (req, res) => {
   pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
+    if (pgErr) {
+      return res.send('Error ' + pgErr);
+    }
     client.query('select * from t_post', (err) => {
       done();
-      if (pgErr || err) {
-        const error = pgErr || err;
-        console.error(error);
-        res.send('Error ' + error);
+      if (err) {
+        res.send('Error ' + err);
       } else {
-        res.send(layout('Success'), App);
+        res.send(layout('Success', App));
       }
     });
   });
-  res.send(layout('The title'), App);
 });
