@@ -13,6 +13,8 @@ SocketIO.listen(server);
 import App from './app';
 import layout from './layout';
 import sql from './sql';
+import Post from './components/post';
+import React from 'react';
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
@@ -34,7 +36,7 @@ app.get(articleMatcher, (req, res) => {
         if (err) {
           res.status(404).send('Not found');
         } else {
-          res.send(layout('Success', JSON.stringify(result)));
+          res.send(layout('Success', React.renderToString(<Post post={result.rows[0]} />)));
         }
       });
     });
