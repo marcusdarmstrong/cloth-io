@@ -13,11 +13,11 @@ var buffer = require('vinyl-buffer');
 var babel = require('gulp-babel');
 
 gulp.task('clean-server', function() {
-  del(['bin/*.js']);
+  return del(['bin/*.js']);
 });
 
 gulp.task('clean-client', function() {
-  del(['public/*.js', 'public/*.map']);
+  return del(['public/*.js', 'public/*.map']);
 });
 
 gulp.task('lint', function() {
