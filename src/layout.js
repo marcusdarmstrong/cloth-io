@@ -9,7 +9,7 @@ export default function(title, body) {
   <title>${title}</title>
 </head>
 <body>
-  <nav><img class="logo" src="public/images/logo.png"><div class="button pull-right">+</div></nav>
+  <nav><img class="logo" src="public/images/logo.png"></nav>
   <div class="container">
     <article class="article">
       <h1>BGA Wrap Up: Jets at Texans</h1>

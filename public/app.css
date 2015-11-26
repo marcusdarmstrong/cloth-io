@@ -24,6 +24,32 @@
   background-color: #6A470D;
 }
 
+.comments {
+  margin-left: -1rem;
+}
+
+.comments .separator {
+  margin-left: 1rem;
+}
+
+.comment-summary h2 {
+  margin-left: 1rem;
+}
+
+@media (min-width: 800px) {
+  .comments {
+    margin-left: -1.5rem;
+  }
+
+  .comments .separator {
+    margin-left: 1.5rem;
+  }
+
+  .comment-summary h2 {
+    margin-left: 1.5rem;
+  }
+}
+
 html {
   font-size: 16pt;
   line-height: 1.5em;
@@ -98,11 +124,6 @@ nav {
 
 .comments {
   padding-top: 2rem;
-  margin-left: -1.5rem;
-}
-
-.comments .separator {
-  margin-left: 1.5rem;
 }
 
 .comment {
@@ -204,10 +225,6 @@ nav {
 
 .comment-summary {
   overflow: auto;
-}
-
-.comment-summary h2 {
-  margin-left: 1.5rem;
 }
 
 .add-comment-box {
