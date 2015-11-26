@@ -81,7 +81,7 @@ export default function(title, body) {
       </div>
       <div class="reply">
         <div class="reply">
-          <div class="comment fork">
+          <div class="comment fork has-replies">
             <div class="author"><div class="avatar avatar-7">L</div></div>
             <div class="comment-container">
               <div class="comment-header">
@@ -94,6 +94,54 @@ export default function(title, body) {
               </div>
               <div class="comment-text">
                 <p>That's a little rude, don't you think? We're here to talk about the Jets, ya'know.</p>
+              </div>
+              <div class="comment-options">
+                <div class="button pull-right">Reply</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reply">
+        <div class="reply">
+          <div class="reply">
+            <div class="comment fork">
+              <div class="author"><div class="avatar avatar-1">B</div></div>
+              <div class="comment-container">
+                <div class="comment-header">
+                  <div class="comment-timestamp pull-right">
+                    1 minute ago
+                  </div>
+                  <div class="author-name">
+                    Brendan
+                  </div>
+                </div>
+                <div class="comment-text">
+                  <p>Eh, it's cool. Sunday's game made me puke too.</p>
+                </div>
+                <div class="comment-options">
+                  <div class="button pull-right">Reply</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reply">
+        <div class="reply">
+          <div class="comment child">
+            <div class="author"><div class="avatar avatar-2">A</div></div>
+            <div class="comment-container">
+              <div class="comment-header">
+                <div class="comment-timestamp pull-right">
+                  2 minutes ago
+                </div>
+                <div class="author-name">
+                  a57se
+                </div>
+              </div>
+              <div class="comment-text">
+                <p>Fair enough. Fitzpatrick is the best QB of all time.</p>
               </div>
               <div class="comment-options">
                 <div class="button pull-right">Reply</div>
