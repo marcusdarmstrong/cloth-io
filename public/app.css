@@ -30,10 +30,24 @@
 
 .comments .separator {
   margin-left: 1rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
 .comment-summary h2 {
   margin-left: 1rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
 @media (min-width: 800px) {
@@ -114,6 +128,13 @@ nav {
   text-align: center;
   overflow: hidden;
   padding: 0 1rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
 .logo {
@@ -146,6 +167,7 @@ nav {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
+  text-shadow: 1px 1px 1px #666;
 }
 
 .container {
@@ -170,6 +192,13 @@ nav {
   overflow: hidden;
   font-size: .75rem;
   line-height: 1rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 .comment-options {
   overflow: hidden;
