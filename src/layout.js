@@ -11,12 +11,7 @@ export default function(title, body) {
 <body>
   <nav><img class="logo" src="/public/images/logo.png"></nav>
   <div class="container">
-    <article class="article">
-      <h1>BGA Wrap Up: Jets at Texans</h1>
-      <p>For all the changes the Jets made this offseason, yesterday's loss and the struggles over the past few weeks had a familiar feel to them.</p>
-      <p>However, if I told you at the start of the season that the Jets would be without Nick Mangold, Sheldon Richardson and Darrelle Revis during a November road game against a team leading their division, would you really have expected anything better than a competitive loss?</p>
-      <p>Right now, the Jets are victims of their own early-season success because the 4-1 start placed unrealistic expectations on the team. At the same time, they're not as bad as this 1-4 stretch would suggest either.</p>
-    </article>
+    ${body}
     <section class="comments">
       <div class="comment-summary">
         <h2>5 Comments</h2>
@@ -211,7 +206,6 @@ export default function(title, body) {
       </div>
     </section>
   </div>
-  ${body}
   <script src="/public/app.js"></script>
 </body>
 </html>`;
