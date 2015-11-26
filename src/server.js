@@ -12,6 +12,7 @@ SocketIO.listen(server);
 
 import App from './app';
 import layout from './layout';
+import sql from './sql';
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
@@ -19,18 +20,25 @@ app.get('/', (req, res) => {
   res.send(layout('Hi', App));
 });
 
-app.get(/\/p\/.*/, (req, res) => {
-  pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
-    if (pgErr) {
-      return res.send('Error ' + pgErr);
-    }
-    client.query('select * from t_post', (err) => {
-      done();
-      if (err) {
-        res.send('Error ' + err);
-      } else {
-        res.send(layout('Success', App));
+const articleMatcher = /\/p\/(.+)/;
+app.get(articleMatcher, (req, res) => {
+  const match = articleMatcher.exec(req.path);
+  if (match && match.length > 1) {
+    const urlString = match[1];
+    pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
+      if (pgErr) {
+        return res.status(500).send('Internal Server Error');
       }
+      client.query(sql`select * from t_post where urlstring=${urlString}`, (err, result) => {
+        done();
+        if (err) {
+          res.status(404).send('Not found');
+        } else {
+          res.send(layout('Success', JSON.stringify(result)));
+        }
+      });
     });
-  });
+  } else {
+    res.status(404).send('Not found');
+  }
 });
