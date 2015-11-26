@@ -2,21 +2,20 @@ import React from 'react';
 
 export default ({comment}) => {
   const classString = (comment.hasReplies) ? 'comment has-replies' : 'comment';
+  const avatar = comment.name.charAt(0).toUpperCase();
+  const avatarColor = 'color: #' + comment.color;
   let markup = (<div className={classString}>
-    <div className="author"><div className="avatar avatar-1">B</div></div>
+    <div className="author"><div className="avatar" style={avatarColor}>{avatar}</div></div>
     <div className="comment-container">
       <div className="comment-header">
         <div className="comment-timestamp pull-right">
           14 minutes ago
         </div>
         <div className="author-name">
-          Brendan
+          comment.name
         </div>
       </div>
-      <div className="comment-text">
-        <p>I think one of the more frustrating aspects of the Jets recent slump over the last five games is made more alarming by the recurring pattern behind it. Team gets off to a sluggish start, looks unprepared. At least one unit... it varies week to week... seems <strong>totally</strong> lost in space and the others cannot compensate for it.</p>
-        <p>That fragility, or lack of mental toughness, surfaces, and the team falls behind early.</p>
-      </div>
+      <div className="comment-text" dangerouslySetInnerHTML={{__html: comment.body}}></div>
       <div className="comment-options">
         <div className="button pull-right">Reply</div>
       </div>
