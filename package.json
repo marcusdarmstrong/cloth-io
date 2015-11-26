@@ -5,7 +5,7 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "node bin/server.js",
-    "postinstall": "gulp default",
+    "postinstall": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

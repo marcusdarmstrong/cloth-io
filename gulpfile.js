@@ -48,17 +48,6 @@ gulp.task('server', ['clean-server'], function() {
   return gulp.src(['src/**/*.js'])
     .pipe(babel())
     .pipe(gulp.dest('bin'));
-  /*return browserify()
-    .transform(babelify)
-    .require('src/server.js', { entry: true })
-    .bundle()
-    .on('error', function handleError(err) {
-      console.error(err.toString());
-      this.emit('end');
-    })
-    .pipe(source('server.js'))
-    //.pipe(buffer())
-    .pipe(gulp.dest('bin'));*/
 });
 
 gulp.task('default', ['lint', 'server', 'client']);
