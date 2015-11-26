@@ -36,4 +36,4 @@ create table t_comment (
 );
 
 create unique index on t_comment (id);
-create unique index on t_comment (post_id);
+create index on t_comment (post_id);

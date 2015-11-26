@@ -10,8 +10,8 @@ export default function(title, body) {
 </head>
 <body>
   <nav><img class="logo" src="/public/images/logo.png"></nav>
+  ${body}
   <div class="container">
-    ${body}
     <section class="comments">
       <div class="comment-summary">
         <h2>5 Comments</h2>
