@@ -18,6 +18,26 @@ export default function(title, body) {
       <p>Right now, the Jets are victims of their own early-season success because the 4-1 start placed unrealistic expectations on the team. At the same time, they're not as bad as this 1-4 stretch would suggest either.</p>
     </article>
     <section class="comments">
+      <div class="comment-summary">
+        <h2>5 Comments</h2>
+        <div class="add-comment-box">
+          <div class="author"><div class="avatar avatar-4">M</div></div>
+          <div class="add-comment-container">
+            <div class="comment-header">
+              <div class="author-name">
+                Marcus
+              </div>
+            </div>
+            <div class="textarea-container">
+              <div class="textarea" contenteditable></div>
+            </div>
+            <div class="comment-options">
+              <div class="button pull-right">Post Comment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
       <div class="comment has-replies">
         <div class="author"><div class="avatar avatar-1">B</div></div>
         <div class="comment-container">

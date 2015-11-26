@@ -33,6 +33,10 @@ h1 {
   font-weight: bold;
   font-family: "Raleway", "Helvetica", sans-serif;
 }
+.separator {
+  text-align: center;
+  font-size: 1.5rem;
+}
 
 p:first-child {
   margin-top: 5px;
@@ -42,7 +46,7 @@ p:last-child {
   margin-bottom: 0;
 }
 
-.article, .comment-text {
+.article, .comment-text, .textarea {
   font-family: "Merriweather", "Georgia", "Times New Roman", serif;
   font-weight: 300;
 }
@@ -100,7 +104,7 @@ nav {
   height: 2rem;
   width: 2rem;
   border-radius: 1rem;
-  border: 1px solid black;
+  border: 1px solid #666;
   color: white;
   text-align: center;
   line-height: 1.9rem;
@@ -163,31 +167,58 @@ nav {
 }
 
 .child .author:before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: 50%;
-    height: 1.5rem;
-    border-left: 2px solid #666;
-    z-index: -1;
-    margin-left: -1px;
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  height: 1.5rem;
+  border-left: 2px solid #666;
+  z-index: -1;
+  margin-left: -1px;
 }
 
 .fork .author:before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -3px;
-    margin-left: -.5rem;
-    width: 2rem;
-    height: 2rem;
-    border: 2px solid #666;
-    border-right: 2px solid transparent;
-    border-top: 2px solid transparent;
-    border-radius: 0 0 0 1.5rem;
-    z-index: -1;
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -3px;
+  margin-left: -.5rem;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #666;
+  border-right: 2px solid transparent;
+  border-top: 2px solid transparent;
+  border-radius: 0 0 0 1.5rem;
+  z-index: -1;
 }
 
+.comment-summary {
+  overflow: auto;
+}
 
+.comment-summary h2 {
+  margin-left: 1.5rem;
+}
 
-
+.add-comment-box {
+  margin-left: .5rem;
+}
+.add-comment-container {
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+.textarea-container {
+  margin-top: 8px;
+}
+.textarea {
+  width: 100%;
+  line-height: 1rem;
+  font-size: .75rem;
+  outline: none;
+  border: 1px solid #ddd;
+  border-radius: .25rem;
+  padding: .5rem;
+}
+.textarea:focus {
+  border-color: #666;
+}
