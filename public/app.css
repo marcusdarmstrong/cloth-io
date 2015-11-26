@@ -17,6 +17,12 @@
 .avatar-5 {
   background-color: #10833D;
 }
+.avatar-6 {
+  background-color: #301644;
+}
+.avatar-7 {
+  background-color: #6A470D;
+}
 
 html {
   font-size: 16pt;
@@ -184,7 +190,7 @@ nav {
 .fork .author:before {
   content: '';
   position: absolute;
-  top: -50%;
+  top: -85%;
   left: -3px;
   margin-left: -.5rem;
   width: 2rem;

@@ -80,6 +80,29 @@ export default function(title, body) {
         </div>
       </div>
       <div class="reply">
+        <div class="reply">
+          <div class="comment fork">
+            <div class="author"><div class="avatar avatar-7">L</div></div>
+            <div class="comment-container">
+              <div class="comment-header">
+                <div class="comment-timestamp pull-right">
+                  3 minutes ago
+                </div>
+                <div class="author-name">
+                  levi
+                </div>
+              </div>
+              <div class="comment-text">
+                <p>That's a little rude, don't you think? We're here to talk about the Jets, ya'know.</p>
+              </div>
+              <div class="comment-options">
+                <div class="button pull-right">Reply</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reply">
         <div class="comment child">
           <div class="author"><div class="avatar avatar-3">T</div></div>
           <div class="comment-container">
