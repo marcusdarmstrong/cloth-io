@@ -5,14 +5,14 @@ export default ({comment}) => {
   const avatar = comment.name.charAt(0).toUpperCase();
   const avatarColor = '#' + comment.color;
   let markup = (<div className={classString}>
-    <div className="author"><div className="avatar" style={{color: avatarColor}}>{avatar}</div></div>
+    <div className="author"><div className="avatar" style={{backgroundColor: avatarColor}}>{avatar}</div></div>
     <div className="comment-container">
       <div className="comment-header">
         <div className="comment-timestamp pull-right">
           14 minutes ago
         </div>
         <div className="author-name">
-          comment.name
+          {comment.name}
         </div>
       </div>
       <div className="comment-text" dangerouslySetInnerHTML={{__html: comment.body}}></div>
