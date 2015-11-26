@@ -15,6 +15,7 @@ import layout from './layout';
 import sql from './sql';
 import Post from './components/post';
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
@@ -36,7 +37,7 @@ app.get(articleMatcher, (req, res) => {
         if (err) {
           res.status(404).send('Not found');
         } else {
-          res.send(layout('Success', React.renderToString(<Post post={result.rows[0]} />)));
+          res.send(layout('Success', ReactDOMServer.renderToString(<Post post={result.rows[0]} />)));
         }
       });
     });
