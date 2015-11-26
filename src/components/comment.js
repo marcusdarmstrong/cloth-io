@@ -3,9 +3,9 @@ import React from 'react';
 export default ({comment}) => {
   const classString = (comment.hasReplies) ? 'comment has-replies' : 'comment';
   const avatar = comment.name.charAt(0).toUpperCase();
-  const avatarColor = 'color: #' + comment.color;
+  const avatarColor = '#' + comment.color;
   let markup = (<div className={classString}>
-    <div className="author"><div className="avatar" style={avatarColor}>{avatar}</div></div>
+    <div className="author"><div className="avatar" style={{color: avatarColor}}>{avatar}</div></div>
     <div className="comment-container">
       <div className="comment-header">
         <div className="comment-timestamp pull-right">
