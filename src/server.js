@@ -1,21 +1,20 @@
 import express from 'express';
 import path from 'path';
 import { native as pg } from 'pg';
-const app = express();
-
-app.set('port', (process.env.PORT || 5000));
-const server = app.listen(app.get('port'));
-
 import SocketIO from 'socket.io';
-
-SocketIO.listen(server);
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 import layout from './layout';
 import sql from './sql';
 import Post from './components/post';
 
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+
+const app = express();
+app.set('port', (process.env.PORT || 5000));
+const server = app.listen(app.get('port'));
+SocketIO.listen(server);
+
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import AddCommentBox from './add-comment-box';
+import Comment from './comment';
 
 export default ({comments}) => (
   <section className="comments">
