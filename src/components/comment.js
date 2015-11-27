@@ -30,7 +30,11 @@ export default ({comment}) => {
     </div>
   </div>);
 
-  for (let i = comment.nestLevel; i > 0; i--) {
+  let nestLevel = comment.nestLevel;
+  if (comment.child) {
+    --nestLevel;
+  }
+  for (let i = nestLevel; i > 0; i--) {
     markup = (<div className="reply">{markup}</div>);
   }
   return markup;
