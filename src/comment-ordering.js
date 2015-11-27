@@ -1,7 +1,7 @@
 function sortAndBucket(comments) { // I think O(n log n)
   comments.sort((a, b) => a.created - b.created);
   const buckets = {};
-  for (let i = 0; i < comments.length; i++) {
+  for (let i = 0; i < comments.length; ++i) {
     const comment = comments[i];
     const key = comment.parent_id || 0;
     if (!buckets[key]) {
@@ -15,7 +15,7 @@ function sortAndBucket(comments) { // I think O(n log n)
 function markAndFlatten(buckets, parentId, fork) { // I think O(n)
   const result = [];
   const bucket = buckets[parentId];
-  for (let i = 0; i < bucket.length; i++) {
+  for (let i = 0; i < bucket.length; ++i) {
     const root = bucket[i];
     const children = buckets[root.id];
     if (fork) {
