@@ -13,7 +13,7 @@ function sortAndBucket(comments) { // I think O(n log n)
 }
 
 function markAndFlatten(buckets, parentId, fork) { // I think O(n)
-  const result = [];
+  let result = [];
   const bucket = buckets[parentId];
   for (let i = 0; i < bucket.length; ++i) {
     const root = bucket[i];
@@ -25,7 +25,7 @@ function markAndFlatten(buckets, parentId, fork) { // I think O(n)
     if (children) {
       root.hasReplies = true;
       children[children.length - 1].child = true;
-      result.concat(markAndFlatten(buckets, root.id, true));
+      result = result.concat(markAndFlatten(buckets, root.id, true));
     }
   }
   return result;
