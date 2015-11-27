@@ -3,9 +3,9 @@ import React from 'react';
 export default ({comment}) => {
   let classString = 'comment';
   if (comment.hasReplies) {
-    classString += 'has-replies';
+    classString += ' has-replies';
   }
-  if (comment.child) {
+  if (comment.child && !comment.fork) {
     classString += ' child';
   }
   if (comment.fork) {
