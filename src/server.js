@@ -40,7 +40,7 @@ app.get(articleMatcher, (req, res) => {
         res.status(404).send('Not found');
       } else {
         const post = result.rows[0];
-        client.query(sql`select c.*, u.* from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
+        client.query(sql`select c.*, u.name, u.color from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
           const comments = commentOrdering(commentResult.rows);
           res.send(layout(post.title, ReactDOMServer.renderToString(<Post post={post} comments={comments} />)));
         });
