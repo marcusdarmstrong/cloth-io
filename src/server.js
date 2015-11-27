@@ -7,7 +7,7 @@ import ReactDOMServer from 'react-dom/server';
 
 import layout from './layout';
 import sql from './sql';
-import commentOrdering from './commentOrdering';
+import commentOrdering from './comment-ordering';
 import Post from './components/post';
 
 
