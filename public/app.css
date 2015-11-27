@@ -89,7 +89,7 @@ p:last-child {
   -ms-user-select: none;
   user-select: none;
   font-size: .75em;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.93);
 }
 
 .button:hover {
