@@ -89,7 +89,7 @@ p:last-child {
   -ms-user-select: none;
   user-select: none;
   font-size: .75em;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.8);
 }
 
 .button:hover {
@@ -119,6 +119,7 @@ nav {
 
 .logo {
   height: 2rem;
+  width: 3.6rem;
   cursor: pointer;
   margin: 1rem auto;
   display: block;
