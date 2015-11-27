@@ -12,7 +12,7 @@ function sortAndBucket(comments) { // I think O(n log n)
   return buckets;
 }
 
-function markAndFlatten(buckets, parentId, fork) { // I think O(n)
+function markAndFlatten(buckets, parentId, fork, nestLevel) { // I think O(n)
   let result = [];
   const bucket = buckets[parentId];
   for (let i = 0; i < bucket.length; ++i) {
@@ -21,16 +21,17 @@ function markAndFlatten(buckets, parentId, fork) { // I think O(n)
     if (fork) {
       root.fork = true;
     }
+    root.nestLevel = nestLevel;
     result.push(root);
     if (children) {
       root.hasReplies = true;
       children[children.length - 1].child = true;
-      result = result.concat(markAndFlatten(buckets, root.id, true));
+      result = result.concat(markAndFlatten(buckets, root.id, true, nestLevel + 1));
     }
   }
   return result;
 }
 
 export default function(rawComments) {
-  return markAndFlatten(sortAndBucket(rawComments), 0, false);
+  return markAndFlatten(sortAndBucket(rawComments), 0, false, 0);
 }

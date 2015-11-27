@@ -5,10 +5,9 @@ export default ({comment}) => {
   if (comment.hasReplies) {
     classString += ' has-replies';
   }
-  if (comment.child && !comment.fork) {
+  if (comment.child) {
     classString += ' child';
-  }
-  if (comment.fork) {
+  } else if (comment.fork) {
     classString += ' fork';
   }
   const avatar = comment.name.charAt(0).toUpperCase();
