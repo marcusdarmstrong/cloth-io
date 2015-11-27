@@ -1,29 +1,5 @@
 *{box-sizing: border-box;}
 
-/*Avatar colors: 0D6A66, 44202B, 6A0D57, 830A02, 10833D, 301644, 6A470D*/
-
-.avatar-1 {
-  background-color: #0D6A66;
-}
-.avatar-2 {
-  background-color: #44202B;
-}
-.avatar-3 {
-  background-color: #6A0D57;
-}
-.avatar-4 {
-  background-color: #830A02;
-}
-.avatar-5 {
-  background-color: #10833D;
-}
-.avatar-6 {
-  background-color: #301644;
-}
-.avatar-7 {
-  background-color: #6A470D;
-}
-
 .comments {
   margin-left: -1rem;
 }
@@ -124,6 +100,8 @@ p:last-child {
 }
 
 nav {
+  top: 0;
+  position: fixed;
   width: 100%;
   text-align: center;
   overflow: hidden;
@@ -138,7 +116,7 @@ nav {
 }
 
 .logo {
-  height: 2em;
+  height: 2rem;
   cursor: pointer;
   margin: 1rem auto;
 }
@@ -172,7 +150,7 @@ nav {
 
 .container {
   max-width: 700px;
-  margin: 0 auto;
+  margin: 4rem auto;
 }
 
 .author {

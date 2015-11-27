@@ -1,5 +1,6 @@
 import React from 'react';
 import Comments from './comments';
+import Nav from './nav';
 
 export default ({post, comments}) => (
   <div>
