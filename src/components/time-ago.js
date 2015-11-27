@@ -52,7 +52,7 @@ class TimeAgo extends React.Component {
     }
 
     const then = this.props.timestamp;
-    const now = Math.round(Date.now().getTime() / 1000);
+    const now = Math.round(Date.now() / 1000);
     const seconds = Math.abs(now - then);
 
     let period = 35000;
@@ -69,7 +69,7 @@ class TimeAgo extends React.Component {
   }
   render() {
     const then = this.props.timestamp;
-    const now = Math.round(Date.now().getTime() / 1000);
+    const now = Math.round(Date.now() / 1000);
     const seconds = Math.abs(now - then);
 
     let value;
