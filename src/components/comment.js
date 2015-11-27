@@ -1,4 +1,5 @@
 import React from 'react';
+import TimeAgo from './time-ago';
 
 export default ({comment}) => {
   let classString = 'comment';
@@ -16,9 +17,7 @@ export default ({comment}) => {
     <div className="author"><div className="avatar" style={{backgroundColor: avatarColor}}>{avatar}</div></div>
     <div className="comment-container">
       <div className="comment-header">
-        <div className="comment-timestamp pull-right">
-          14 minutes ago
-        </div>
+        <TimeAgo timestamp={comment.created} />
         <div className="author-name">
           {comment.name}
         </div>
