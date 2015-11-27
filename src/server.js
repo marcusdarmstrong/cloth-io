@@ -42,6 +42,7 @@ app.get(articleMatcher, (req, res) => {
         const post = result.rows[0];
         client.query(sql`select c.*, u.name, u.color from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
           const comments = commentOrdering(commentResult.rows);
+          console.log(JSON.stringify(comments))
           res.send(layout(post.title, ReactDOMServer.renderToString(<Post post={post} comments={comments} />)));
         });
       }

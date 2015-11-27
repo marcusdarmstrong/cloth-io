@@ -9,7 +9,6 @@ function sortAndBucket(comments) { // I think O(n log n)
     }
     buckets[key].push(comment);
   }
-  console.log(JSON.stringify(buckets));
   return buckets;
 }
 
