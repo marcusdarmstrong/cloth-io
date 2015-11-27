@@ -89,7 +89,7 @@ p:last-child {
   -ms-user-select: none;
   user-select: none;
   font-size: .75em;
-  background-color: rgba(255,255,255,0.93);
+  background-color: white;
 }
 
 .button:hover {
@@ -107,7 +107,7 @@ nav {
   width: 100%;
   text-align: center;
   overflow: hidden;
-  padding: 0 1rem;
+  padding: .5rem 1rem;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -115,12 +115,13 @@ nav {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
+  background-color: rgba(255,255,255,0.80);
 }
 
 .logo {
   width: 3.6rem;
   cursor: pointer;
-  margin: 1rem 0 0 -1.8em;
+  margin-left: -1.8em;
   position: absolute;
   top: 0;
   left: 50%;
@@ -187,7 +188,7 @@ nav {
   overflow: hidden;
 }
 .comment-options .button {
-  margin-bottom: 0;
+  margin: 1rem 0 0;
   line-height: 1rem;
 }
 .comment-timestamp {
