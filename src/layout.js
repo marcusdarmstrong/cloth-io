@@ -9,7 +9,6 @@ export default function(title, body) {
   <title>${title}</title>
 </head>
 <body>
-  <nav><img class="logo" src="/public/images/logo.png"></nav>
   ${body}
   <script src="/public/app.js"></script>
 </body>
