@@ -7,6 +7,7 @@ import ReactDOMServer from 'react-dom/server';
 
 import layout from './layout';
 import sql from './sql';
+import commentOrdering from './commentOrdering';
 import Post from './components/post';
 
 
@@ -40,7 +41,7 @@ app.get(articleMatcher, (req, res) => {
       } else {
         const post = result.rows[0];
         client.query(sql`select c.*, u.* from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
-          const comments = commentResult.rows;
+          const comments = commentOrdering(commentResult.rows);
           res.send(layout(post.title, ReactDOMServer.renderToString(<Post post={post} comments={comments} />)));
         });
       }

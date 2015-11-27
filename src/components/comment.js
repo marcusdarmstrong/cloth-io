@@ -1,7 +1,16 @@
 import React from 'react';
 
 export default ({comment}) => {
-  const classString = (comment.hasReplies) ? 'comment has-replies' : 'comment';
+  let classString = 'comment';
+  if (comment.hasReplies) {
+    classString += 'has-replies';
+  }
+  if (comment.child) {
+    classString += ' child';
+  }
+  if (comment.fork) {
+    classString += ' fork';
+  }
   const avatar = comment.name.charAt(0).toUpperCase();
   const avatarColor = '#' + comment.color;
   let markup = (<div className={classString}>
