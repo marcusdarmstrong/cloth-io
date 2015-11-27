@@ -119,10 +119,10 @@ nav {
 
 .logo {
   width: 76px;
-  width: 3.6rem;
   cursor: pointer;
   margin: 1rem auto;
   display: block;
+  position: static;
 }
 
 .comments {
