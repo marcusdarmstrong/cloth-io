@@ -79,7 +79,6 @@ p:last-child {
   border-radius: 1rem;
   border: 1px solid #1D8345;
   display: inline-block;
-  margin: 1rem 0;
   padding: 0 .5rem;
   cursor: pointer;
   -webkit-touch-callout: none;
@@ -88,7 +87,7 @@ p:last-child {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-size: .75em;
+  font-size: .75rem;
   background-color: white;
 }
 
@@ -121,9 +120,9 @@ nav {
 .logo {
   width: 3.6rem;
   cursor: pointer;
-  margin-left: -1.8em;
+  margin-left: -1.8rem;
   position: absolute;
-  top: 0;
+  top: .5rem;
   left: 50%;
 }
 
