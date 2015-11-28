@@ -14,7 +14,7 @@ import sql from './sql';
 import commentOrdering from './comment-ordering';
 import App from './components/app';
 import reducer from './reducer';
-import { validate, NAME_REX } from './validator';
+import { validate, NAME_REX, EMAIL_REX } from './validator';
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -37,6 +37,28 @@ app.get('/api/isUsernameTaken', (req, res) => {
         return res.status(500).send('Internal Server Error');
       }
       client.query(sql`select id from t_user where name=${name}`, (err, result) => {
+        done();
+        if (result && result.rows && result.rows.length === 0) {
+          res.send(JSON.stringify({success: true}));
+        } else {
+          res.send(JSON.stringify({success: false}));
+        }
+      });
+    });
+  } else {
+    res.send(JSON.stringify({success: false}));
+  }
+});
+
+app.get('/api/isEmailTaken', (req, res) => {
+  let email = req.query.email;
+  if (email && validate(EMAIL_REX, email)) {
+    email = email.trim();
+    pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
+      if (pgErr) {
+        return res.status(500).send('Internal Server Error');
+      }
+      client.query(sql`select id from t_user where email=${email}`, (err, result) => {
         done();
         if (result && result.rows && result.rows.length === 0) {
           res.send(JSON.stringify({success: true}));

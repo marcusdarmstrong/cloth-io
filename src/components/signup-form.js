@@ -51,7 +51,16 @@ class SignupForm extends React.Component {
     if (failure) {
       this.setState({emailHelperText: 'Double check your email.'});
     } else {
-      this.setState({emailHelperText: 'Looks good!'});
+      this.setState({emailHelperText: 'Checking...'});
+      fetch('/api/isEmailTaken?name=' + encodeURIComponent(newEmail))
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            this.setState({emailHelperText: 'Looks good!'});
+          } else {
+            this.setState({emailHelperText: 'That email is taken. Try another.'});
+          }
+        });
     }
   }
   handlePasswordChange(e) {
