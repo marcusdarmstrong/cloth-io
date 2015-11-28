@@ -52,7 +52,7 @@ class SignupForm extends React.Component {
       this.setState({emailHelperText: 'Double check your email.'});
     } else {
       this.setState({emailHelperText: 'Checking...'});
-      fetch('/api/isEmailTaken?name=' + encodeURIComponent(newEmail))
+      fetch('/api/isEmailTaken?email=' + encodeURIComponent(newEmail))
         .then(res => res.json())
         .then(data => {
           if (data.success) {
