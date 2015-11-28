@@ -8,7 +8,7 @@ class Nav extends React.Component {
       modal = React.createElement(
         Modal,
         Object.assign({title: 'Log in'}, this.props),
-        React.createElement(this.props.modal)
+        React.createElement(this.props.modal, this.props)
       );
     }
 
