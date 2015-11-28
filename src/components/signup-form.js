@@ -32,7 +32,7 @@ class SignupForm extends React.Component {
       }
     } else {
       this.setState({nameHelperText: 'Checking...'});
-      fetch('./api/isUsernameTaken?name=' + encodeURIComponent(newName))
+      fetch('/api/isUsernameTaken?name=' + encodeURIComponent(newName))
         .then(res => res.json())
         .then(data => {
           if (data.success) {
