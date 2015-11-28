@@ -26,7 +26,7 @@ class Nav extends React.Component {
 
 Nav.propTypes = {
   modal: React.PropTypes.shape({
-    component: React.PropTypes.instanceOf(React.Component),
+    component: React.PropTypes.func,
   }),
   openModal: React.PropTypes.func.isRequired,
 };
