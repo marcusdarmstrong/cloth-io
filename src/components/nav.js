@@ -6,7 +6,7 @@ class Nav extends React.Component {
       <nav>
         <div className="button pull-right" onClick={openModal.bind(this, 'login')}>Log in</div>
         <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
-        {(modal) ? React.createElement(modal) : ''}
+        {(modal) ? React.createElement(modal) : null}
       </nav>
     );
   }
