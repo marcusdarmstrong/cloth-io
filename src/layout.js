@@ -1,4 +1,4 @@
-export default function(title, body) {
+export default function(title, body, state) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -10,6 +10,9 @@ export default function(title, body) {
 </head>
 <body>
   <div id="react-container">${body}</div>
+  <script>
+    window.__INITIAL_STATE__ = ${JSON.stringify(state)}
+  </script>
   <script src="/public/app.js"></script>
 </body>
 </html>`;

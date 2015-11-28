@@ -4,12 +4,15 @@ import { native as pg } from 'pg';
 import SocketIO from 'socket.io';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import { createStore } from 'redux';
+import { List as list, Map as map } from 'immutable';
+import { Provider } from 'react-redux';
 
 import layout from './layout';
 import sql from './sql';
 import commentOrdering from './comment-ordering';
 import Post from './components/post';
-
+import reducer from './reducer';
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -41,8 +44,16 @@ app.get(articleMatcher, (req, res) => {
       } else {
         const post = result.rows[0];
         client.query(sql`select c.*, u.name, u.color from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
-          const comments = commentOrdering(commentResult.rows);
-          res.send(layout(post.title, ReactDOMServer.renderToString(<Post post={post} comments={comments} />)));
+          const comments = list(commentOrdering(commentResult.rows));
+          const user = 'Marcus';
+
+          const store = createStore(reducer, map({post, comments, user}));
+
+          res.send(layout(post.title, ReactDOMServer.renderToString(
+            <Provider store={store}>
+              <Post/>
+            </Provider>
+          ), store));
         });
       }
     });
