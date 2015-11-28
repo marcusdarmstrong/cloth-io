@@ -10,7 +10,7 @@ export default ({comments}) => (
     </div>
     <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
     {comments.map((comment) =>
-      <Comment comment={comment} />
+      <Comment key={comment.id} comment={comment} />
     )}
   </section>
 );
