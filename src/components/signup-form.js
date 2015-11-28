@@ -1,6 +1,6 @@
 import React from 'react';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from '../validator';
-import fetch from 'whatwg-fetch';
+import fetch from 'isomorphic-fetch';
 
 class SignupForm extends React.Component {
   constructor() {
