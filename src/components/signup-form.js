@@ -13,20 +13,47 @@ class SignupForm extends React.Component {
       emailError: false,
       emailHelperText: 'You\'ll use this to log in.',
       passwordError: false,
-      passwordHelperText: '6 or more characters.',
+      passwordHelperText: 'Password must be 6 or more characters.',
     };
   }
   handleNameChange(e) {
-    this.setState({name: e.target.value});
-    this.setState({nameError: !validate(NAME_REX, e.target.value)});
+    const newName = e.target.value;
+    const failure = !validate(NAME_REX, newName);
+    this.setState({name: newName});
+    this.setState({nameError: failure});
+    if (failure) {
+      if (newName.length < 4) {
+        this.setState({passwordHelperText: 'Make sure you have at least 4 characters.'});
+      } else if (newName.length > 20) {
+        this.setState({passwordHelperText: 'Keep it under 20 characters.'});
+      } else {
+        this.setState({passwordHelperText: 'Avoid any special characters.'});
+      }
+    } else {
+      this.setState({passwordHelperText: 'Looks good!'});
+    }
   }
   handleEmailChange(e) {
-    this.setState({email: e.target.value});
-    this.setState({emailError: !validate(EMAIL_REX, e.target.value)});
+    const newEmail = e.target.value;
+    const failure = !validate(EMAIL_REX, newEmail);
+    this.setState({email: newEmail});
+    this.setState({emailError: failure});
+    if (failure) {
+      this.setState({passwordHelperText: 'Double check your email.'});
+    } else {
+      this.setState({passwordHelperText: 'Looks good!'});
+    }
   }
   handlePasswordChange(e) {
-    this.setState({password: e.target.value});
-    this.setState({passwordError: !validate(PASSWORD_REX, e.target.value)});
+    const newPassword = e.target.value;
+    const failure = !validate(PASSWORD_REX, newPassword);
+    this.setState({password: newPassword});
+    this.setState({passwordError: failure});
+    if (failure) {
+      this.setState({passwordHelperText: 'Password must be 6 or more characters.'});
+    } else {
+      this.setState({passwordHelperText: 'Looks good!'});
+    }
   }
   handleSubmit(e) {
     e.preventDefault();
