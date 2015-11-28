@@ -9,7 +9,10 @@ const Modal = (props) => (
 );
 
 Modal.propTypes = {
-  children: React.PropTypes.arrayOf(React.PropTypes.element),
+  children: React.PropTypes.oneOfType([
+    React.PropTypes.arrayOf(React.PropTypes.node),
+     React.PropTypes.node,
+  ]),
 };
 
 export default Modal;
