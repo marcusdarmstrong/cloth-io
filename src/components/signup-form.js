@@ -39,6 +39,7 @@ class SignupForm extends React.Component {
             this.setState({nameHelperText: 'Looks good!'});
           } else {
             this.setState({nameHelperText: 'That name is taken. Try another.'});
+            this.setState({nameError: true});
           }
         });
     }
@@ -59,6 +60,7 @@ class SignupForm extends React.Component {
             this.setState({emailHelperText: 'Looks good!'});
           } else {
             this.setState({emailHelperText: 'That email is taken. Try another.'});
+            this.setState({emailError: true});
           }
         });
     }
