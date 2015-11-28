@@ -23,14 +23,14 @@ class SignupForm extends React.Component {
     this.setState({nameError: failure});
     if (failure) {
       if (newName.length < 4) {
-        this.setState({passwordHelperText: 'Make sure you have at least 4 characters.'});
+        this.setState({nameHelperText: 'Make sure you have at least 4 characters.'});
       } else if (newName.length > 20) {
-        this.setState({passwordHelperText: 'Keep it under 20 characters.'});
+        this.setState({nameHelperText: 'Keep it under 20 characters.'});
       } else {
-        this.setState({passwordHelperText: 'Avoid any special characters.'});
+        this.setState({nameHelperText: 'Avoid any special characters.'});
       }
     } else {
-      this.setState({passwordHelperText: 'Looks good!'});
+      this.setState({nameHelperText: 'Looks good!'});
     }
   }
   handleEmailChange(e) {
@@ -39,9 +39,9 @@ class SignupForm extends React.Component {
     this.setState({email: newEmail});
     this.setState({emailError: failure});
     if (failure) {
-      this.setState({passwordHelperText: 'Double check your email.'});
+      this.setState({emailHelperText: 'Double check your email.'});
     } else {
-      this.setState({passwordHelperText: 'Looks good!'});
+      this.setState({emailHelperText: 'Looks good!'});
     }
   }
   handlePasswordChange(e) {
