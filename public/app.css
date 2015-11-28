@@ -286,6 +286,22 @@ nav {
   border: 1px solid #ddd;
 }
 
+.modal-frame h2 {
+  margin-top: 0;
+}
+
+.close-button {
+  color: #1D8345;
+  font-size: 1.5rem;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 label {
   display: block;
   font-weight: 100;

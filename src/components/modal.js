@@ -5,7 +5,7 @@ const Modal = (props) => (
     <div className="modal-container">
       <div className="modal-frame">
         <div className="modal-header">
-          <span className="close-button pull-right">&times;</span>
+          <span className="close-button pull-right" onClick={props.closeModal.bind(this, 'login')}>&times;</span>
           <h2>{props.title}</h2>
         </div>
         <div className="modal-content">
@@ -22,6 +22,7 @@ Modal.propTypes = {
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node,
   ]),
+  closeModal: React.PropTypes.func.isRequired,
 };
 
 export default Modal;
