@@ -3,7 +3,7 @@ import React from 'react';
 export default () => (
   <form className="login-form">
     <div className="create-account-cta">
-      <div className="button pull-right">Create Account</div>
+      <div className="button pull-right" onClick={this.props.openModal.bind(this, 'signup')}>Create account</div>
       <div>New here?</div>
     </div>
     <label htmlFor="email">Email address:</label>
