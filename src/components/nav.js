@@ -1,7 +1,8 @@
 import React from 'react';
 
 class Nav extends React.Component {
-  render({modal, openModal}) {
+  render() {
+    const {modal, openModal} = this.props;
     return (
       <nav>
         <div className="button pull-right" onClick={openModal.bind(this, 'login')}>Log in</div>
@@ -11,5 +12,10 @@ class Nav extends React.Component {
     );
   }
 }
+
+Nav.propTypes = {
+  modal: React.PropTypes.instanceOf(React.ReactClass),
+  openModal: React.PropTypes.func.isRequired,
+};
 
 export default Nav;
