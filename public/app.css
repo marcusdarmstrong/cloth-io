@@ -270,6 +270,7 @@ nav {
   position: fixed;
   height: 100%;
   width: 100%;
+  z-index: 1;
 }
 
 .modal-container {
@@ -303,4 +304,13 @@ input {
 
 input:focus {
   border-color: #666;
+}
+
+input[type="submit"] {
+  margin-top: 1rem;
+  background-color: #FFF;
+  color: #1D8345;
+  border: 1px solid #1D8345;
+  border-radius: 1rem;
+  cursor: pointer;
 }
