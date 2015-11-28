@@ -46,14 +46,14 @@ app.get(articleMatcher, (req, res) => {
         client.query(sql`select c.*, u.name, u.color from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
           const comments = list(commentOrdering(commentResult.rows));
           const user = 'Marcus';
-
-          const store = createStore(reducer, map({post, comments, user}));
+          const state = map({post, comments, user});
+          const store = createStore(reducer, state);
 
           res.send(layout(post.title, ReactDOMServer.renderToString(
             <Provider store={store}>
               <App />
             </Provider>
-          ), store));
+          ), state));
         });
       }
     });

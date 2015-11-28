@@ -4,6 +4,6 @@ import Post from './post';
 import * as actions from '../actions';
 
 export default connect(
-  state => { const ret = state.toObject(); console.log(ret); return ret; },
+  state => state.toObject(),
   dispatch => bindActionCreators(actions, dispatch)
 )(Post);
