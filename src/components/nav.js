@@ -3,14 +3,22 @@ import Modal from './modal';
 
 class Nav extends React.Component {
   render() {
-    const {modal, openModal} = this.props;
+    let modal = null;
+    if (this.props.modal) {
+      modal = React.createElement(
+        Modal,
+        Object.assign({title: 'Log in'}, this.props),
+        React.createElement(modal)
+      );
+    }
+
     return (
       <div className="nav-container">
         <nav>
-          <div className="button pull-right" onClick={openModal.bind(this, 'login')}>Log in</div>
+          <div className="button pull-right" onClick={this.props.openModal.bind(this, 'login')}>Log in</div>
           <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
         </nav>
-        {(modal) ? React.createElement(Modal, this.props, React.createElement(modal)) : null}
+        {modal}
       </div>
     );
   }
