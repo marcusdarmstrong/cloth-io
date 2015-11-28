@@ -18,6 +18,9 @@ export function createAuthToken(id) {
 }
 
 export function decodeAuthToken(token) {
+  if (!token) {
+    return null;
+  }
   const decipher = crypto.createDecipher(algorithm, password);
   let dec = decipher.update(token, 'hex', 'utf8');
   dec += decipher.final('utf8');
