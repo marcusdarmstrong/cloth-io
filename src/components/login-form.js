@@ -1,8 +1,9 @@
 import React from 'react';
 
 class LoginForm extends React.Component {
-  getInitialState() {
-    return {email: '', password: ''};
+  constructor() {
+    super();
+    this.state = {email: '', password: ''};
   }
   handleEmailChange(e) {
     this.setState({email: e.target.value});

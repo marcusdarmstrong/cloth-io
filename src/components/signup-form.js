@@ -1,8 +1,9 @@
 import React from 'react';
 
 class SignupForm extends React.Component {
-  getInitialState() {
-    return {name: '', email: '', password: ''};
+  constructor() {
+    super();
+    this.state = {name: '', email: '', password: ''};
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
