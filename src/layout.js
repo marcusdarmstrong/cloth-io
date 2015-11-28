@@ -9,9 +9,7 @@ export default function(title, body) {
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900|Open+Sans:400,600,300,300italic,400italic,600italic,700italic,800italic,800,700|Merriweather:400,300,700,300italic,900italic,700italic,400italic,900' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <div id="react-container">
-    ${body}
-  </div>
+  <div id="react-container">${body}</div>
   <script src="/public/app.js"></script>
 </body>
 </html>`;
