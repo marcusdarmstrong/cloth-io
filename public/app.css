@@ -337,6 +337,10 @@ input[type="submit"] {
   margin-bottom: 1rem;
 }
 
+.create-account-cta div {
+  line-height: 2rem;
+}
+
 .create-acount-cta .button {
   line-height: 1.5rem;
 }
