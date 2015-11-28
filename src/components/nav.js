@@ -7,8 +7,8 @@ class Nav extends React.Component {
     if (this.props.modal) {
       modal = React.createElement(
         Modal,
-        Object.assign({title: 'Log in'}, this.props),
-        React.createElement(this.props.modal, this.props)
+        this.props,
+        React.createElement(this.props.modal.component, this.props)
       );
     }
 
@@ -25,7 +25,9 @@ class Nav extends React.Component {
 }
 
 Nav.propTypes = {
-  modal: React.PropTypes.instanceOf(React.ReactClass),
+  modal: React.PropTypes.shape({
+    component: React.PropTypes.instanceOf(React.ReactClass),
+  }),
   openModal: React.PropTypes.func.isRequired,
 };
 

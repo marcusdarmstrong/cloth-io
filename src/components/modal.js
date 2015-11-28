@@ -6,7 +6,7 @@ const Modal = (props) => (
       <div className="modal-frame">
         <div className="modal-header">
           <span className="close-button pull-right" onClick={props.closeModal.bind(this, 'login')}>&times;</span>
-          <h2>{props.title}</h2>
+          <h2>{props.modal.title}</h2>
         </div>
         <div className="modal-content">
           {props.children}
@@ -17,7 +17,9 @@ const Modal = (props) => (
 );
 
 Modal.propTypes = {
-  title: React.PropTypes.string,
+  modal: React.PropTypes.shape({
+    title: React.PropTypes.string,
+  }),
   children: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node,
