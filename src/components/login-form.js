@@ -4,6 +4,9 @@ class LoginForm extends React.Component {
   constructor() {
     super();
     this.state = {email: '', password: ''};
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleEmailChange(e) {
     this.setState({email: e.target.value});
