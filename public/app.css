@@ -323,6 +323,10 @@ input:focus {
   border-color: #666;
 }
 
+input.error:focus {
+  border-color: #830A02;
+}
+
 input[type="submit"] {
   margin-top: 1rem;
   background-color: #FFF;

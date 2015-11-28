@@ -11,9 +11,9 @@ class SignupForm extends React.Component {
       nameError: false,
       nameHelperText: 'Your name around the site. 4-20 characters.',
       emailError: false,
-      emailHelperText: 'You\'ll use this to log in',
+      emailHelperText: 'You\'ll use this to log in.',
       passwordError: false,
-      passwordHelperText: '6 or more characters',
+      passwordHelperText: '6 or more characters.',
     };
   }
   handleNameChange(e) {
@@ -33,8 +33,8 @@ class SignupForm extends React.Component {
   }
   render() {
     const nameClass = (this.state.nameError) ? ' error' : '';
-    const emailClass = (this.state.emailClass) ? ' error' : '';
-    const passwordClass = (this.state.passwordClass) ? ' error' : '';
+    const emailClass = (this.state.emailError) ? ' error' : '';
+    const passwordClass = (this.state.passwordError) ? ' error' : '';
     return (
       <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
         <label htmlFor="name">Display name:</label>
