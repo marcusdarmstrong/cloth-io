@@ -14,11 +14,11 @@ class LoginForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
   }
-  render(props) {
+  render() {
     return (
       <form className="login-form" onSubmit={this.handleSubmit}>
         <div className="create-account-cta">
-          <div className="button pull-right" onClick={props.openModal.bind(this, 'signup')}>Create account</div>
+          <div className="button pull-right" onClick={this.props.openModal.bind(this, 'signup')}>Create account</div>
           <div>New here?</div>
         </div>
         <label htmlFor="email">Email address:</label>
@@ -30,5 +30,9 @@ class LoginForm extends React.Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  openModal: React.PropTypes.func.isRequired,
+};
 
 export default LoginForm;
