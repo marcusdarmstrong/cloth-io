@@ -103,7 +103,7 @@ app.get(articleMatcher, (req, res) => {
         const post = result.rows[0];
         client.query(sql`select c.*, u.name, u.color from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
           const comments = list(commentOrdering(commentResult.rows));
-          const userId = decodeAuthToken(req.cookies.auth);
+          const userId = req.cookies && decodeAuthToken(req.cookies.auth);
           if (userId) {
             client.query(sql`select u.id, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
               renderPostPage(res, post, comments, userResult.rows[0]);
