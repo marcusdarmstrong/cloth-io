@@ -1,15 +1,12 @@
 import React from 'react';
 
 class Nav extends React.Component {
-  openLogin() {
-    alert('hi');
-  }
-
-  render() {
+  render({modal, openModal}) {
     return (
       <nav>
-        <div className="button pull-right" onClick={this.openLogin}>Log in</div>
+        <div className="button pull-right" onClick={openModal.bind(this, 'login')}>Log in</div>
         <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
+        {(modal) ? React.createElement(modal) : ''}
       </nav>
     );
   }
