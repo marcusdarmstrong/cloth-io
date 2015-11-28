@@ -4,7 +4,7 @@ export default () => (
   <form className="login-form">
     <div className="create-account-cta">
       <div className="button pull-right">Create Account</div>
-      <div>New to cloth.io?</div>
+      <div>New here?</div>
     </div>
     <label htmlFor="email">Email address:</label>
     <input type="email" autoFocus name="email" />
