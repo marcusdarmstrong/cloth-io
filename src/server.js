@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import layout from './layout';
 import sql from './sql';
 import commentOrdering from './comment-ordering';
-import Post from './components/post';
+import App from './components/app';
 import reducer from './reducer';
 
 const app = express();
@@ -51,7 +51,7 @@ app.get(articleMatcher, (req, res) => {
 
           res.send(layout(post.title, ReactDOMServer.renderToString(
             <Provider store={store}>
-              <Post/>
+              <App />
             </Provider>
           ), store));
         });
