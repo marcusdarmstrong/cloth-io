@@ -3,7 +3,9 @@ import React from 'react';
 const Modal = (props) => (
   <div className="modal-screen">
     <div className="modal-container">
-      {props.children}
+      <div className="modal-frame">
+        {props.children}
+      </div>
     </div>
   </div>
 );
