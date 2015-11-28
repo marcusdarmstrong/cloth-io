@@ -18,15 +18,15 @@ class SignupForm extends React.Component {
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
-    this.setState({nameError: validate(NAME_REX, this.state.name)});
+    this.setState({nameError: !validate(NAME_REX, this.state.name)});
   }
   handleEmailChange(e) {
     this.setState({email: e.target.value});
-    this.setState({emailError: validate(EMAIL_REX, this.state.email)});
+    this.setState({emailError: !validate(EMAIL_REX, this.state.email)});
   }
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
-    this.setState({passwordError: validate(PASSWORD_REX, this.state.password)});
+    this.setState({passwordError: !validate(PASSWORD_REX, this.state.password)});
   }
   handleSubmit(e) {
     e.preventDefault();
