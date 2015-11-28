@@ -29,8 +29,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/isUsernameTaken', (req, res) => {
-  const name = req.query.name;
+  let name = req.query.name;
   if (name && validate(NAME_REX, name)) {
+    name = name.trim();
     pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
       if (pgErr) {
         return res.status(500).send('Internal Server Error');
