@@ -15,6 +15,7 @@ import commentOrdering from './comment-ordering';
 import App from './components/app';
 import reducer from './reducer';
 import { validate, NAME_REX, EMAIL_REX } from './validator';
+import { decodeAuthToken } from './auth-token';
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -73,6 +74,17 @@ app.get('/api/isEmailTaken', (req, res) => {
 });
 
 const articleMatcher = /\/p\/(.+)/;
+const renderPostPage = (res, post, comments, user) => {
+  const state = map({post, comments, user, modal: null});
+  const store = createStore(reducer, state);
+
+  res.send(layout(post.title, ReactDOMServer.renderToString(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  ), state));
+};
+
 app.get(articleMatcher, (req, res) => {
   const match = articleMatcher.exec(req.path);
   if (!match || match.length <= 1) {
@@ -91,15 +103,14 @@ app.get(articleMatcher, (req, res) => {
         const post = result.rows[0];
         client.query(sql`select c.*, u.name, u.color from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
           const comments = list(commentOrdering(commentResult.rows));
-          const user = 'Marcus';
-          const state = map({post, comments, user, modal: null});
-          const store = createStore(reducer, state);
-
-          res.send(layout(post.title, ReactDOMServer.renderToString(
-            <Provider store={store}>
-              <App />
-            </Provider>
-          ), state));
+          const userId = decodeAuthToken(req.cookies.auth);
+          if (userId) {
+            client.query(sql`select u.id, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
+              renderPostPage(res, post, comments, userResult.rows[0]);
+            });
+          } else {
+            renderPostPage(res, post, comments);
+          }
         });
       }
     });
