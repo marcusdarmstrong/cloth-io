@@ -57,11 +57,22 @@ class SignupForm extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
+    if (this.state.nameError || this.state.emailError || this.state.passwordError) {
+      return;
+    }
   }
   render() {
     const nameClass = (this.state.nameError) ? ' error' : '';
     const emailClass = (this.state.emailError) ? ' error' : '';
     const passwordClass = (this.state.passwordError) ? ' error' : '';
+    const submitClass =
+      (!this.state.nameError
+        && !this.state.emailError
+        && !this.state.passwordError
+        && this.state.name !== ''
+        && this.state.email !== ''
+        && this.state.password !== '')
+      ? 'disabled' : '';
     return (
       <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
         <label htmlFor="name">Display name:</label>
@@ -73,7 +84,7 @@ class SignupForm extends React.Component {
         <label htmlFor="password">Password:</label>
         <input type="password" className={passwordClass} name="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
         <div className={'form-helper' + passwordClass}>{this.state.passwordHelperText}</div>
-        <input type="submit" name="submit" value="Create account" />
+        <input type="submit" name="submit" className={submitClass} value="Create account" />
       </form>
     );
   }

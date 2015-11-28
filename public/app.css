@@ -338,6 +338,12 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+input[type="submit"].disabled {
+  color: grey;
+  border-color: grey;
+  cursor: default;
+}
+
 .create-account-cta {
   overflow: hidden;
   margin-bottom: 1rem;
