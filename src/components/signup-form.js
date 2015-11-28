@@ -4,10 +4,6 @@ class SignupForm extends React.Component {
   constructor() {
     super();
     this.state = {name: '', email: '', password: ''};
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
@@ -23,13 +19,13 @@ class SignupForm extends React.Component {
   }
   render() {
     return (
-      <form className="login-form" onSubmit={this.handleSubmit}>
+      <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
         <label htmlFor="name">Display name:</label>
-        <input type="text" autoFocus name="name" value={this.state.name} onChange={this.handleNameChange} />
+        <input type="text" autoFocus name="name" value={this.state.name} onChange={this.handleNameChange.bind(this)} />
         <label htmlFor="email">Email address:</label>
-        <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange} />
+        <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange.bind(this)} />
         <label htmlFor="password">Password:</label>
-        <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange} />
+        <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
         <input type="submit" name="submit" value="Create account" />
       </form>
     );
