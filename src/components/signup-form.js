@@ -1,5 +1,6 @@
 import React from 'react';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from '../validator';
+import fetch from 'whatwg-fetch';
 
 class SignupForm extends React.Component {
   constructor() {
@@ -30,7 +31,16 @@ class SignupForm extends React.Component {
         this.setState({nameHelperText: 'Avoid any special characters.'});
       }
     } else {
-      this.setState({nameHelperText: 'Looks good!'});
+      this.setState({nameHelperText: 'Checking...'});
+      fetch('./api/isUsernameTaken?name=' + encodeURIComponent(newName))
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            this.setState({nameHelperText: 'Looks good!'});
+          } else {
+            this.setState({nameHelperText: 'That name is taken. Try another.'});
+          }
+        });
     }
   }
   handleEmailChange(e) {

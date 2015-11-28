@@ -14,6 +14,7 @@ import sql from './sql';
 import commentOrdering from './comment-ordering';
 import App from './components/app';
 import reducer from './reducer';
+import { validate, NAME_REX } from './validator';
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -25,6 +26,27 @@ app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/', (req, res) => {
   res.send(layout('Hi', 'Hello World'));
+});
+
+app.get('/api/isUsernameTaken', (req, res) => {
+  const name = req.query.name;
+  if (name && validate(NAME_REX, name)) {
+    pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
+      if (pgErr) {
+        return res.status(500).send('Internal Server Error');
+      }
+      client.query(sql`select id from t_user where name=${name}`, (err, result) => {
+        done();
+        if (result && result.rows && result.rows.length === 0) {
+          res.send(JSON.stringify({success: true}));
+        } else {
+          res.send(JSON.stringify({success: false}));
+        }
+      });
+    });
+  } else {
+    res.send(JSON.stringify({success: false}));
+  }
 });
 
 const articleMatcher = /\/p\/(.+)/;
