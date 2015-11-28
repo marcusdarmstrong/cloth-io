@@ -47,10 +47,6 @@ class TimeAgo extends React.Component {
     }
   }
   tick() {
-    if (!this.isMounted()) {
-      return;
-    }
-
     const then = this.props.timestamp;
     const now = Math.round(Date.now() / 1000);
     const seconds = Math.abs(now - then);
