@@ -1,9 +1,8 @@
 import React from 'react';
 
-export default (props) => (
+export default () => (
   <div className="modal-screen">
     <div className="modal-container">
-      {props.children}
     </div>
   </div>
 );
