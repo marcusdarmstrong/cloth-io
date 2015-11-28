@@ -7,6 +7,7 @@ import ReactDOMServer from 'react-dom/server';
 import { createStore } from 'redux';
 import { List as list, Map as map } from 'immutable';
 import { Provider } from 'react-redux';
+import compression from 'compression';
 
 import layout from './layout';
 import sql from './sql';
@@ -19,7 +20,7 @@ app.set('port', (process.env.PORT || 5000));
 const server = app.listen(app.get('port'));
 SocketIO.listen(server);
 
-
+app.use(compression());
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/', (req, res) => {
