@@ -3,6 +3,7 @@ import React from 'react';
 class LoginForm extends React.Component {
   constructor() {
     super();
+    this.state = {email: '', password: ''};
   }
   handleEmailChange(e) {
     this.setState({email: e.target.value});
