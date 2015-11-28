@@ -66,13 +66,13 @@ class SignupForm extends React.Component {
     const emailClass = (this.state.emailError) ? ' error' : '';
     const passwordClass = (this.state.passwordError) ? ' error' : '';
     const submitClass =
-      (!this.state.nameError
+          (!this.state.nameError
         && !this.state.emailError
         && !this.state.passwordError
         && this.state.name !== ''
         && this.state.email !== ''
         && this.state.password !== '')
-      ? 'disabled' : '';
+      ? '' : 'disabled';
     return (
       <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
         <label htmlFor="name">Display name:</label>
