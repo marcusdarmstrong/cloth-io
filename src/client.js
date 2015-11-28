@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Post from './components/post';
 
-React.render(<Post />, document.getElementById('react-container'));
+ReactDOM.render(<Post />, document.getElementById('react-container'));
