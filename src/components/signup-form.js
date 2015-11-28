@@ -32,17 +32,20 @@ class SignupForm extends React.Component {
     e.preventDefault();
   }
   render() {
+    const nameClass = (this.state.nameError) ? ' error' : '';
+    const emailClass = (this.state.emailClass) ? ' error' : '';
+    const passwordClass = (this.state.passwordClass) ? ' error' : '';
     return (
       <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
         <label htmlFor="name">Display name:</label>
-        <input type="text" autoFocus name="name" value={this.state.name} onChange={this.handleNameChange.bind(this)} />
-        <div className="form-helper">{this.state.nameHelperText}</div>
+        <input type="text" className={nameClass} autoFocus name="name" value={this.state.name} onChange={this.handleNameChange.bind(this)} />
+        <div className={'form-helper' + nameClass}>{this.state.nameHelperText}</div>
         <label htmlFor="email">Email address:</label>
-        <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange.bind(this)} />
-        <div className="form-helper">{this.state.emailHelperText}</div>
+        <input type="email" className={emailClass} name="email" value={this.state.email} onChange={this.handleEmailChange.bind(this)} />
+        <div className={'form-helper' + emailClass}>{this.state.emailHelperText}</div>
         <label htmlFor="password">Password:</label>
-        <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
-        <div className="form-helper">{this.state.passwordHelperText}</div>
+        <input type="password" className={passwordClass} name="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
+        <div className={'form-helper' + passwordClass}>{this.state.passwordHelperText}</div>
         <input type="submit" name="submit" value="Create account" />
       </form>
     );
