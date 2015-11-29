@@ -28,7 +28,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('client', ['clean-client'], function() {
-  return browserify({ debug: true })
+  return browserify(/*{ debug: true }*/)
     .transform(babelify)
     .require('src/client.js', { entry: true })
     .bundle()
@@ -38,9 +38,9 @@ gulp.task('client', ['clean-client'], function() {
     })
     .pipe(source('app.js'))
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(uglify())
-    .pipe(sourcemaps.write())
+    //.pipe(sourcemaps.init({loadMaps: true}))
+    //  .pipe(uglify())
+    //.pipe(sourcemaps.write())
     .pipe(gulp.dest('public'));
 });
 
