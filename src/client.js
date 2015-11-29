@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import reducer from './reducer';
 import { Provider } from 'react-redux';
 import { fromJS } from 'immutable';
-import io from 'socket.io';
+import io from 'socket.io-client';
 
 const state = fromJS(window.__INITIAL_STATE__);
 const store = createStore(reducer, state);
