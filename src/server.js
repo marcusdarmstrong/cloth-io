@@ -130,6 +130,31 @@ app.post('/api/createAccount', (req, res) => {
   });
 });
 
+app.post('/api/login', (req, res) => {
+  let email = req.body.email || '';
+  email = email.trim();
+  const password = req.body.password || '';
+
+  pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
+    if (pgErr) {
+      return res.status(500).send('Internal Server Error');
+    }
+    client.query(sql`select id, name, passhash, color from t_user where email=${email}`, (emailErr, emailResult) => {
+      done();
+      const user = emailResult.rows[0];
+      const salt = new Buffer(user.name);
+      const passHash = scrypt.hashSync(password, {N: 16384, r: 8, p: 1}, 64, salt).toString('hex');
+
+      if (passHash === user.passhash) {
+        login(res, user.id);
+        res.send(JSON.stringify({success: true, user: { id: user.id, name: user.name, color: user.color }}));
+      } else {
+        res.send(JSON.stringify({success: false, error: 'Sorry, that password doesn\'t match'}));
+      }
+    });
+  });
+});
+
 const articleMatcher = /\/p\/(.+)/;
 const renderPostPage = (res, post, comments, user) => {
   const state = map({post, comments, user, modal: null});
