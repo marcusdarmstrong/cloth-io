@@ -16,6 +16,7 @@ import layout from './layout';
 import sql from './sql';
 import commentOrdering from './comment-ordering';
 import App from './components/app';
+import Socket from './components/socket';
 import reducer from './reducer';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from './validator';
 import { createAuthToken, decodeAuthToken } from './auth-token';
@@ -167,6 +168,7 @@ const renderPostPage = (res, post, comments, user) => {
 
   res.send(layout(post.title, ReactDOMServer.renderToString(
     <Provider store={store}>
+      <Socket socket={null} />
       <App />
     </Provider>
   ), state));
