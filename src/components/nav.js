@@ -12,10 +12,19 @@ class Nav extends React.Component {
       );
     }
 
+    let userNav = (<div className="button pull-right" onClick={this.props.openModal.bind(this, 'login')}>Log in</div>);
+    if (this.props.user) {
+      const color = '#' + this.props.user.color;
+      const letter = this.props.user.name.substr(0, 1);
+      userNav = (
+        <div className="avatar" style={{backgroundColor: color}}>{letter}</div>
+      );
+    }
+
     return (
       <div className="nav-container">
         <nav>
-          <div className="button pull-right" onClick={this.props.openModal.bind(this, 'login')}>Log in</div>
+          {userNav}
           <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
         </nav>
         {modal}
@@ -27,6 +36,10 @@ class Nav extends React.Component {
 Nav.propTypes = {
   modal: React.PropTypes.shape({
     component: React.PropTypes.func,
+  }),
+  user: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    color: React.PropTypes.string,
   }),
   openModal: React.PropTypes.func.isRequired,
 };
