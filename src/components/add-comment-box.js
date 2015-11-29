@@ -6,7 +6,7 @@ export default ({user, parentComment, fork}) => {
   const avatar = (<div className="avatar" style={{backgroundColor: color}}>{letter}</div>);
   const className = (fork) ? 'add-comment-box fork' : 'this.props.comment.hasReplies';
   return (
-    <div className="{className}">
+    <div className={className}>
       <div className="author">{avatar}</div>
       <div className="add-comment-container">
         <div className="comment-header">
@@ -16,6 +16,7 @@ export default ({user, parentComment, fork}) => {
         </div>
         <div className="textarea-container">
           <div className="textarea" contentEditable></div>
+          <input type="hidden" name="parentId" value={parentComment.id} />
         </div>
         <div className="comment-options">
           <div className="button pull-right">Post Comment</div>

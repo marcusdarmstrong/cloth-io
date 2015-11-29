@@ -35,7 +35,7 @@ class Comment extends React.Component {
         <div className="comment-options">
           <div className="button pull-right" onClick={this.toggleReplyBox.bind(this)}>Reply</div>
         </div>
-        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork=true /> : null}
+        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork /> : null}
       </div>
       {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} /> : null}
     </div>);
