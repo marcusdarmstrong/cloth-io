@@ -165,10 +165,10 @@ const articleMatcher = /\/p\/(.+)/;
 const renderPostPage = (res, post, comments, user) => {
   const state = map({post, comments, user, modal: null});
   const store = createStore(reducer, state);
-
+  const mockSocket = { on: () => null };
   res.send(layout(post.title, ReactDOMServer.renderToString(
     <Provider store={store}>
-      <Socket socket={null} />
+      <Socket socket={mockSocket} />
       <App />
     </Provider>
   ), state));
