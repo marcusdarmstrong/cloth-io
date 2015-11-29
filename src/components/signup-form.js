@@ -89,6 +89,7 @@ class SignupForm extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
+      credentials: 'same-origin',
       body: JSON.stringify({
         name: this.state.name,
         email: this.state.email,
