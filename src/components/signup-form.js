@@ -81,6 +81,20 @@ class SignupForm extends React.Component {
     if (this.state.nameError || this.state.emailError || this.state.passwordError) {
       return;
     }
+
+    fetch('/api/createAccount', {
+      method: 'post',
+      body: new FormData(document.querySelector('form')),
+    }).then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          this.props.closeModal();
+          this.props.loginUser(data.user);
+        } else {
+          this.setState({emailHelperText: 'That email is taken. Try another.'});
+          this.setState({emailError: true});
+        }
+      });
   }
   render() {
     const nameClass = (this.state.nameError) ? ' error' : '';
@@ -110,5 +124,10 @@ class SignupForm extends React.Component {
     );
   }
 }
+
+SignupForm.propTypes = {
+  closeModal: React.PropTypes.func.isRequired,
+  loginUser: React.PropTypes.func.isRequired,
+};
 
 export default SignupForm;

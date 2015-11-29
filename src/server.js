@@ -110,9 +110,10 @@ app.post('/api/createAccount', (req, res) => {
           if (userResult && userResult.rows && userResult.rows.length === 0) {
             client.query(sql`insert into t_user (name, email, passhash, color) values (${name}, ${email}, ${passHash}, ${color}) returning id`, (err, result) => {
               done();
-              const authToken = createAuthToken(result.rows[0].id);
+              const id = result.rows[0].id;
+              const authToken = createAuthToken(id);
               res.cookie('auth', authToken, { maxAge: 60 * 60 * 24 * 365 * 2, httpOnly: true });
-              res.send(JSON.stringify({success: true}));
+              res.send(JSON.stringify({success: true, user: { id, name, color }}));
             });
           } else {
             res.send(JSON.stringify({success: false, nameError: 'Name is already taken.'}));
