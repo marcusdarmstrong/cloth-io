@@ -12,7 +12,7 @@ class Comment extends React.Component {
   }
   render() {
     let classString = 'comment';
-    if (this.props.comment.hasReplies) {
+    if (this.props.comment.hasReplies || this.state.commentBoxExpanded) {
       classString += ' has-replies';
     }
     if (this.props.comment.child) {
@@ -35,8 +35,9 @@ class Comment extends React.Component {
         <div className="comment-options">
           <div className="button pull-right" onClick={this.toggleReplyBox.bind(this)}>Reply</div>
         </div>
-        {(this.state.commentBoxExpanded) ? <AddCommentBox user={this.props.user} /> : null}
+        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork=true /> : null}
       </div>
+      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} /> : null}
     </div>);
 
     let nestLevel = this.props.comment.nestLevel;

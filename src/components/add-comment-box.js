@@ -1,11 +1,12 @@
 import React from 'react';
 
-export default ({user}) => {
+export default ({user, parentComment, fork}) => {
   const color = '#' + user.color;
   const letter = user.name.substr(0, 1).toUpperCase();
   const avatar = (<div className="avatar" style={{backgroundColor: color}}>{letter}</div>);
+  const className = (fork) ? 'add-comment-box fork' : 'this.props.comment.hasReplies';
   return (
-    <div className="add-comment-box">
+    <div className="{className}">
       <div className="author">{avatar}</div>
       <div className="add-comment-container">
         <div className="comment-header">
