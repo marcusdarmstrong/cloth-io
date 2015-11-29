@@ -8,7 +8,7 @@ export function createAuthToken(id) {
   if (!id) {
     return null;
   }
-  const manifest = [Number(id), md5(id.toString)];
+  const manifest = [Number(id), md5(id.toString())];
   const text = JSON.stringify(manifest);
 
   const cipher = crypto.createCipher(algorithm, password);
@@ -26,7 +26,7 @@ export function decodeAuthToken(token) {
   dec += decipher.final('utf8');
   const manifest = JSON.parse(dec);
 
-  if (manifest && manifest.length === 2 && md5(manifest[0]) === manifest[1]) {
+  if (manifest && manifest.length === 2 && md5(manifest[0].toString()) === manifest[1]) {
     return manifest[0];
   }
   return null;
