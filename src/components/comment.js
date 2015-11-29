@@ -8,7 +8,7 @@ class Comment extends React.Component {
     this.state = {commentBoxExpanded: false};
   }
   toggleReplyBox() {
-    this.setState({commentBoxExpanded: this.state.commentBoxExpanded});
+    this.setState({commentBoxExpanded: !!this.state.commentBoxExpanded});
   }
   render() {
     let classString = 'comment';
