@@ -15,9 +15,9 @@ class Nav extends React.Component {
     let userNav = (<div className="button pull-right" onClick={this.props.openModal.bind(this, 'login')}>Log in</div>);
     if (this.props.user) {
       const color = '#' + this.props.user.color;
-      const letter = this.props.user.name.substr(0, 1);
+      const letter = this.props.user.name.substr(0, 1).toUpperCase();
       userNav = (
-        <div className="avatar" style={{backgroundColor: color}}>{letter}</div>
+        <div className="avatar pull-right" style={{backgroundColor: color}}>{letter}</div>
       );
     }
 
