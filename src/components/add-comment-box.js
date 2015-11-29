@@ -4,7 +4,7 @@ export default ({user, parentComment, fork}) => {
   const color = '#' + user.color;
   const letter = user.name.substr(0, 1).toUpperCase();
   const avatar = (<div className="avatar" style={{backgroundColor: color}}>{letter}</div>);
-  const className = (fork) ? 'add-comment-box fork' : 'this.props.comment.hasReplies';
+  const className = (fork) ? 'add-comment-box fork' : 'add-comment-box';
   return (
     <div className={className}>
       <div className="author">{avatar}</div>
