@@ -369,4 +369,6 @@ input[type="submit"].disabled {
   border-color: #830A02;
 }
 
-
+nav .avatar {
+  cursor: pointer;
+}
