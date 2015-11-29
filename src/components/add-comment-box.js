@@ -31,7 +31,7 @@ class AddCommentBox extends React.Component {
     ) : (
       <div className="add-comment-container">
         <div className="comment-login-cta">
-          <div className="button" onClick={this.openModal.bind(this, 'login')}>Log in to comment</div>
+          <div className="button" onClick={this.props.openModal.bind(this, 'login')}>Log in to comment</div>
         </div>
       </div>
     );
