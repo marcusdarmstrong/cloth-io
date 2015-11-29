@@ -1,10 +1,16 @@
-import { OPEN_MODAL, CLOSE_MODAL, LOGIN_USER } from './actions';
-import { Map as map } from 'immutable';
+import { ADD_COMMENT, OPEN_MODAL, CLOSE_MODAL, LOGIN_USER } from './actions';
+import { Map as map, fromJS } from 'immutable';
 import LoginForm from './components/login-form';
 import SignupForm from './components/signup-form';
+import commentOrdering from './comment-ordering';
 
 export default (state = map, action) => {
   switch (action.type) {
+  case ADD_COMMENT:
+    const comments = state.get('comments').toJS();
+    comments.push(action.comment);
+    state.set('comments', fromJS(commentOrdering(comments)));
+    return state;
   case OPEN_MODAL:
     if (action.modalType === 'login') {
       return state.set('modal', map({component: LoginForm, title: 'Log in'}));
