@@ -221,7 +221,7 @@ nav {
   margin-left: -1px;
 }
 
-.fork .author:before {
+.fork > .author:before {
   content: '';
   position: absolute;
   top: -85%;
