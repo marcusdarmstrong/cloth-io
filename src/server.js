@@ -82,7 +82,7 @@ app.get('/api/isEmailTaken', (req, res) => {
 
 const login = (res, id) => {
   const authToken = createAuthToken(id);
-  res.cookie('auth', authToken, { maxAge: 60 * 60 * 24 * 365 * 2, httpOnly: true });
+  res.cookie('auth', authToken, { maxAge: 1000 * 60 * 60 * 24 * 365 * 2, httpOnly: true });
 };
 app.post('/api/createAccount', (req, res) => {
   let name = req.body.name || '';
