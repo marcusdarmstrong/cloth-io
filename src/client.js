@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app';
-import Socket from './components/socket';
 import { createStore } from 'redux';
 import reducer from './reducer';
 import { Provider } from 'react-redux';
@@ -13,8 +12,7 @@ const store = createStore(reducer, state);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Socket socket={io()}/>
-    <App />
+    <App socket={io()} />
   </Provider>,
   document.getElementById('react-container')
 );
