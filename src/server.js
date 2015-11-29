@@ -23,7 +23,7 @@ import { createAuthToken, decodeAuthToken } from './auth-token';
 const app = express();
 app.set('port', (process.env.PORT || 5000));
 const server = app.listen(app.get('port'));
-SocketIO.listen(server);
+const io = SocketIO.listen(server);
 
 app.use(compression());
 app.use(cookieParser());
@@ -201,5 +201,13 @@ app.get(articleMatcher, (req, res) => {
         });
       }
     });
+  });
+});
+
+io.on('connection', (socket) => {
+  io.emit('CONNECTED', { data: 'Hello World'});
+
+  socket.on('ADD_COMMENT', (comment) => {
+    console.log('Recieved a comment: ' + JSON.stringify(comment));
   });
 });

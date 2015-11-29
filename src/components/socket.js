@@ -9,6 +9,7 @@ class Socket extends React.Component {
         this.props.socket.on(action, (data) => this.props[action](data));
       }
     }
+    this.props.socket.on('CONNECTED', (data) => alert(data.data));
   }
   render() {
     return null;
