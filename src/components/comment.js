@@ -8,7 +8,11 @@ class Comment extends React.Component {
     this.state = {commentBoxExpanded: false};
   }
   toggleReplyBox() {
-    this.setState({commentBoxExpanded: !this.state.commentBoxExpanded});
+    if (this.props.user) {
+      this.setState({commentBoxExpanded: !this.state.commentBoxExpanded});
+    } else {
+      this.props.openModal('login');
+    }
   }
   render() {
     let classString = 'comment';
@@ -68,6 +72,7 @@ Comment.propTypes = {
     name: React.PropTypes.string,
     color: React.PropTypes.string,
   }),
+  openModal: React.PropTypes.func.isRequired,
 };
 
 export default Comment;
