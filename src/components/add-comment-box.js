@@ -16,7 +16,7 @@ export default ({user, parentComment, fork}) => {
         </div>
         <div className="textarea-container">
           <div className="textarea" contentEditable></div>
-          <input type="hidden" name="parentId" value={parentComment.id} />
+          <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
         <div className="comment-options">
           <div className="button pull-right">Post Comment</div>
