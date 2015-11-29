@@ -27,7 +27,7 @@ SocketIO.listen(server);
 
 app.use(compression());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
@@ -79,6 +79,11 @@ app.get('/api/isEmailTaken', (req, res) => {
   }
 });
 
+
+const login = (res, id) => {
+  const authToken = createAuthToken(id);
+  res.cookie('auth', authToken, { maxAge: 60 * 60 * 24 * 365 * 2, httpOnly: true });
+};
 app.post('/api/createAccount', (req, res) => {
   let name = req.body.name || '';
   name = name.trim();
@@ -111,8 +116,7 @@ app.post('/api/createAccount', (req, res) => {
             client.query(sql`insert into t_user (name, email, passhash, color) values (${name}, ${email}, ${passHash}, ${color}) returning id`, (err, result) => {
               done();
               const id = result.rows[0].id;
-              const authToken = createAuthToken(id);
-              res.cookie('auth', authToken, { maxAge: 60 * 60 * 24 * 365 * 2, httpOnly: true });
+              login(res, id);
               res.send(JSON.stringify({success: true, user: { id, name, color }}));
             });
           } else {

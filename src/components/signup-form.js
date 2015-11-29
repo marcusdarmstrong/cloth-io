@@ -15,6 +15,7 @@ class SignupForm extends React.Component {
       emailHelperText: 'You\'ll use this to log in.',
       passwordError: false,
       passwordHelperText: 'Password must be 6 or more characters.',
+      submissionError: '',
     };
   }
   handleNameChange(e) {
@@ -84,15 +85,22 @@ class SignupForm extends React.Component {
 
     fetch('/api/createAccount', {
       method: 'post',
-      body: new FormData(document.querySelector('form')),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+      }),
     }).then(res => res.json())
       .then(data => {
         if (data.success) {
           this.props.closeModal();
           this.props.loginUser(data.user);
         } else {
-          this.setState({emailHelperText: 'That email is taken. Try another.'});
-          this.setState({emailError: true});
+          this.setState({submissionError: 'Something went wrong.'});
         }
       });
   }
@@ -108,8 +116,12 @@ class SignupForm extends React.Component {
         && this.state.email !== ''
         && this.state.password !== '')
       ? '' : 'disabled';
+    const submissionError = (this.state.submissionError === '')
+      ? null : (<p className="error">{this.state.submissionError}</p>);
+
     return (
       <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
+        {submissionError}
         <label htmlFor="name">Display name:</label>
         <input type="text" className={nameClass} autoFocus name="name" value={this.state.name} onChange={this.handleNameChange.bind(this)} />
         <div className={'form-helper' + nameClass}>{this.state.nameHelperText}</div>
