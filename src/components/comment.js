@@ -8,7 +8,7 @@ class Comment extends React.Component {
     this.state = {commentBoxExpanded: false};
   }
   toggleReplyBox() {
-    this.setState({commentBoxExpanded: true});
+    this.setState({commentBoxExpanded: this.state.commentBoxExpanded});
   }
   render() {
     let classString = 'comment';
@@ -22,6 +22,8 @@ class Comment extends React.Component {
     }
     const avatar = this.props.comment.name.charAt(0).toUpperCase();
     const avatarColor = '#' + this.props.comment.color;
+    const replyState = (this.state.commentBoxExpanded) ? 'button pull-right engaged' : 'button pull-right';
+
     let markup = (<div className={classString}>
       <div className="author"><div className="avatar" style={{backgroundColor: avatarColor}}>{avatar}</div></div>
       <div className="comment-container">
@@ -33,7 +35,7 @@ class Comment extends React.Component {
         </div>
         <div className="comment-text" dangerouslySetInnerHTML={{__html: this.props.comment.body}}></div>
         <div className="comment-options">
-          <div className="button pull-right" onClick={this.toggleReplyBox.bind(this)}>Reply</div>
+          <div className={replyState} onClick={this.toggleReplyBox.bind(this)}>Reply</div>
         </div>
         {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork /> : null}
       </div>

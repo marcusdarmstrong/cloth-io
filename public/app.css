@@ -91,7 +91,7 @@ p:last-child {
   background-color: #FFF;
 }
 
-.button:hover {
+.button:hover, .button.engaged {
   color: #0C371D;
   border: 1px solid #0C371D;
 }
