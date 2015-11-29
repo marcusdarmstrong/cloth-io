@@ -155,6 +155,11 @@ app.post('/api/login', (req, res) => {
   });
 });
 
+app.get('/api/signOut', (req, res) => {
+  res.cookie('auth', '', { maxAge: 0, httpOnly: true });
+  res.send(JSON.stringify({success: true}));
+});
+
 const articleMatcher = /\/p\/(.+)/;
 const renderPostPage = (res, post, comments, user) => {
   const state = map({post, comments, user, modal: null});
