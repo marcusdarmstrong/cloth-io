@@ -29,8 +29,10 @@ class AddCommentBox extends React.Component {
       }),
     }).then(res => res.json())
       .then(data => {
-        if (data.success && this.props.onSubmission) {
-          this.props.onSubmission();
+        if (data.success) {
+          if (this.props.onSubmission) {
+            this.props.onSubmission();
+          }
           this.setState({value: ''});
         }
       });
