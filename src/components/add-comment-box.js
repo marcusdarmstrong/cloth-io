@@ -29,8 +29,8 @@ class AddCommentBox extends React.Component {
       }),
     }).then(res => res.json())
       .then(data => {
-        if (data.success) {
-          // Idk.
+        if (data.success && this.props.onSubmission) {
+          this.props.onSubmission();
         }
       });
   }
@@ -90,6 +90,7 @@ AddCommentBox.propTypes = {
   }),
   fork: React.PropTypes.bool,
   openModal: React.PropTypes.func.isRequired,
+  onSubmission: React.PropTypes.func,
   postId: React.PropTypes.string,
 };
 

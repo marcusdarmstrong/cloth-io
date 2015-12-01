@@ -41,9 +41,9 @@ class Comment extends React.Component {
         <div className="comment-options">
           <div className={replyState} onClick={this.toggleReplyBox.bind(this)}>Reply</div>
         </div>
-        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork openModal={this.props.openModal} /> : null}
+        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork openModal={this.props.openModal} onSubmition={this.toggleReplyBox.bind(this)}/> : null}
       </div>
-      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} openModal={this.props.openModal} /> : null}
+      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} openModal={this.props.openModal} onSubmition={this.toggleReplyBox.bind(this)} /> : null}
     </div>);
 
     let nestLevel = this.props.comment.nestLevel;

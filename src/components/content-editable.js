@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class ContentEditable extends React.Component {
+  componentDidMount() {
+    ReactDOM.findDOMNode(this).focus();
+  }
+
   shouldComponentUpdate(nextProps) {
     return nextProps.html !== ReactDOM.findDOMNode(this).innerHTML;
   }
