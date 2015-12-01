@@ -213,6 +213,7 @@ nav {
   font-size: .75rem;
   line-height: 1rem;
   margin-top: 8px;
+  overflow: hidden;
 }
 
 .reply {
