@@ -162,13 +162,14 @@ app.get('/api/signOut', (req, res) => {
 });
 
 
-const addComment = (id, created, name, color, parentId, body) => {
+const addComment = (id, created, name, color, parentId, postId, body) => {
   io.emit('addComment', {
     id: id,
     created: created,
     name: name,
     color: color,
     parent_id: parentId,
+    post_id: postId,
     body: body,
   });
 };
@@ -196,6 +197,7 @@ app.post('/api/addComment', (req, res) => {
               userResult.rows[0].name,
               userResult.rows[0].color,
               parentId,
+              postId,
               comment
             );
             res.send(JSON.stringify({success: true}));
