@@ -1,18 +1,19 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class ContentEditable extends React.Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.html !== ReadDOM.findDOMNode(this).innerHTML;
+    return nextProps.html !== ReactDOM.findDOMNode(this).innerHTML;
   }
 
   componentDidUpdate() {
-    if (this.props.html !== ReadDOM.findDOMNode(this).innerHTML) {
-      ReadDOM.findDOMNode(this).innerHTML = this.props.html;
+    if (this.props.html !== ReactDOM.findDOMNode(this).innerHTML) {
+      ReactDOM.findDOMNode(this).innerHTML = this.props.html;
     }
   }
 
   emitChange() {
-    const html = ReadDOM.findDOMNode(this).innerHTML;
+    const html = ReactDOM.findDOMNode(this).innerHTML;
     if (this.props.onChange && html !== this.lastHtml) {
       this.props.onChange({
         target: {

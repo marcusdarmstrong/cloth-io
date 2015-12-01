@@ -1,5 +1,6 @@
 import React from 'react';
 import ContentEditable from './content-editable';
+import fetch from 'isomorphic-fetch';
 
 class AddCommentBox extends React.Component {
   constructor() {
