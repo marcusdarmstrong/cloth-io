@@ -9,8 +9,7 @@ export default (state = map, action) => {
   case ADD_COMMENT:
     const comments = state.get('comments').toJS();
     comments.push(action.comment);
-    state.set('comments', fromJS(commentOrdering(comments)));
-    return state;
+    return state.set('comments', fromJS(commentOrdering(comments)));
   case OPEN_MODAL:
     if (action.modalType === 'login') {
       return state.set('modal', map({component: LoginForm, title: 'Log in'}));
