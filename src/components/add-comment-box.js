@@ -1,6 +1,39 @@
 import React from 'react';
+import ContentEditable from './content-editable';
 
 class AddCommentBox extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      value: '',
+    };
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  addComment() {
+    fetch('/api/addComment', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify({
+        comment: this.state.value,
+        parentId: this.props.parentComment.id,
+        postId: this.props.parentComment.post_id,
+      }),
+    }).then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          // Idk.
+        }
+      });
+  }
+
   render() {
     const {user, parentComment, fork} = this.props;
     const color = (user) ? '#' + user.color : '#ddd';
@@ -21,11 +54,11 @@ class AddCommentBox extends React.Component {
           </div>
         </div>
         <div className="textarea-container">
-          <div className="textarea" contentEditable></div>
+          <ContentEditable onChange={this.handleChange.bind(this)}/>
           <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
         <div className="comment-options">
-          <div className="button pull-right">Post Comment</div>
+          <div className="button pull-right" onClick={this.addComment.bind(this)}>Post Comment</div>
         </div>
       </div>
     ) : (
@@ -52,6 +85,7 @@ AddCommentBox.propTypes = {
   }),
   parentComment: React.PropTypes.shape({
     id: React.PropTypes.number,
+    post_id: React.PropTypes.number,
   }),
   fork: React.PropTypes.bool,
   openModal: React.PropTypes.func.isRequired,

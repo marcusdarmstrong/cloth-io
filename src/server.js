@@ -11,6 +11,7 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import scrypt from 'scrypt';
 import cookieParser from 'cookie-parser';
+import sanitizeHtml from 'sanitize-html';
 
 import layout from './layout';
 import sql from './sql';
@@ -160,6 +161,49 @@ app.get('/api/signOut', (req, res) => {
   res.send(JSON.stringify({success: true}));
 });
 
+
+const addComment = (id, created, name, color, parentId, body) => {
+  io.emit('ADD_COMMENT', {
+    id: id,
+    created: created,
+    name: name,
+    color: color,
+    parent_id: parentId,
+    body: body,
+  });
+};
+
+app.post('/api/addComment', (req, res) => {
+  const userId = req.cookies && decodeAuthToken(req.cookies.auth);
+  const comment = sanitizeHtml(req.body.comment, {
+    allowedTags: [ 'b', 'i', 'em', 'strong', 'a' ],
+    allowedAttributes: {
+      'a': [ 'href' ],
+    },
+  });
+  const parentId = req.body.parentId;
+  const postId = req.body.postId;
+
+  if (userId && comment && comment !== '') {
+    pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
+      client.query(sql`select name, color from t_user where id=${userId}`, (userErr, userResult) => {
+        client.query(sql`insert into t_comment (user_id, post_id, parent_id, body) values (${userId}, ${postId}, ${parentId}, ${comment}) returning id, created`, (insertErr, insertResult) => {
+          done();
+          addComment(
+            insertResult.rows[0].id,
+            insertResult.rows[0].created,
+            userResult.rows[0].name,
+            userResult.rows[0].color,
+            parentId,
+            comment
+          );
+          res.send(JSON.stringify({success: true}));
+        });
+      });
+    });
+  }
+});
+
 const articleMatcher = /\/p\/(.+)/;
 const renderPostPage = (res, post, comments, user) => {
   const state = map({post, comments, user, modal: null});
@@ -201,13 +245,5 @@ app.get(articleMatcher, (req, res) => {
         });
       }
     });
-  });
-});
-
-io.on('connection', (socket) => {
-  io.emit('CONNECTED', { data: 'Hello World'});
-
-  socket.on('ADD_COMMENT', (comment) => {
-    console.log('Recieved a comment: ' + JSON.stringify(comment));
   });
 });
