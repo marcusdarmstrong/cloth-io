@@ -13,7 +13,7 @@ const Post = (props) => (
           <h1>{props.post.title}</h1>
           <div dangerouslySetInnerHTML={{__html: props.post.body}}></div>
         </article>
-        <Comments {...props} />
+        <Comments {...props}/>
       </div>
     </div>
   </div>

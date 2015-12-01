@@ -25,7 +25,7 @@ class AddCommentBox extends React.Component {
       body: JSON.stringify({
         comment: this.state.value,
         parentId: this.props.parentComment.id,
-        postId: this.props.parentComment.post_id,
+        postId: this.props.parentComment.post_id || this.props.postId,
       }),
     }).then(res => res.json())
       .then(data => {
@@ -90,6 +90,7 @@ AddCommentBox.propTypes = {
   }),
   fork: React.PropTypes.bool,
   openModal: React.PropTypes.func.isRequired,
+  postId: React.PropTypes.number,
 };
 
 export default AddCommentBox;
