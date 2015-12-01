@@ -3,7 +3,6 @@ function sortAndBucket(comments) { // I think O(n log n)
   const buckets = {};
   for (let i = 0; i < comments.length; ++i) {
     const comment = comments[i];
-    comment.nestLevel = 0;
     const key = comment.parent_id || 0;
     if (!buckets[key]) {
       buckets[key] = [];
@@ -19,17 +18,20 @@ function markAndFlatten(buckets, parentId, fork, nestLevel) { // I think O(n)
   for (let i = 0; i < bucket.length; ++i) {
     const root = bucket[i];
     const children = buckets[root.id];
+    let childNestLevel = nestLevel;
+    if (i === bucket.length - 1) {
+      childNestLevel--;
+    }
     if (fork) {
       root.fork = true;
     }
-    root.nestLevel += nestLevel;
+    root.nestLevel = childNestLevel;
     root.created = Number(root.created);
     result.push(root);
     if (children) {
       root.hasReplies = true;
       children[children.length - 1].child = true;
-      result = result.concat(markAndFlatten(buckets, root.id, true, nestLevel + 1));
-      children[children.length - 1].nestLevel -= 1;
+      result = result.concat(markAndFlatten(buckets, root.id, true, childNestLevel + 1));
     }
   }
   return result;
