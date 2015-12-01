@@ -2,17 +2,17 @@ import React from 'react';
 
 class ContentEditable extends React.Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.html !== this.getDOMNode().innerHTML;
+    return nextProps.html !== ReadDOM.findDOMNode(this).innerHTML;
   }
 
   componentDidUpdate() {
-    if (this.props.html !== this.getDOMNode().innerHTML) {
-      this.getDOMNode().innerHTML = this.props.html;
+    if (this.props.html !== ReadDOM.findDOMNode(this).innerHTML) {
+      ReadDOM.findDOMNode(this).innerHTML = this.props.html;
     }
   }
 
   emitChange() {
-    const html = this.getDOMNode().innerHTML;
+    const html = ReadDOM.findDOMNode(this).innerHTML;
     if (this.props.onChange && html !== this.lastHtml) {
       this.props.onChange({
         target: {
