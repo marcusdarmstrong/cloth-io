@@ -163,7 +163,7 @@ app.get('/api/signOut', (req, res) => {
 
 
 const addComment = (id, created, name, color, parentId, body) => {
-  io.emit('ADD_COMMENT', {
+  io.emit('addComment', {
     id: id,
     created: created,
     name: name,
