@@ -24,8 +24,8 @@ class AddCommentBox extends React.Component {
       credentials: 'same-origin',
       body: JSON.stringify({
         comment: this.state.value,
-        parentId: this.props.parentComment.id,
-        postId: this.props.parentComment.post_id || this.props.postId,
+        parentId: (this.props.parentComment) ? this.props.parentComment.id : null,
+        postId: (this.props.parentComment) ? this.props.parentComment.post_id : this.props.postId,
       }),
     }).then(res => res.json())
       .then(data => {
