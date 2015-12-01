@@ -46,11 +46,7 @@ class Comment extends React.Component {
       {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} openModal={this.props.openModal} onSubmition={this.toggleReplyBox.bind(this)} /> : null}
     </div>);
 
-    let nestLevel = this.props.comment.nestLevel;
-    if (this.props.comment.child) {
-      --nestLevel;
-    }
-    for (let i = nestLevel; i > 0; i--) {
+    for (let i = this.props.comment.nestLevel; i > 0; i--) {
       markup = (<div className="reply">{markup}</div>);
     }
     return markup;
