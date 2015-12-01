@@ -86,11 +86,11 @@ AddCommentBox.propTypes = {
   }),
   parentComment: React.PropTypes.shape({
     id: React.PropTypes.string,
-    post_id: React.PropTypes.number,
+    post_id: React.PropTypes.string,
   }),
   fork: React.PropTypes.bool,
   openModal: React.PropTypes.func.isRequired,
-  postId: React.PropTypes.number,
+  postId: React.PropTypes.string,
 };
 
 export default AddCommentBox;
