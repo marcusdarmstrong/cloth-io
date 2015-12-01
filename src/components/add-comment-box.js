@@ -85,7 +85,7 @@ AddCommentBox.propTypes = {
     name: React.PropTypes.string,
   }),
   parentComment: React.PropTypes.shape({
-    id: React.PropTypes.number,
+    id: React.PropTypes.string,
     post_id: React.PropTypes.number,
   }),
   fork: React.PropTypes.bool,
