@@ -189,15 +189,19 @@ app.post('/api/addComment', (req, res) => {
       client.query(sql`select name, color from t_user where id=${userId}`, (userErr, userResult) => {
         client.query(sql`insert into t_comment (user_id, post_id, parent_id, body) values (${userId}, ${postId}, ${parentId}, ${comment}) returning id, created`, (insertErr, insertResult) => {
           done();
-          addComment(
-            insertResult.rows[0].id,
-            insertResult.rows[0].created,
-            userResult.rows[0].name,
-            userResult.rows[0].color,
-            parentId,
-            comment
-          );
-          res.send(JSON.stringify({success: true}));
+          if (insertResult && insertResult.rows && insertResult.rows.length === 1) {
+            addComment(
+              insertResult.rows[0].id,
+              insertResult.rows[0].created,
+              userResult.rows[0].name,
+              userResult.rows[0].color,
+              parentId,
+              comment
+            );
+            res.send(JSON.stringify({success: true}));
+          } else {
+            res.send(JSON.stringify({success: false}));
+          }
         });
       });
     });
