@@ -28,8 +28,8 @@ class ContentEditable extends React.Component {
     return (
       <div id="contenteditable"
         className="textarea"
-        onInput={this.emitChange}
-        onBlur={this.emitChange}
+        onInput={this.emitChange.bind(this)}
+        onBlur={this.emitChange.bind(this)}
         contentEditable
         dangerouslySetInnerHTML={{__html: this.props.html}}>
       </div>
