@@ -1,11 +1,9 @@
 import React from 'react';
 import Comments from './comments';
 import Nav from './nav';
-import Socket from './socket';
 
 const Post = (props) => (
   <div>
-    <Socket {...props} />
     <Nav {...props} />
     <div className="spacer">
       <div className="container">

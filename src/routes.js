@@ -1,13 +1,7 @@
-import React from 'react';
-import { IndexRoute, Route } from 'react-router';
-import PostDetailPage from './components/post-detail-page';
 import Home from './components/home';
+import Post from './components/post';
 
-export default (socket) => {
-  return (
-    <Route path="/">
-      <IndexRoute component={Home}/>
-      <Route path="p/:urlString" component={PostDetailPage} socket={socket}/>
-    </Route>
-  );
-};
+export default [
+  { name: 'Post', pattern: /\/p\/(.+)/, component: Post },
+  { name: 'Home', path: '/', component: Home },
+];

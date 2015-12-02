@@ -5,22 +5,21 @@ import SocketIO from 'socket.io';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { createStore } from 'redux';
-import { List as list, Map as map } from 'immutable';
 import { Provider } from 'react-redux';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import scrypt from 'scrypt';
 import cookieParser from 'cookie-parser';
 import sanitizeHtml from 'sanitize-html';
-import { match, RoutingContext } from 'react-router';
 
 import layout from './layout';
 import sql from './sql';
-import commentOrdering from './comment-ordering';
 import reducer from './reducer';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from './validator';
 import { createAuthToken, decodeAuthToken } from './auth-token';
+import router from './router';
 import routes from './routes';
+import loaders from './loaders';
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -33,44 +32,36 @@ app.use(bodyParser.json());
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
-const serve = (req, res, title, state) => {
+router(app, loaders(routes), (component, res, state) => {
   const store = createStore(reducer, state);
-  const mockSocket = { on: () => null };
-  const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-  match({ routes: routes(mockSocket), location: fullUrl }, (error, redirectLocation, renderProps) => {
-    if (error) {
-      res.status(500).send(error.message);
-    } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-    } else if (renderProps) {
-      res.status(200).send(
-        layout(
-          title,
-          ReactDOMServer.renderToString(
-            <Provider store={store}>
-              <RoutingContext {...renderProps} />
-            </Provider>
-          ),
-          state
-        )
-      );
-    } else {
-      res.status(404).send('Not found');
-    }
-  });
-};
-
-
-app.get('/', (req, res) => {
+  res.status(200).send(
+    layout(
+      state.title,
+      ReactDOMServer.renderToString(
+        <Provider store={store}>
+          {component}
+        </Provider>
+      ),
+      state
+    )
+  );
+}, (req, state, cb) => {
   pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
-    client.query(sql`select * from t_post order by created desc limit 10`, (err, result) => {
-      done();
-      if (!err && result && result.rows) {
-        res.send(layout('New York Jets / cloth.io', 'Hello World'));
-      } else {
-        res.send(layout('New York Jets / cloth.io', 'Error World'));
-      }
-    });
+    if (pgErr) {
+      return cb(state);
+    }
+    const userId = req.cookies && decodeAuthToken(req.cookies.auth);
+    if (userId) {
+      client.query(sql`select u.id, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
+        done();
+        if (userErr || !userResult || !userResult.rows) {
+          return cb(state);
+        }
+        cb(state.set('user', userResult.rows[0]));
+      });
+    } else {
+      return cb(state);
+    }
   });
 });
 
@@ -201,7 +192,7 @@ app.get('/api/signOut', (req, res) => {
 
 
 const addComment = (id, created, name, color, parentId, postId, body) => {
-  io.emit('addComment', {
+  io.emit('ADD_COMMENT', {
     id: id,
     created: created,
     name: name,
@@ -246,41 +237,4 @@ app.post('/api/addComment', (req, res) => {
       });
     });
   }
-});
-
-const articleMatcher = /\/p\/(.+)/;
-const buildState = (post, comments, user) => {
-  return map({post, comments, user, modal: null});
-};
-
-app.get(articleMatcher, (req, res) => {
-  const matcher = articleMatcher.exec(req.path);
-  if (!matcher || matcher.length <= 1) {
-    return res.status(404).send('Not found');
-  }
-  const urlString = matcher[1];
-  pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
-    if (pgErr) {
-      return res.status(500).send('Internal Server Error');
-    }
-    client.query(sql`select * from t_post where urlstring=${urlString}`, (err, result) => {
-      done();
-      if (err || !result || !result.rows || result.rows.length !== 1) {
-        res.status(404).send('Not found');
-      } else {
-        const post = result.rows[0];
-        client.query(sql`select c.*, u.name, u.color from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
-          const comments = list(commentOrdering(commentResult.rows));
-          const userId = req.cookies && decodeAuthToken(req.cookies.auth);
-          if (userId) {
-            client.query(sql`select u.id, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
-              serve(req, res, post.title, buildState(post, comments, userResult.rows[0]));
-            });
-          } else {
-            serve(req, res, post.title, buildState(post, comments));
-          }
-        });
-      }
-    });
-  });
 });
