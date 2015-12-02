@@ -234,7 +234,7 @@ app.get(articleMatcher, (req, res) => {
     }
     client.query(sql`select * from t_post where urlstring=${urlString}`, (err, result) => {
       done();
-      if (err) {
+      if (err || !result || !result.rows || result.rows.length !== 1) {
         res.status(404).send('Not found');
       } else {
         const post = result.rows[0];
