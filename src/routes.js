@@ -7,7 +7,7 @@ export default () => {
   return (
     <Route path="/">
       <IndexRoute component={Home}/>
-      <Route path="/p/:urlString" component={PostDetailPage}/>
+      <Route path="p/:urlString" component={PostDetailPage}/>
     </Route>
   );
 };
