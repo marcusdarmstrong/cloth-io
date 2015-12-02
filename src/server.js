@@ -274,10 +274,10 @@ app.get(articleMatcher, (req, res) => {
           const userId = req.cookies && decodeAuthToken(req.cookies.auth);
           if (userId) {
             client.query(sql`select u.id, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
-              serve(req, res, post.title, buildState(res, post, comments, userResult.rows[0]));
+              serve(req, res, post.title, buildState(post, comments, userResult.rows[0]));
             });
           } else {
-            serve(req, res, post.title, buildState(res, post, comments));
+            serve(req, res, post.title, buildState(post, comments));
           }
         });
       }
