@@ -16,7 +16,7 @@ import sanitizeHtml from 'sanitize-html';
 import layout from './layout';
 import sql from './sql';
 import commentOrdering from './comment-ordering';
-import App from './components/app';
+import PostDetailPage from './components/post-detail-page';
 import reducer from './reducer';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from './validator';
 import { createAuthToken, decodeAuthToken } from './auth-token';
@@ -33,7 +33,16 @@ app.use(bodyParser.json());
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/', (req, res) => {
-  res.send(layout('Hi', 'Hello World'));
+  pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
+    client.query(sql`select * from t_post order by created desc limit 10`, (err, result) => {
+      done();
+      if (!err && result && result.rows) {
+        res.send(layout('New York Jets / cloth.io', 'Hello World'));
+      } else {
+        res.send(layout('New York Jets / cloth.io', 'Error World'));
+      }
+    });
+  });
 });
 
 app.get('/api/isUsernameTaken', (req, res) => {
@@ -217,7 +226,7 @@ const renderPostPage = (res, post, comments, user) => {
   const mockSocket = { on: () => null };
   res.send(layout(post.title, ReactDOMServer.renderToString(
     <Provider store={store}>
-      <App socket={mockSocket} />
+      <PostDetailPage socket={mockSocket} />
     </Provider>
   ), state));
 };
