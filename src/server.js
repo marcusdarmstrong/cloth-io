@@ -16,7 +16,7 @@ import sanitizeHtml from 'sanitize-html';
 import layout from './layout';
 import sql from './sql';
 import commentOrdering from './comment-ordering';
-import PostDetailPage from './components/post-detail-page';
+import Routes from './routs';
 import reducer from './reducer';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from './validator';
 import { createAuthToken, decodeAuthToken } from './auth-token';
@@ -226,7 +226,7 @@ const renderPostPage = (res, post, comments, user) => {
   const mockSocket = { on: () => null };
   res.send(layout(post.title, ReactDOMServer.renderToString(
     <Provider store={store}>
-      <PostDetailPage socket={mockSocket} />
+      <Routes socket={mockSocket} />
     </Provider>
   ), state));
 };

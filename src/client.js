@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PostDetailPage from './components/post-detail-page';
+import Routes from './routes';
 import { createStore } from 'redux';
 import reducer from './reducer';
 import { Provider } from 'react-redux';
@@ -12,7 +12,7 @@ const store = createStore(reducer, state);
 
 ReactDOM.render(
   <Provider store={store}>
-    <PostDetailPage socket={io()} />
+    <Routes socket={io()} />
   </Provider>,
   document.getElementById('react-container')
 );
