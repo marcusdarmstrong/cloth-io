@@ -34,14 +34,15 @@ app.use(bodyParser.json());
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 const serve = (req, res, title, state) => {
+  const store = createStore(reducer, state);
+  const mockSocket = { on: () => null };
   const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-  match({ routes: routes(), location: fullUrl }, (error, redirectLocation, renderProps) => {
+  match({ routes: routes(mockSocket), location: fullUrl }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      const store = createStore(reducer, state);
       res.status(200).send(
         layout(
           title,
