@@ -34,7 +34,8 @@ app.use(bodyParser.json());
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 const serve = (req, res, title, state) => {
-  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+  const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+  match({ routes, location: fullUrl }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {
