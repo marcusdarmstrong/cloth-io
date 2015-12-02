@@ -20,6 +20,7 @@ import commentOrdering from './comment-ordering';
 import reducer from './reducer';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from './validator';
 import { createAuthToken, decodeAuthToken } from './auth-token';
+import routes from './routes';
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -33,7 +34,7 @@ app.use(bodyParser.json());
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 const serve = (req, res, title, state) => {
-  match({ location: req.url }, (error, redirectLocation, renderProps) => {
+  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {
