@@ -12,11 +12,11 @@ import bodyParser from 'body-parser';
 import scrypt from 'scrypt';
 import cookieParser from 'cookie-parser';
 import sanitizeHtml from 'sanitize-html';
+import { match, RoutingContext } from 'react-router';
 
 import layout from './layout';
 import sql from './sql';
 import commentOrdering from './comment-ordering';
-import Routes from './routes';
 import reducer from './reducer';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from './validator';
 import { createAuthToken, decodeAuthToken } from './auth-token';
@@ -31,6 +31,32 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
+
+const serve = (req, res, title, state) => {
+  match({ location: req.url }, (error, redirectLocation, renderProps) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+    } else if (renderProps) {
+      const store = createStore(reducer, state);
+      res.status(200).send(
+        layout(
+          title,
+          ReactDOMServer.renderToString(
+            <Provider store={store}>
+              <RoutingContext {...renderProps} />
+            </Provider>
+          ),
+          state
+        )
+      );
+    } else {
+      res.status(404).send('Not found');
+    }
+  });
+};
+
 
 app.get('/', (req, res) => {
   pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
@@ -220,23 +246,16 @@ app.post('/api/addComment', (req, res) => {
 });
 
 const articleMatcher = /\/p\/(.+)/;
-const renderPostPage = (res, post, comments, user) => {
-  const state = map({post, comments, user, modal: null});
-  const store = createStore(reducer, state);
-  const mockSocket = { on: () => null };
-  res.send(layout(post.title, ReactDOMServer.renderToString(
-    <Provider store={store}>
-      <Routes socket={mockSocket} />
-    </Provider>
-  ), state));
+const buildState = (post, comments, user) => {
+  return map({post, comments, user, modal: null});
 };
 
 app.get(articleMatcher, (req, res) => {
-  const match = articleMatcher.exec(req.path);
-  if (!match || match.length <= 1) {
+  const matcher = articleMatcher.exec(req.path);
+  if (!matcher || matcher.length <= 1) {
     return res.status(404).send('Not found');
   }
-  const urlString = match[1];
+  const urlString = matcher[1];
   pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
     if (pgErr) {
       return res.status(500).send('Internal Server Error');
@@ -252,10 +271,10 @@ app.get(articleMatcher, (req, res) => {
           const userId = req.cookies && decodeAuthToken(req.cookies.auth);
           if (userId) {
             client.query(sql`select u.id, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
-              renderPostPage(res, post, comments, userResult.rows[0]);
+              serve(req, res, post.title, buildState(res, post, comments, userResult.rows[0]));
             });
           } else {
-            renderPostPage(res, post, comments);
+            serve(req, res, post.title, buildState(res, post, comments));
           }
         });
       }
