@@ -1,7 +1,7 @@
 import { native as pg } from 'pg';
 import { List as list, Map as map } from 'immutable';
-import commentOrdering from './comment-ordering';
-import sql from './sql';
+import commentOrdering from '../comment-ordering';
+import sql from '../sql';
 
 const buildState = (title, post, comments, user) => {
   return map({title, post, comments, user, modal: null});

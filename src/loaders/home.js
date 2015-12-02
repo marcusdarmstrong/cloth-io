@@ -1,5 +1,5 @@
 import { native as pg } from 'pg';
-import sql from './sql';
+import sql from '../sql';
 
 export default (cb) => {
   pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
