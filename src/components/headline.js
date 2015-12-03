@@ -12,7 +12,7 @@ class Headline extends React.Component {
           <Avatar name={post.name} hex={post.color} />
           <div className="byline-name">{post.name}</div>
         </div>
-        <p>{preview}</p>
+        <p className="headline-preview">{preview}</p>
       </div>
     );
   }

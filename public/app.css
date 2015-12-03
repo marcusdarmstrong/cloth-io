@@ -68,7 +68,7 @@ p:last-child {
   margin-bottom: 0;
 }
 
-.article, .comment-text, .textarea {
+.article, .comment-text, .textarea, .headline-preview {
   font-family: "Merriweather", "Georgia", "Times New Roman", serif;
   font-weight: 300;
 }
@@ -412,4 +412,13 @@ nav .avatar {
 
 .headlines a:visited {
   color: #000;
+}
+
+.headline-preview {
+  font-size: .75rem;
+}
+
+.byline-name {
+  font-weight: 600;
+  margin-top: -3px;
 }
