@@ -395,3 +395,21 @@ input[type="submit"].disabled {
 nav .avatar {
   cursor: pointer;
 }
+
+
+/**** Homepage ****/
+
+.headlines h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Raleway", "Helvetica", sans-serif;
+}
+
+.headlines a {
+  color: #1D8345;
+  text-decoration: none;
+}
+
+.headlines a:visited {
+  color: #1D8345;
+}
