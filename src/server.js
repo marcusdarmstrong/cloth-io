@@ -37,7 +37,7 @@ router(app, loaders(routes), (component, res, state) => {
   const store = createStore(reducer, state);
   res.send(
     layout(
-      state.title,
+      state.get('title'),
       ReactDOMServer.renderToString(
         <Provider store={store}>
           {React.createElement(binder(component))}
