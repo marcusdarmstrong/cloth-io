@@ -20,7 +20,7 @@ import { createAuthToken, decodeAuthToken } from './auth-token';
 import router from './router';
 import routes from './routes';
 import loaders from './loaders';
-import binder from './binder';
+import binder from './components/binder';
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
