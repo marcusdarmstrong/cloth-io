@@ -1,3 +1,5 @@
+process.env.TZ = 'America/New_York'; 
+
 import express from 'express';
 import path from 'path';
 import { native as pg } from 'pg';
