@@ -207,7 +207,7 @@ const addComment = (id, created, name, color, parentId, postId, body) => {
 app.post('/api/addComment', (req, res) => {
   const userId = req.cookies && decodeAuthToken(req.cookies.auth);
   const comment = sanitizeHtml(req.body.comment, {
-    allowedTags: [ 'b', 'i', 'em', 'strong', 'a', 'p' ],
+    allowedTags: [ 'b', 'i', 'em', 'strong', 'a', 'p', 'br', 'div' ],
     allowedAttributes: {
       'a': [ 'href' ],
     },
