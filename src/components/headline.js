@@ -1,9 +1,19 @@
 import React from 'react';
+import Avatar from './avatar';
 
 class Headline extends React.Component {
   render() {
+    const { post } = this.props;
+    const preview = post.body.substring(0, 140);
     return (
-      <h2><a href={'/p/' + this.props.post.urlstring}>{this.props.post.title}</a></h2>
+      <div className="headline">
+        <h2><a href={'/p/' + post.urlstring}>{post.title}</a></h2>
+        <div className="byline">
+          <Avatar name={post.name} color={post.color} />
+          <div className="byline-name">{post.name}</div>
+        </div>
+        <p>{preview}</p>
+      </div>
     );
   }
 }

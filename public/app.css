@@ -406,10 +406,10 @@ nav .avatar {
 }
 
 .headlines a {
-  color: #1D8345;
+  color: #000;
   text-decoration: none;
 }
 
 .headlines a:visited {
-  color: #1D8345;
+  color: #000;
 }

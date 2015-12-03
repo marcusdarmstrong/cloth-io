@@ -8,10 +8,8 @@ const Home = (props) => {
       <Nav {...props} />
       <div className="spacer">
         <div className="container">
-          <div>
-            <p>Hello World! This is the homepage.</p>
-            <Posts posts={props.posts} />
-          </div>
+          <h1>Today's top stories...</h1>
+          <Posts posts={props.posts} />
         </div>
       </div>
     </div>
