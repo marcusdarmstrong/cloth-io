@@ -15,8 +15,7 @@ const createHandler = (route, cb, stateMiddleware) => {
 };
 
 export default (app, routes, cb, stateMiddleware) => {
-  console.log('Router: ' + JSON.stringify(routes));
-  for (let i = 0; routes.length; i++) {
+  for (let i = 0; i < routes.length; i++) {
     const route = routes[i];
     app.get(route.pattern || route.path, createHandler(route, cb, stateMiddleware));
   }
