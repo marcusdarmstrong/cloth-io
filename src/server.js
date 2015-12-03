@@ -39,7 +39,9 @@ router(app, loaders(routes), (component, res, state) => {
       state.title,
       ReactDOMServer.renderToString(
         <Provider store={store}>
-          {component}
+          <div>
+            {component}
+          </div>
         </Provider>
       ),
       state
