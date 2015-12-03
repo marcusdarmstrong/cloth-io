@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from './nav';
+import Posts from './posts';
 
 const Home = (props) => {
   return (
@@ -9,7 +10,7 @@ const Home = (props) => {
         <div className="container">
           <div>
             <p>Hello World! This is the homepage.</p>
-            {props.posts.map(post => (<a href={'/p/' + post.urlstring}>{post.title}</a>))}
+            <Posts posts={props.posts} />
           </div>
         </div>
       </div>
@@ -19,10 +20,7 @@ const Home = (props) => {
 
 Home.propTypes = {
   posts: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      urlstring: React.PropTypes.string,
-      title: React.PropTypes.string,
-    })
+    React.PropTypes.object
   ),
 };
 
