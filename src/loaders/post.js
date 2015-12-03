@@ -20,7 +20,7 @@ export default (cb, urlString) => {
         const post = result.rows[0];
         client.query(sql`select c.*, u.name, u.color from t_comment c join t_user u on u.id = c.user_id where c.post_id=${post.id}`, (commentErr, commentResult) => {
           const comments = list(commentOrdering(commentResult.rows));
-          buildState(post.title, post, comments);
+          cb(buildState(post.title, post, comments);
         });
       }
     });
