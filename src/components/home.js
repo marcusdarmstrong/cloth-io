@@ -1,7 +1,10 @@
 import React from 'react';
 
-export default () => {
+export default ({posts}) => {
   return (
-    <div>Hello World! This is the homepage.</div>
+    <div>
+      <p>Hello World! This is the homepage.</p>
+      {posts.map(post => (<a href={post.urlstring}>{post.title}</a>))}
+    </div>
   );
 };
