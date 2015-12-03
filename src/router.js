@@ -4,12 +4,12 @@ const createHandler = (route, cb, stateMiddleware) => {
       const matches = route.pattern.exec(req.url);
       if (matches) {
         matches.shift();
-        route.loader(state => stateMiddleware(req, state, cb.bind(null, res, route.component)), ...matches);
+        route.loader(state => stateMiddleware(req, state, cb.bind(null, route.component, res)), ...matches);
       } else {
         res.status(500).send('Internal error: ' + req.url);
       }
     } else {
-      route.loader(state => stateMiddleware(req, state, cb.bind(null, res, route.component)));
+      route.loader(state => stateMiddleware(req, state, cb.bind(null, route.component, res)));
     }
   };
 };

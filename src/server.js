@@ -34,7 +34,7 @@ app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 router(app, loaders(routes), (component, res, state) => {
   const store = createStore(reducer, state);
-  res.status(200).send(
+  res.send(
     layout(
       state.title,
       ReactDOMServer.renderToString(
