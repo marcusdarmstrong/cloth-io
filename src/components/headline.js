@@ -9,7 +9,7 @@ class Headline extends React.Component {
       <div className="headline">
         <h2><a href={'/p/' + post.urlstring}>{post.title}</a></h2>
         <div className="byline">
-          <Avatar name={post.name} color={post.color} />
+          <Avatar name={post.name} hex={post.color} />
           <div className="byline-name">{post.name}</div>
         </div>
         <p>{preview}</p>
