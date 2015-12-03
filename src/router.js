@@ -6,7 +6,7 @@ const createHandler = (route, cb, stateMiddleware) => {
         matches.shift();
         route.loader(state => stateMiddleware(req, state, cb.bind(null, res, route.component)), ...matches);
       } else {
-        res.status(500).send('Internal error');
+        res.status(500).send('Internal error: ' + res.url);
       }
     } else {
       route.loader(state => stateMiddleware(req, state, cb.bind(null, res, route.component)));
