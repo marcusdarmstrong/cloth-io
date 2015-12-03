@@ -47,7 +47,7 @@ class Comment extends React.Component {
     </div>);
 
     for (let i = this.props.comment.nestLevel; i > 0; i--) {
-      markup = (<div className="reply">{markup}</div>);
+      markup = (<div className="reply-container"><div className="reply">{markup}</div></div>);
     }
     return markup;
   }
