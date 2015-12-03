@@ -29,7 +29,7 @@ function numToString(num) {
 
 class TimeAgo extends React.Component {
   componentDidMount() {
-    this.tick(true);
+    this.tick();
   }
   componentDidUpdate(lastProps) {
     if (this.props.timestamp !== lastProps.timestamp) {
@@ -59,7 +59,7 @@ class TimeAgo extends React.Component {
     }
 
     if (!!period) {
-      this.timeoutId = setTimeout(this.tick, period);
+      this.timeoutId = setTimeout(this.tick.bind(this), period);
     }
     this.forceUpdate();
   }
