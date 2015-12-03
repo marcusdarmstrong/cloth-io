@@ -25,7 +25,7 @@ for (const action in actions) {
 ReactDOM.render(
   <Provider store={store}>
     <div>
-      {router(routes, window.location.pathname)}
+      {React.createElement(router(routes, window.location.pathname))}
     </div>
   </Provider>,
   document.getElementById('react-container')

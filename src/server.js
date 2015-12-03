@@ -39,9 +39,7 @@ router(app, loaders(routes), (component, res, state) => {
       state.title,
       ReactDOMServer.renderToString(
         <Provider store={store}>
-          <div>
-            {component}
-          </div>
+          {React.createElement(component)}
         </Provider>
       ),
       state
