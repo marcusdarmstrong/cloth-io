@@ -217,12 +217,12 @@ nav {
 }
 
 .reply {
-  margin-left: .5rem;
+  margin-left: 1rem;
+  border-left: 2px solid #666;
 }
 
 .reply-container {
-  margin-left: 1rem;
-  border-left: 2px solid #666;
+  margin-left: .5rem;
 }
 
 .child .author:before {
