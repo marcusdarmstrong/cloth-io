@@ -8,6 +8,7 @@ import io from 'socket.io-client';
 import router from './client-router';
 import routes from './routes';
 import * as actions from './actions';
+import binder from './binder';
 
 const state = fromJS(window.__INITIAL_STATE__);
 const store = createStore(reducer, state);
@@ -25,7 +26,7 @@ for (const action in actions) {
 ReactDOM.render(
   <Provider store={store}>
     <div>
-      {React.createElement(router(routes, window.location.pathname))}
+      {React.createElement(binder(router(routes, window.location.pathname)))}
     </div>
   </Provider>,
   document.getElementById('react-container')

@@ -20,6 +20,7 @@ import { createAuthToken, decodeAuthToken } from './auth-token';
 import router from './router';
 import routes from './routes';
 import loaders from './loaders';
+import binder from './binder';
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -39,7 +40,7 @@ router(app, loaders(routes), (component, res, state) => {
       state.title,
       ReactDOMServer.renderToString(
         <Provider store={store}>
-          {React.createElement(component)}
+          {React.createElement(binder(component))}
         </Provider>
       ),
       state
