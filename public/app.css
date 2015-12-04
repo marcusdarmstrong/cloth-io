@@ -26,28 +26,6 @@
   cursor: default;
 }
 
-@media (min-width: 800px) {
-  .comments {
-    margin-left: -1.5rem;
-  }
-
-  .comments .separator {
-    margin-left: 1.5rem;
-  }
-
-  .comment-summary h2 {
-    margin-left: 1.5rem;
-  }
-
-  .byline {
-    margin-left: 1.5rem;
-  }
-
-  .headline .avatar {
-    margin-left: -1rem;
-  }
-}
-
 html {
   font-size: 16pt;
   line-height: 1.5em;
@@ -453,4 +431,26 @@ nav .avatar {
 .intro {
   font-family: "Open Sans", Helvetica, sans-serif;
   font-weight: 300;
+}
+
+@media (min-width: 800px) {
+  .comments {
+    margin-left: -1.5rem;
+  }
+
+  .comments .separator {
+    margin-left: 1.5rem;
+  }
+
+  .comment-summary h2 {
+    margin-left: 1.5rem;
+  }
+
+  .byline {
+    margin-left: 1.5rem;
+  }
+
+  .headline .avatar {
+    margin-left: -1rem;
+  }
 }
