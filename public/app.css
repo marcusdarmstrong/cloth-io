@@ -39,7 +39,13 @@
     margin-left: 1.5rem;
   }
 
-  .byline {}
+  .byline {
+    margin-left: 1.5rem;
+  }
+
+  .headline .avatar {
+    margin-left: -1rem;
+  }
 }
 
 html {
@@ -419,7 +425,7 @@ nav .avatar {
 }
 
 .headline .avatar {
-  margin-left: -1rem;
+  margin-left: -.5rem;
   float: left;
 }
 
@@ -429,7 +435,7 @@ nav .avatar {
 }
 
 .byline {
-  margin-left: 1.5rem;
+  margin-left: 2rem;
   font-size: .75rem;
   line-height: 1rem;
 }
