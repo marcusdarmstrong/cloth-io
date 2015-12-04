@@ -7,13 +7,14 @@ class Headline extends React.Component {
   render() {
     const { post } = this.props;
     const preview = previewer(post.body);
+    const ts = Number(post.creatd);
     return (
       <a href={'/p/' + post.urlstring} className="headline">
         <h2>{post.title}</h2>
         <div className="headline-details">
           <Avatar name={post.name} hex={post.color} />
           <div className="byline">
-            <TimeAgo timestamp={post.created} />
+            <TimeAgo timestamp={ts} />
             <div className="byline-name">{post.name}</div>
           </div>
           <p className="headline-preview">{preview}</p>
