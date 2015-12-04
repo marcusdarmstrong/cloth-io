@@ -9,18 +9,21 @@ class Headline extends React.Component {
     const preview = previewer(post.body);
     const ts = Number(post.created);
     return (
-      <a href={'/p/' + post.urlstring} className="headline">
-        <h2>{post.title}</h2>
-        <div className="headline-details">
-          <Avatar name={post.name} hex={post.color} />
-          <div className="byline">
-            <TimeAgo timestamp={ts} />
-            <div className="byline-name">{post.name}</div>
-            <p className="headline-preview">{preview}</p>
-            <div className="comment-count">Read More</div>
+      <div>
+        <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+        <a href={'/p/' + post.urlstring} className="headline">
+          <h2>{post.title}</h2>
+          <div className="headline-details">
+            <Avatar name={post.name} hex={post.color} />
+            <div className="byline">
+              <TimeAgo timestamp={ts} />
+              <div className="byline-name">{post.name}</div>
+              <p className="headline-preview">{preview}</p>
+              <div className="comment-count">Read More</div>
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
     );
   }
 }
