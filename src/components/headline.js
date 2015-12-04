@@ -7,7 +7,7 @@ class Headline extends React.Component {
   render() {
     const { post } = this.props;
     const preview = previewer(post.body);
-    const ts = Number(post.creatd);
+    const ts = Number(post.created);
     return (
       <a href={'/p/' + post.urlstring} className="headline">
         <h2>{post.title}</h2>
