@@ -8,7 +8,7 @@ const Home = (props) => {
       <Nav {...props} />
       <div className="spacer">
         <div className="container">
-          <h1>Today's top stories...</h1>
+          <h1 className="intro">Today's top stories...</h1>
           <Posts posts={props.posts} />
         </div>
       </div>

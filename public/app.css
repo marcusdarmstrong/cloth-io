@@ -442,3 +442,8 @@ nav .avatar {
 .comment-count {
   float: right;
 }
+
+.intro {
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-weight: 300;
+}
