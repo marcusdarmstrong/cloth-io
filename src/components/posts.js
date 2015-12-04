@@ -7,7 +7,7 @@ class Posts extends React.Component {
       <div className="headlines">
         {this.props.posts.map(post => (
           <div>
-            <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+            <div className="separator" key={post.id}>&middot;&nbsp;&middot;&nbsp;&middot;</div>
             <Headline key={post.id} post={post} />
           </div>
         ))}
