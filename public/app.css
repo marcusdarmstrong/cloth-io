@@ -406,6 +406,7 @@ nav .avatar {
   font-size: 1.5rem;
   font-weight: bold;
   font-family: "Raleway", "Helvetica", sans-serif;
+  margin-bottom: 1rem;
 }
 
 .headlines a {
@@ -417,11 +418,27 @@ nav .avatar {
   color: #000;
 }
 
+.headline .avatar {
+  margin-left: -1rem;
+  float: left;
+}
+
 .headline-preview {
   font-size: .75rem;
+  margin-top: 13px;
+}
+
+.byline {
+  font=size: .75rem;
+  line-height: 1rem;
 }
 
 .byline-name {
   font-weight: 600;
   margin-top: -3px;
+  line-height: .75rem;
+}
+
+.comment-count {
+  float: right;
 }
