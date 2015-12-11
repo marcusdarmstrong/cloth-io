@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 
 class ContentEditable extends React.Component {
   componentDidMount() {
-    ReactDOM.findDOMNode(this).focus();
+    if (this.props.autoFocus) {
+      ReactDOM.findDOMNode(this).focus();
+    }
   }
 
   shouldComponentUpdate(nextProps) {
@@ -44,6 +46,7 @@ class ContentEditable extends React.Component {
 ContentEditable.propTypes = {
   html: React.PropTypes.string,
   onChange: React.PropTypes.func,
+  autoFocus: React.PropTypes.bool,
 };
 
 export default ContentEditable;
