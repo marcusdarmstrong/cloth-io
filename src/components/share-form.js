@@ -84,7 +84,7 @@ class ShareForm extends React.Component {
     const titleClass = (this.state.titleError) ? ' error' : '';
     const linkClass = (this.state.linkError) ? ' error' : '';
     const submitClass =
-          (!this.state.nameError
+          (!this.state.titleError
         && !this.state.linkError
         && this.state.title !== '')
       ? '' : 'disabled';
