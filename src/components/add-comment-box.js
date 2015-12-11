@@ -58,7 +58,7 @@ class AddCommentBox extends React.Component {
           </div>
         </div>
         <div className="textarea-container">
-          <ContentEditable onChange={this.handleChange.bind(this)} html={this.state.value}/>
+          <ContentEditable onChange={this.handleChange.bind(this)} html={this.state.value} />
           <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
         <div className="comment-options">
