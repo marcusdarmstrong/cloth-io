@@ -43,7 +43,7 @@ class Nav extends React.Component {
       <div className="nav-container">
         <nav>
           {userNav}
-          <a className="button pull-left" href="/share">Share</a>
+          {(this.props.noShareForm) ? '' : (<a className="button pull-left" href="/share">Share</a>)}
           <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
         </nav>
         {modal}
@@ -62,6 +62,7 @@ Nav.propTypes = {
   }),
   openModal: React.PropTypes.func.isRequired,
   loginUser: React.PropTypes.func.isRequired,
+  noShareForm: React.PropTypes.bool,
 };
 
 export default Nav;

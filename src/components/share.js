@@ -5,7 +5,7 @@ import ShareForm from './share-form';
 const Share = (props) => {
   return (
     <div>
-      <Nav {...props} />
+      <Nav {...props} noShareForm />
       <div className="spacer">
         <div className="container">
           <ShareForm posts={props.user} />
