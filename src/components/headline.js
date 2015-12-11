@@ -8,7 +8,7 @@ class Headline extends React.Component {
     const { post } = this.props;
     const preview = previewer(post.body);
     const ts = Number(post.created);
-    const commentCount = Number(post.commentCount);
+    const commentCount = Number(post.commentcount);
     let commentCountText = 'Read More';
     if (commentCount === 1) {
       commentCountText = '1 Comment';
