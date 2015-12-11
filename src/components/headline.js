@@ -8,11 +8,12 @@ class Headline extends React.Component {
     const { post } = this.props;
     const preview = previewer(post.body);
     const ts = Number(post.created);
-    let commentCount = 'Read More';
-    if (post.commentCount === 1) {
-      commentCount = '1 Comment';
-    } else if (post.commentCount > 1) {
-      commentCount = post.commentCount + ' Comments';
+    const commentCount = Number(post.commentCount);
+    let commentCountText = 'Read More';
+    if (commentCount === 1) {
+      commentCountText = '1 Comment';
+    } else if (commentCount > 1) {
+      commentCountText = post.commentCount + ' Comments';
     }
     return (
       <div>
@@ -25,7 +26,7 @@ class Headline extends React.Component {
               <TimeAgo timestamp={ts} />
               <div className="byline-name">{post.name}</div>
               <p className="headline-preview" dangerouslySetInnerHTML={{__html: preview}}></p>
-              <div className="comment-count">{commentCount}</div>
+              <div className="comment-count">{commentCountText}</div>
             </div>
           </div>
         </a>
