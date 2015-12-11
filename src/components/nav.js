@@ -43,7 +43,7 @@ class Nav extends React.Component {
       <div className="nav-container">
         <nav>
           {userNav}
-          <div class="button pull-left">Share</div>
+          <div className="button pull-left">Share</div>
           <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
         </nav>
         {modal}
