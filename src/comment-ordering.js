@@ -1,6 +1,6 @@
 function sortAndBucket(comments) { // I think O(n log n)
   if (!comments || (comments && comments.length === 0)) {
-    return [];
+    return {0: []};
   }
   comments.sort((b, a) => a.created - b.created);
   const buckets = {};
