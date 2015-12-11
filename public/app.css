@@ -75,11 +75,13 @@ p:last-child {
   user-select: none;
   font-size: .75rem;
   background-color: #FFF;
+  text-decoration: none;
 }
 
 .button:hover, .button.engaged {
   color: #0C371D;
   border: 1px solid #0C371D;
+  text-decoration: none;
 }
 
 .pull-right {
