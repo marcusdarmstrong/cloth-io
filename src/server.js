@@ -55,12 +55,18 @@ router(app, loaders(routes), (component, res, state) => {
     }
     const userId = req.cookies && decodeAuthToken(req.cookies.auth);
     if (userId) {
-      client.query(sql`select u.id, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
+      client.query(sql`select u.id, u.status, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
         done();
         if (userErr || !userResult || !userResult.rows) {
           return cb(state);
         }
-        cb(state.set('user', userResult.rows[0]));
+        const user = userResult.rows[0];
+        cb(state.set('user', {
+          id: user.id,
+          status: Number(user.status),
+          name: user.name,
+          color: user.color,
+        }));
       });
     } else {
       return cb(state);
