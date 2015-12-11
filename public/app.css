@@ -446,6 +446,7 @@ nav .avatar {
 .link-desc {
   margin: -1rem 0 1rem;
   display: block;
+  color: #666;
 }
 
 .headlines .headline-link:hover {
