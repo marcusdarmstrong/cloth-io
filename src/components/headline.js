@@ -13,7 +13,7 @@ class Headline extends React.Component {
     if (commentCount === 1) {
       commentCountText = '1 Comment';
     } else if (commentCount > 1) {
-      commentCountText = post.commentCount + ' Comments';
+      commentCountText = commentCount + ' Comments';
     }
     return (
       <div>
