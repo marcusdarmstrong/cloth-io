@@ -11,7 +11,7 @@ export default (routes) => {
       route.loader = homeLoader;
       break;
     default:
-      route.loader = () => true;
+      route.loader = () => ({'title': 'Share a Story'});
     }
     return route;
   });
