@@ -8,15 +8,11 @@ const Share = (props) => {
       <Nav {...props} noShareForm />
       <div className="spacer">
         <div className="container">
-          <ShareForm user={props.user} />
+          <ShareForm />
         </div>
       </div>
     </div>
   );
-};
-
-Share.propTypes = {
-  user: React.PropTypes.object,
 };
 
 export default Share;

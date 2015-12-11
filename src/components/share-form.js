@@ -108,11 +108,4 @@ class ShareForm extends React.Component {
   }
 }
 
-ShareForm.propTypes = {
-  user: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    color: React.PropTypes.string.isRequired,
-  }).isRequired,
-};
-
 export default ShareForm;
