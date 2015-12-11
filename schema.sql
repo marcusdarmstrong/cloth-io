@@ -19,7 +19,8 @@ create table t_post (
     user_id bigint not null,
     body text not null,
     title text not null,
-    urlstring text not null
+    urlstring text not null,
+    url text default null
 );
 
 create unique index on t_post (id);

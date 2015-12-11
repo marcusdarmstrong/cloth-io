@@ -17,7 +17,7 @@ import sanitizeHtml from 'sanitize-html';
 import layout from './layout';
 import sql from './sql';
 import reducer from './reducer';
-import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from './validator';
+import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX, URL_REX, TITLE_REX } from './validator';
 import { createAuthToken, decodeAuthToken } from './auth-token';
 import router from './router';
 import routes from './routes';
@@ -245,5 +245,48 @@ app.post('/api/addComment', (req, res) => {
         });
       });
     });
+  }
+});
+
+app.post('/api/addPost', (req, res) => {
+  const userId = req.cookies && decodeAuthToken(req.cookies.auth);
+  const body = sanitizeHtml(req.body.body, {
+    allowedTags: [ 'b', 'i', 'em', 'strong', 'a', 'p', 'br', 'div', 'h2', 'h3' ],
+    allowedAttributes: {
+      'a': [ 'href' ],
+    },
+  });
+
+  const link = (validate(URL_REX, req.body.link)) ? req.body.link : null;
+  const title = (validate(TITLE_REX, req.body.title)) ? req.body.title : null;
+  const urlStringRoot = title.toLowerCase().replace(' ', '-').replace(/[^a-z-]/g, '');
+
+  if (userId && body && body !== '') {
+    pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
+      const urlStringLike = urlStringRoot + '%';
+      client.query(sql`select count(*) as count from t_post where urlstring like ${urlStringLike}`, (countErr, countResult) => {
+        if (countResult && countResult.rows && countResult.rows[0] && countResult.rows[0].count) {
+          const urlString = (countResult.rows[0].count === 0) ? urlStringRoot : urlStringRoot + '-' + countResult.rows[0].count;
+          client.query(sql`select status from t_user where id=${userId}`, (userErr, userResult) => {
+            if (userResult.rows[0].status > 0) {
+              client.query(sql`insert into t_post (user_id, title, urlstring, body, url) values (${userId}, ${title}, ${urlString}, ${body}, ${link})`, (insertErr, insertResult) => {
+                done();
+                if (insertResult && insertResult.rows && insertResult.rows.length === 1) {
+                  res.send(JSON.stringify({success: true, post: { urlstring: urlString }}));
+                } else {
+                  res.send(JSON.stringify({success: false, message: 'insert failed'}));
+                }
+              });
+            } else {
+              res.send(JSON.stringify({success: false, message: 'No permissions'}));
+            }
+          });
+        } else {
+          res.send(JSON.stringify({success: false, message: 'Unable to generate urlstring'}));
+        }
+      });
+    });
+  } else {
+    res.send(JSON.stringify({success: false, message: 'Didn\'t validate'}));
   }
 });
