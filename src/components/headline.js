@@ -17,14 +17,35 @@ class Headline extends React.Component {
       commentCountText = commentCount + ' Comments';
     }
 
-    const link = (post.url) ? <a href={post.url} target="_new">{uriParser(post.url).host} &crarr;</a> : null;
-
+    const link = (post.url) ? uriParser(post.url).host : null;
+    const postLink = '/p/' + post.urlstring;
+    if (link) {
+      return (
+        <div>
+          <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+          <div className="headline">
+            <a href={post.url} target="_new">
+              <h2>{post.title}</h2>
+              <span className="linkDesc">{link} &crarr;</span>
+            </a>
+            <a href={postLink} className="headline-details">
+              <Avatar name={post.name} hex={post.color} />
+              <div className="byline">
+                <TimeAgo timestamp={ts} />
+                <div className="byline-name">{post.name}</div>
+                <p className="headline-preview" dangerouslySetInnerHTML={{__html: preview}}></p>
+                <div className="comment-count">{commentCountText}</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      );
+    }
     return (
       <div>
         <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
-        <a href={'/p/' + post.urlstring} className="headline">
+        <a href={postLink} className="headline">
           <h2>{post.title}</h2>
-          {link}
           <div className="headline-details">
             <Avatar name={post.name} hex={post.color} />
             <div className="byline">
