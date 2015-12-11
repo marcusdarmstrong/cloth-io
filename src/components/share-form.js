@@ -59,7 +59,7 @@ class ShareForm extends React.Component {
       return;
     }
 
-    fetch('/api/createPost', {
+    fetch('/api/addPost', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
