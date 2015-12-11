@@ -18,7 +18,7 @@ class Headline extends React.Component {
             <div className="byline">
               <TimeAgo timestamp={ts} />
               <div className="byline-name">{post.name}</div>
-              <p className="headline-preview">{preview}</p>
+              <p className="headline-preview" dangerouslySetInnerHTML={{__html: preview}}></p>
               <div className="comment-count">Read More</div>
             </div>
           </div>
