@@ -448,7 +448,7 @@ nav .avatar {
   display: block;
 }
 
-.headline-link:hover {
+.headlines .headline-link:hover {
   color: #1D8345;
 }
 
