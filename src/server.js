@@ -269,7 +269,7 @@ app.post('/api/addPost', (req, res) => {
           const urlString = (countResult.rows[0].count === 0) ? urlStringRoot : urlStringRoot + '-' + countResult.rows[0].count;
           client.query(sql`select status from t_user where id=${userId}`, (userErr, userResult) => {
             if (userResult.rows[0].status > 0) {
-              client.query(sql`insert into t_post (user_id, title, urlstring, body, url) values (${userId}, ${title}, ${urlString}, ${body}, ${link})`, (insertErr, insertResult) => {
+              client.query(sql`insert into t_post (user_id, title, urlstring, body, url) values (${userId}, ${title}, ${urlString}, ${body}, ${link}) returning id`, (insertErr, insertResult) => {
                 done();
                 if (insertResult && insertResult.rows && insertResult.rows.length === 1) {
                   res.send(JSON.stringify({success: true, post: { urlstring: urlString }}));

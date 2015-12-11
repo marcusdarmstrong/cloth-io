@@ -425,6 +425,7 @@ nav .avatar {
   margin-left: 2rem;
   font-size: .75rem;
   line-height: 1rem;
+  overflow: hidden;
 }
 
 .byline-name {
