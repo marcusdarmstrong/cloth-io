@@ -39,7 +39,7 @@ class Nav extends React.Component {
       }
     }
 
-    const noShareForm = this.props.noShareForm || this.props.user.status === 0;
+    const noShareForm = this.props.noShareForm || !this.props.user || this.props.user.status === 0;
 
     return (
       <div className="nav-container">
