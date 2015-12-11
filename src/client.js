@@ -12,14 +12,17 @@ import binder from './components/binder';
 
 const state = fromJS(window.__INITIAL_STATE__);
 const store = createStore(reducer, state);
-const socket = io();
 
-const bindAction = actionName => {
-  return data => store.dispatch({type: actionName, comment: data});
-};
-for (const action in actions) {
-  if (actions.hasOwnProperty(action) && (typeof action === 'string' || action instanceof String)) {
-    socket.on(action, bindAction(action));
+const socketName = state.get('socket');
+if (socketName) {
+  const socket = io(socketName);
+  const bindAction = actionName => {
+    return data => store.dispatch({type: actionName, comment: data});
+  };
+  for (const action in actions) {
+    if (actions.hasOwnProperty(action) && (typeof action === 'string' || action instanceof String)) {
+      socket.on(action, bindAction(action));
+    }
   }
 }
 

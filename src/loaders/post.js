@@ -4,7 +4,7 @@ import commentOrdering from '../comment-ordering';
 import sql from '../sql';
 
 const buildState = (title, post, comments, user) => {
-  return map({title, post, comments, user, modal: null});
+  return map({title, post, comments, user, modal: null, socket: '/comments-' + post.id});
 };
 
 export default (cb, urlString) => {
