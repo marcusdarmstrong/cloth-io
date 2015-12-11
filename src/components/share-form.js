@@ -3,7 +3,7 @@ import { validate, TITLE_REX, URL_REX } from '../validator';
 import fetch from 'isomorphic-fetch';
 import ContentEditable from './content-editable';
 
-class Share extends React.Component {
+class ShareForm extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -101,11 +101,11 @@ class Share extends React.Component {
   }
 }
 
-Share.propTypes = {
+ShareForm.propTypes = {
   user: React.PropTypes.shape({
     name: React.PropTypes.string.isRequired,
     color: React.PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default Share;
+export default ShareForm;
