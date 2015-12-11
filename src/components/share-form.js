@@ -74,7 +74,7 @@ class ShareForm extends React.Component {
     }).then(res => res.json())
       .then(data => {
         if (data.success && data.post && data.post.urlstring) {
-          window.location = data.post.urlstring;
+          window.location = '/p/' + data.post.urlstring;
         } else {
           this.setState({submissionError: 'Something went wrong.'});
         }
