@@ -2,6 +2,7 @@ import React from 'react';
 import Avatar from './avatar';
 import TimeAgo from './time-ago';
 import previewer from '../previewer';
+import uriParser from '../uri-parser';
 
 class Headline extends React.Component {
   render() {
@@ -15,11 +16,15 @@ class Headline extends React.Component {
     } else if (commentCount > 1) {
       commentCountText = commentCount + ' Comments';
     }
+
+    const link = (post.link) ? <a href={post.link} target="_new">{uriParser(post.link).hostname + '&crarr;'}</a> : null;
+
     return (
       <div>
         <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
         <a href={'/p/' + post.urlstring} className="headline">
           <h2>{post.title}</h2>
+          {link}
           <div className="headline-details">
             <Avatar name={post.name} hex={post.color} />
             <div className="byline">
