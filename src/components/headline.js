@@ -24,9 +24,9 @@ class Headline extends React.Component {
         <div>
           <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
           <div className="headline">
-            <a href={post.url} target="_new">
+            <a href={post.url} target="_new" className="headline-link">
               <h2>{post.title}</h2>
-              <span className="linkDesc">{link} &crarr;</span>
+              <span className="link-desc">{link} &crarr;</span>
             </a>
             <a href={postLink} className="headline-details">
               <Avatar name={post.name} hex={post.color} />

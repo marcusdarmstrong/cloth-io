@@ -443,6 +443,15 @@ nav .avatar {
   font-weight: 300;
 }
 
+.link-desc {
+  margin: -1rem 0 1rem;
+  display: block;
+}
+
+.headline-link:hover {
+  color: #1D8345;
+}
+
 @media (min-width: 800px) {
   .comments {
     margin-left: -1.5rem;
