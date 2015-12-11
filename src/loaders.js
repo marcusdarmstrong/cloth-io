@@ -11,6 +11,7 @@ export default (routes) => {
       route.loader = homeLoader;
       break;
     default:
+      route.loader = () => true;
     }
     return route;
   });
