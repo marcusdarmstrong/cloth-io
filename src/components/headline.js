@@ -17,7 +17,7 @@ class Headline extends React.Component {
       commentCountText = commentCount + ' Comments';
     }
 
-    const link = (post.url) ? <a href={post.url} target="_new">{uriParser(post.url).hostname + '&crarr;'}</a> : null;
+    const link = (post.url) ? <a href={post.url} target="_new">{uriParser(post.url).host} &crarr;</a> : null;
 
     return (
       <div>
