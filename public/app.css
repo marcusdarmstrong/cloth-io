@@ -278,6 +278,9 @@ nav {
 .textarea:focus {
   border-color: #666;
 }
+.share-form .textarea {
+  margin: .5rem 0;
+}
 .spacer {
   margin: 4rem 1rem;
 }

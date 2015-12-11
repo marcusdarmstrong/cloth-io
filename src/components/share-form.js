@@ -36,9 +36,10 @@ class ShareForm extends React.Component {
   }
   handleLinkChange(e) {
     const newLink = e.target.value;
+    this.setState({link: newLink});
+
     if (newLink !== '') {
       const failure = !validate(URL_REX, newLink);
-      this.setState({link: newLink});
       this.setState({linkError: failure});
       if (failure) {
         this.setState({linkHelperText: 'Double check your link.'});
@@ -72,8 +73,8 @@ class ShareForm extends React.Component {
       }),
     }).then(res => res.json())
       .then(data => {
-        if (data.success) {
-          // Then redirect...
+        if (data.success && data.post && data.post.urlstring) {
+          window.location = data.post.urlstring;
         } else {
           this.setState({submissionError: 'Something went wrong.'});
         }
