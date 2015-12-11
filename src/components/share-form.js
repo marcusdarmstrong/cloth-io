@@ -36,12 +36,17 @@ class ShareForm extends React.Component {
   }
   handleLinkChange(e) {
     const newLink = e.target.value;
-    const failure = !validate(URL_REX, newLink);
-    this.setState({link: newLink});
-    this.setState({linkError: failure});
-    if (failure) {
-      this.setState({linkHelperText: 'Double check your link.'});
-      this.setState({linkHelperText: 'Looks good!'});
+    if (newLink !== '') {
+      const failure = !validate(URL_REX, newLink);
+      this.setState({link: newLink});
+      this.setState({linkError: failure});
+      if (failure) {
+        this.setState({linkHelperText: 'Double check your link.'});
+      } else {
+        this.setState({linkHelperText: 'Looks good!'});
+      }
+    } else {
+      this.setState({linkHelperText: 'Optional external link to share.'});
     }
   }
   handleBodyChange(e) {
@@ -80,7 +85,7 @@ class ShareForm extends React.Component {
     const submitClass =
           (!this.state.nameError
         && !this.state.linkError
-        && this.state.name !== '')
+        && this.state.title !== '')
       ? '' : 'disabled';
     const submissionError = (this.state.submissionError === '')
       ? null : (<p className="error">{this.state.submissionError}</p>);
@@ -94,6 +99,7 @@ class ShareForm extends React.Component {
         <label htmlFor="link">Link: (Optional)</label>
         <input type="url" className={linkClass} name="link" value={this.state.link} onChange={this.handleLinkChange.bind(this)} />
         <div className={'form-helper' + linkClass}>{this.state.linkHelperText}</div>
+        <label htmlFor="link">Commentary:</label>
         <ContentEditable onChange={this.handleBodyChange.bind(this)} html={this.state.body} />
         <input type="submit" name="submit" className={submitClass} value="Create post" />
       </form>
