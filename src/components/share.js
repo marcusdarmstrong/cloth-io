@@ -8,7 +8,7 @@ const Share = (props) => {
       <Nav {...props} noShareForm />
       <div className="spacer">
         <div className="container">
-          <ShareForm posts={props.user} />
+          <ShareForm user={props.user} />
         </div>
       </div>
     </div>
