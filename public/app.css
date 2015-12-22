@@ -454,8 +454,7 @@ nav .avatar {
   color: #1D8345;
 }
 
-
-.headlines .separator:not(:first-child) {
+.headlines .separator {
   border-bottom: 1px solid #ddd;
 }
 
