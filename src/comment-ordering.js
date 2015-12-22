@@ -14,7 +14,12 @@ function sortAndBucket(comments) { // I think O(n log n)
   }
   return buckets;
 }
-
+/*
+buckets = {
+  0: [list, of, root, children],
+  parentid: [list, of, children],
+};
+*/
 function markAndFlatten(buckets, parentId, fork, nestLevel) { // I think O(n)
   let result = [];
   const bucket = buckets[parentId];
@@ -22,7 +27,7 @@ function markAndFlatten(buckets, parentId, fork, nestLevel) { // I think O(n)
     const root = bucket[i];
     const children = buckets[root.id];
     let childNestLevel = nestLevel;
-    if (i === bucket.length - 1) {
+    if (i === bucket.length - 1 && parentId !== 0) {
       childNestLevel--;
     }
     if (fork) {
