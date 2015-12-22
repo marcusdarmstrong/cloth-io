@@ -85,6 +85,17 @@ p:last-child {
   text-decoration: none;
 }
 
+.button.disabled {
+  cursor: default;
+  color: #666;
+  border-color: #666;
+}
+
+.button.disabled:hover {
+  color: #666;
+  border-color: #666;
+}
+
 .pull-right {
   float: right;
 }
