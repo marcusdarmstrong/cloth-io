@@ -24,6 +24,7 @@ import routes from './routes';
 import loaders from './loaders';
 import binder from './components/binder';
 
+const namespaces = [];
 const app = express();
 app.set('port', (process.env.PORT || 5000));
 const server = app.listen(app.get('port'));
@@ -37,6 +38,9 @@ app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 router(app, loaders(routes), (component, res, state) => {
   const store = createStore(reducer, state);
+  if (state.get('socket')) {
+    namespaces.push(io.of(state.get('socket')));
+  }
   res.send(
     layout(
       state.get('title'),
