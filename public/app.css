@@ -31,6 +31,7 @@ html {
   line-height: 1.5em;
   font-family: "Open Sans", "Helvetica", sans-serif;
   margin: 0;
+  color: rgba(0,0,0,.8);
 }
 body {
   margin: 0;
@@ -451,6 +452,11 @@ nav .avatar {
 
 .headlines .headline-link:hover {
   color: #1D8345;
+}
+
+
+.headlines .separator:not(:first-child) {
+  border-bottom: 1px solid #ddd;
 }
 
 @media (min-width: 800px) {

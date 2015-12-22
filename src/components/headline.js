@@ -22,7 +22,7 @@ class Headline extends React.Component {
     if (link) {
       return (
         <div>
-          <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+          <div className="separator">&nbsp;</div>
           <div className="headline">
             <a href={post.url} target="_new" className="headline-link">
               <h2>{post.title}</h2>
