@@ -2,15 +2,15 @@ import React from 'react';
 import AddCommentBox from './add-comment-box';
 import Comment from './comment';
 
-export default ({post, user, comments, openModal}) => (
+export default ({post, user, comments, openModal, socketConnected}) => (
   <section className="comments">
     <div className="comment-summary">
       <h2>{comments.length} {(comments.length === 1) ? 'Comment' : 'Comments'}</h2>
-      <AddCommentBox user={user} openModal={openModal} postId={post.id} />
+      <AddCommentBox user={user} openModal={openModal} postId={post.id} socketConnected={socketConnected} />
     </div>
     <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
     {comments.map((comment) =>
-      <Comment key={comment.id} comment={comment} user={user} openModal={openModal} />
+      <Comment key={comment.id} comment={comment} user={user} openModal={openModal} socketConnected={socketConnected} />
     )}
   </section>
 );

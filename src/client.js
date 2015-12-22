@@ -24,6 +24,7 @@ if (socketName) {
       socket.on(action, bindAction(action));
     }
   }
+  socket.on('connect', () => store.dispatch({type: 'SOCKET_CONNECT'}));
 }
 
 ReactDOM.render(

@@ -1,4 +1,4 @@
-import { ADD_COMMENT, OPEN_MODAL, CLOSE_MODAL, LOGIN_USER } from './actions';
+import { ADD_COMMENT, OPEN_MODAL, CLOSE_MODAL, LOGIN_USER, SOCKET_CONNECT } from './actions';
 import { Map as map, fromJS } from 'immutable';
 import LoginForm from './components/login-form';
 import SignupForm from './components/signup-form';
@@ -19,6 +19,8 @@ export default (state = map, action) => {
     return state.set('modal', null);
   case LOGIN_USER:
     return state.set('user', action.user);
+  case SOCKET_CONNECT:
+    return state.set('socketConnected', true);
   default:
     return state;
   }

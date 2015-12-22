@@ -41,9 +41,9 @@ class Comment extends React.Component {
         <div className="comment-options">
           <div className={replyState} onClick={this.toggleReplyBox.bind(this)}>Reply</div>
         </div>
-        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork openModal={this.props.openModal} onSubmission={this.toggleReplyBox.bind(this)}/> : null}
+        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork openModal={this.props.openModal} onSubmission={this.toggleReplyBox.bind(this)} socketConnected={this.props.socketConnected} /> : null}
       </div>
-      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} openModal={this.props.openModal} onSubmission={this.toggleReplyBox.bind(this)} /> : null}
+      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} openModal={this.props.openModal} onSubmission={this.toggleReplyBox.bind(this)} socketConnected={this.props.socketConnected} /> : null}
     </div>);
 
     for (let i = this.props.comment.nestLevel; i > 0; i--) {
@@ -69,6 +69,7 @@ Comment.propTypes = {
     color: React.PropTypes.string,
   }),
   openModal: React.PropTypes.func.isRequired,
+  socketConnected: React.PropTypes.bool.isRequired,
 };
 
 export default Comment;

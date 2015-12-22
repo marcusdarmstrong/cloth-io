@@ -39,7 +39,7 @@ class AddCommentBox extends React.Component {
   }
 
   render() {
-    const {user, parentComment, fork} = this.props;
+    const {user, parentComment, fork, socketConnected} = this.props;
     const color = (user) ? '#' + user.color : '#ddd';
     const letter = (user) ? user.name.substr(0, 1).toUpperCase() : '?';
     const avatar = (<div className="avatar" style={{backgroundColor: color}}>{letter}</div>);
@@ -62,7 +62,11 @@ class AddCommentBox extends React.Component {
           <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
         <div className="comment-options">
+        {(socketConnected) ?
           <div className="button pull-right" onClick={this.addComment.bind(this)}>Post Comment</div>
+          :
+          <div className="button pull-right disabled">Connecting...</div>
+        }
         </div>
       </div>
     ) : (
@@ -95,6 +99,7 @@ AddCommentBox.propTypes = {
   openModal: React.PropTypes.func.isRequired,
   onSubmission: React.PropTypes.func,
   postId: React.PropTypes.string,
+  socketConnected: React.PropTypes.bool.isRequired,
 };
 
 export default AddCommentBox;
