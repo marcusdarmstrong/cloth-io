@@ -47,7 +47,7 @@ class ShareForm extends React.Component {
         this.setState({linkHelperText: 'Looks good!'});
       }
     } else {
-      this.setState({linkHelperText: 'Optional external link to share.'});
+      this.setState({linkError: false, linkHelperText: 'Optional external link to share.'});
     }
   }
   handleBodyChange(e) {
