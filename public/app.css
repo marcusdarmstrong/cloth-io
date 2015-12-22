@@ -408,12 +408,12 @@ nav .avatar {
   margin-bottom: 1rem;
 }
 
-.headline-link, .headline a {
+.headline-link, a.headline {
   color: rgba(0,0,0,.8);
   text-decoration: none;
 }
 
-.headline-link:visited, .headline a {
+.headline-link:visited, a.headline:visited {
   color: rgba(0,0,0,.8);
 }
 
