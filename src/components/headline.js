@@ -43,7 +43,7 @@ class Headline extends React.Component {
     }
     return (
       <div>
-        <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+        <div className="separator">&nbsp;</div>
         <a href={postLink} className="headline">
           <h2>{post.title}</h2>
           <div className="headline-details">
