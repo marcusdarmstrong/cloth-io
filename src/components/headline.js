@@ -6,7 +6,7 @@ import uriParser from '../uri-parser';
 
 class Headline extends React.Component {
   render() {
-    const { post } = this.props;
+    const { post, hasSeparator } = this.props;
     const preview = previewer(post.body);
     const ts = Number(post.created);
     const commentCount = Number(post.commentcount);
@@ -22,7 +22,7 @@ class Headline extends React.Component {
     if (link) {
       return (
         <div>
-          <div className="separator">&nbsp;</div>
+          {(hasSeparator) ? (<div className="separator">&nbsp;</div>) : null}
           <div className="headline">
             <a href={post.url} target="_new" className="headline-link">
               <h2>{post.title}</h2>
@@ -43,7 +43,7 @@ class Headline extends React.Component {
     }
     return (
       <div>
-        <div className="separator">&nbsp;</div>
+        {(hasSeparator) ? (<div className="separator">&nbsp;</div>) : null}
         <a href={postLink} className="headline">
           <h2>{post.title}</h2>
           <div className="headline-details">
@@ -66,6 +66,7 @@ Headline.propTypes = {
     urlstring: React.PropTypes.string,
     title: React.PropTypes.string,
   }),
+  hasSeparator: React.PropTypes.bool,
 };
 
 export default Headline;

@@ -3,11 +3,16 @@ import Headline from './headline';
 
 class Posts extends React.Component {
   render() {
+    let firstPost = true;
     return (
       <div className="headlines">
-        {this.props.posts.map(post => (
-          <Headline key={post.id} post={post} />
-        ))}
+        {this.props.posts.map(post => {
+          const retval = (
+            <Headline key={post.id} post={post} hasSeparator={firstPost} />
+          );
+          firstPost = false;
+          return retval;
+        })}
       </div>
     );
   }
