@@ -404,6 +404,18 @@ nav .avatar {
   cursor: pointer;
 }
 
+.article a h1 {
+  margin-bottom: 1rem;
+}
+
+.headline-link {
+  color: rgba(0,0,0,.8);
+  text-decoration: none;
+}
+
+.headline-link:visited {
+  color: rgba(0,0,0,.8);
+}
 
 /**** Homepage ****/
 
@@ -412,15 +424,6 @@ nav .avatar {
   font-weight: bold;
   font-family: "Raleway", "Helvetica", sans-serif;
   margin-bottom: 1rem;
-}
-
-.headlines a {
-  color: rgba(0,0,0,.8);
-  text-decoration: none;
-}
-
-.headlines a:visited {
-  color: rgba(0,0,0,.8);
 }
 
 .headline .avatar {
