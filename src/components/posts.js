@@ -8,7 +8,7 @@ class Posts extends React.Component {
       <div className="headlines">
         {this.props.posts.map(post => {
           const retval = (
-            <Headline key={post.id} post={post} hasSeparator={firstPost} />
+            <Headline key={post.id} post={post} hasSeparator={!firstPost} />
           );
           firstPost = false;
           return retval;
