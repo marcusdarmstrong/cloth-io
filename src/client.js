@@ -15,7 +15,7 @@ const store = createStore(reducer, state);
 
 const socketName = state.get('socket');
 if (socketName) {
-  const socket = io.connect(socketName, {'force new connection': true});
+  const socket = io.connect('http://' + window.location.hostname + socketName, {'force new connection': true});
   const bindAction = actionName => {
     return data => store.dispatch({type: actionName, comment: data});
   };
