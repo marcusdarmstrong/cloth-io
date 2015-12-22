@@ -15,7 +15,8 @@ const store = createStore(reducer, state);
 
 const socketName = state.get('socket');
 if (socketName) {
-  const socket = io.connect('http://' + window.location.hostname + socketName, {'force new connection': true});
+  const socket = io(socketName, {'force new connection': true});
+  socket.on('connect', () => store.dispatch({type: 'SOCKET_CONNECT'}));
   const bindAction = actionName => {
     return data => store.dispatch({type: actionName, comment: data});
   };
@@ -24,7 +25,7 @@ if (socketName) {
       socket.on(action, bindAction(action));
     }
   }
-  socket.on('connect', () => store.dispatch({type: 'SOCKET_CONNECT'}));
+  window.socket = socket;
 }
 
 ReactDOM.render(
