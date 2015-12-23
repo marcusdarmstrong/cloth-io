@@ -53,6 +53,10 @@ class AddCommentBox extends React.Component {
     }
 
     const disabledCopy = (this.state.sending) ? 'Sending...' : 'Connecting...';
+    const postButton = (socketConnected && !this.state.sending) ?
+          (<div className="button pull-right" onClick={this.addComment.bind(this)}>Post Comment</div>)
+          :
+          (<div className="button pull-right disabled">{disabledCopy}</div>);
 
     const body = (user) ? (
       <div className="add-comment-container">
@@ -65,13 +69,7 @@ class AddCommentBox extends React.Component {
           <ContentEditable onChange={this.handleChange.bind(this)} html={this.state.value} autoFocus={(!!parentComment)} />
           <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
-        <div className="comment-options">
-        {(socketConnected && !this.state.sending) ?
-          <div className="button pull-right" onClick={this.addComment.bind(this)}>Post Comment</div>
-          :
-          <div className="button pull-right disabled">{disabledCopy}</div>
-        }
-        </div>
+        {(parentComment.nestLevel < 4) ? (<div className="comment-options">{postButton}</div>) : null}
       </div>
     ) : (
       <div className="add-comment-container">
@@ -98,6 +96,7 @@ AddCommentBox.propTypes = {
   parentComment: React.PropTypes.shape({
     id: React.PropTypes.string,
     post_id: React.PropTypes.string,
+    nestLevel: React.PropTypes.number,
   }),
   fork: React.PropTypes.bool,
   openModal: React.PropTypes.func.isRequired,
