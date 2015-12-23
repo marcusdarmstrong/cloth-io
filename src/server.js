@@ -66,7 +66,7 @@ router(app, loaders(routes), (component, res, state) => {
       client.query(sql`select u.id, u.status, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
         done();
         if (userErr || !userResult || !userResult.rows) {
-          console.error(pgErr);
+          console.error(userErr);
           return cb(state);
         }
         const user = userResult.rows[0];
