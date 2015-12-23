@@ -27,7 +27,7 @@
 }
 
 html {
-  font-size: 16pt;
+  font-size: 12pt;
   line-height: 1.5em;
   font-family: "Open Sans", "Helvetica", sans-serif;
   margin: 0;
@@ -493,5 +493,9 @@ nav .avatar {
 
   .headline .avatar {
     margin-left: -1rem;
+  }
+
+  html {
+    font-size: 16pt;
   }
 }
