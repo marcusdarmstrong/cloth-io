@@ -13,6 +13,7 @@ import bodyParser from 'body-parser';
 import scrypt from 'scrypt';
 import cookieParser from 'cookie-parser';
 import sanitizeHtml from 'sanitize-html';
+import favicon from 'serve-favicon';
 
 import layout from './layout';
 import sql from './sql';
@@ -31,6 +32,7 @@ const server = app.listen(app.get('port'));
 const io = SocketIO.listen(server);
 
 app.use(compression());
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
