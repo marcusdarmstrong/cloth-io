@@ -7,6 +7,7 @@ class AddCommentBox extends React.Component {
     super();
     this.state = {
       value: '',
+      sending: false,
     };
   }
 
@@ -15,6 +16,7 @@ class AddCommentBox extends React.Component {
   }
 
   addComment() {
+    this.setState({sending: true});
     fetch('/api/addComment', {
       method: 'post',
       headers: {
@@ -33,7 +35,7 @@ class AddCommentBox extends React.Component {
           if (this.props.onSubmission) {
             this.props.onSubmission();
           }
-          this.setState({value: ''});
+          this.setState({value: '', sending: false});
         }
       });
   }
@@ -50,6 +52,8 @@ class AddCommentBox extends React.Component {
       className += ' child';
     }
 
+    const disabledCopy = (this.state.sending) ? 'Sending...' : 'Connecting...';
+
     const body = (user) ? (
       <div className="add-comment-container">
         <div className="comment-header">
@@ -62,10 +66,10 @@ class AddCommentBox extends React.Component {
           <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
         <div className="comment-options">
-        {(socketConnected) ?
+        {(socketConnected && !this.state.sending) ?
           <div className="button pull-right" onClick={this.addComment.bind(this)}>Post Comment</div>
           :
-          <div className="button pull-right disabled">Connecting...</div>
+          <div className="button pull-right disabled">{disabledCopy}</div>
         }
         </div>
       </div>
