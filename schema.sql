@@ -14,7 +14,7 @@ create unique index on t_user (email);
 
 create table t_post (
     id bigserial not null,
-    status int not nulldefault 0,
+    status int not null default 0,
     created bigint not null default (extract('epoch' from now())),
     user_id bigint not null,
     body text not null,

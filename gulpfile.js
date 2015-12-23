@@ -36,7 +36,7 @@ gulp.task('lint', ['clean-manifest'], function() {
 });
 
 gulp.task('client', ['clean-client'], function() {
-  return browserify(/*{ debug: true }*/)
+  var stream = browserify(/*{ debug: true }*/)
     .transform(babelify)
     .require('src/client.js', { entry: true })
     .bundle()
@@ -45,11 +45,13 @@ gulp.task('client', ['clean-client'], function() {
       this.emit('end');
     })
     .pipe(source('app.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(uglify())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('public'))
+    .pipe(buffer());
+
+  if (process.env.NODE_ENV === "production") {
+    stream = stream.pipe(uglify());
+  }
+  
+  return stream.pipe(gulp.dest('public'))
     .pipe(rev())
     .pipe(gulp.dest('public'))
     .pipe(rev.manifest('public/manifest.json', {base: process.cwd() + '/public', merge: true}))
