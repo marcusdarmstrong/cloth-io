@@ -57,6 +57,8 @@ router(app, loaders(routes), (component, res, state) => {
 }, (req, state, cb) => {
   pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
     if (pgErr) {
+      done();
+      console.error(pgErr);
       return cb(state);
     }
     const userId = req.cookies && decodeAuthToken(req.cookies.auth);
@@ -64,6 +66,7 @@ router(app, loaders(routes), (component, res, state) => {
       client.query(sql`select u.id, u.status, u.name, u.color from t_user u where u.id=${userId}`, (userErr, userResult) => {
         done();
         if (userErr || !userResult || !userResult.rows) {
+          console.error(pgErr);
           return cb(state);
         }
         const user = userResult.rows[0];
@@ -75,6 +78,7 @@ router(app, loaders(routes), (component, res, state) => {
         }));
       });
     } else {
+      done();
       return cb(state);
     }
   });
