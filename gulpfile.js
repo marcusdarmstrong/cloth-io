@@ -1,5 +1,4 @@
 'use strict';
-
 var gulp = require('gulp');
 var eslint = require('gulp-eslint');
 var concat = require('gulp-concat');
@@ -36,7 +35,7 @@ gulp.task('lint', ['clean-manifest'], function() {
 });
 
 gulp.task('client', ['clean-client'], function() {
-  var stream = browserify(/*{ debug: true }*/)
+  var stream = browserify()
     .transform(babelify)
     .require('src/client.js', { entry: true })
     .bundle()
@@ -50,7 +49,7 @@ gulp.task('client', ['clean-client'], function() {
   if (process.env.NODE_ENV === "production") {
     stream = stream.pipe(uglify());
   }
-  
+
   return stream.pipe(gulp.dest('public'))
     .pipe(rev())
     .pipe(gulp.dest('public'))
