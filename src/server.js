@@ -32,7 +32,7 @@ const server = app.listen(app.get('port'));
 const io = SocketIO.listen(server);
 
 app.use(compression());
-app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + 'public/favicon.ico'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
