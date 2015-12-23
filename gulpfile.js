@@ -16,6 +16,10 @@ var rev = require('gulp-rev');
 var insert = require('gulp-insert');
 var rename = require('gulp-rename');
 
+gulp.task('clean-manifest', function() {
+  return del(['src/manifest.js']);
+});
+
 gulp.task('clean-server', function() {
   return del(['bin/*.js']);
 });
@@ -24,7 +28,7 @@ gulp.task('clean-client', function() {
   return del(['public/*.js', 'public/*.map', 'public/*.css', 'public/*.json']);
 });
 
-gulp.task('lint', function() {
+gulp.task('lint', ['clean-manifest'], function() {
   return gulp.src(['src/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())

@@ -36,7 +36,9 @@ app.use(favicon(__dirname + '/../public/favicon.ico'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-app.use('/public', express.static(path.join(__dirname, '..', 'public')));
+app.use('/public', express.static(path.join(__dirname, '..', 'public'), {
+  maxage: 60 * 60 * 24 * 365,
+}));
 
 router(app, loaders(routes), (component, res, state) => {
   const store = createStore(reducer, state);
