@@ -2,4 +2,7 @@
 node_modules/
 npm-debug.log
 bin
-public/app.js
+public/*.js
+public/*.css
+public/*.json
+src/manifest.js

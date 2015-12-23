@@ -1,8 +1,10 @@
+import manifest from './manifest';
+
 export default function(title, body, state) {
   return `<!doctype html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="/public/app.css">
+  <link rel="stylesheet" href="/public/${manifest['app.css']}">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
   <title>${title}</title>
@@ -13,7 +15,7 @@ export default function(title, body, state) {
   <script>
     window.__INITIAL_STATE__ = ${JSON.stringify(state)}
   </script>
-  <script src="/public/app.js"></script>
+  <script src="/public/${manifest['app.js']}"></script>
 </body>
 </html>`;
 }
