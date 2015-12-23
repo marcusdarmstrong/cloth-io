@@ -34,7 +34,7 @@ const io = SocketIO.listen(server);
 app.use(compression());
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public'), {
-  maxAge: 60 * 60 * 24 * 365,
+  maxAge: 1000 * 60 * 60 * 24 * 365,
 }));
 
 app.use(favicon(__dirname + '/../public/favicon.ico'));
