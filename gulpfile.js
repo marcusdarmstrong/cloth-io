@@ -11,13 +11,14 @@ var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var babel = require('gulp-babel');
+var minifyCss = require('gulp-minify-css');
 
 gulp.task('clean-server', function() {
   return del(['bin/*.js']);
 });
 
 gulp.task('clean-client', function() {
-  return del(['public/*.js', 'public/*.map']);
+  return del(['public/*.js', 'public/*.map', 'public/*.css']);
 });
 
 gulp.task('lint', function() {
@@ -50,4 +51,10 @@ gulp.task('server', ['clean-server'], function() {
     .pipe(gulp.dest('bin'));
 });
 
-gulp.task('default', ['lint', 'server', 'client']);
+gulp.task('css', ['clean-client'], function() {
+  return gulp.src('css/**/*.css')
+    .pipe(minifyCss())
+    .pipe(gulp.dest('public'));
+});
+
+gulp.task('default', ['lint', 'server', 'client', 'css']);
