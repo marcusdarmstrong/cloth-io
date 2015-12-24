@@ -69,7 +69,7 @@ class AddCommentBox extends React.Component {
           <ContentEditable onChange={this.handleChange.bind(this)} html={this.state.value} autoFocus={(!!parentComment)} />
           <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
-        {(!parentComment || parentComment.nestLevel < 4) ? (<div className="comment-options">{postButton}</div>) : null}
+        <div className="comment-options">{postButton}</div>
       </div>
     ) : (
       <div className="add-comment-container">
@@ -96,7 +96,6 @@ AddCommentBox.propTypes = {
   parentComment: React.PropTypes.shape({
     id: React.PropTypes.string,
     post_id: React.PropTypes.string,
-    nestLevel: React.PropTypes.number,
   }),
   fork: React.PropTypes.bool,
   openModal: React.PropTypes.func.isRequired,

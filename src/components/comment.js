@@ -27,6 +27,7 @@ class Comment extends React.Component {
     const avatar = this.props.comment.name.charAt(0).toUpperCase();
     const avatarColor = '#' + this.props.comment.color;
     const replyState = (this.state.commentBoxExpanded) ? 'button pull-right engaged' : 'button pull-right';
+    const replyNestLevel = (this.props.comment.hasReplies) ? this.props.comment.nestLevel + 1 : this.props.comment.nestLevel;
 
     let markup = (<div className={classString}>
       <div className="author"><div className="avatar" style={{backgroundColor: avatarColor}}>{avatar}</div></div>
@@ -38,9 +39,9 @@ class Comment extends React.Component {
           </div>
         </div>
         <div className="comment-text" dangerouslySetInnerHTML={{__html: this.props.comment.body}}></div>
-        <div className="comment-options">
+        {(replyNestLevel <= 4) ? (<div className="comment-options">
           <div className={replyState} onClick={this.toggleReplyBox.bind(this)}>Reply</div>
-        </div>
+        </div>) : null}
         {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork openModal={this.props.openModal} onSubmission={this.toggleReplyBox.bind(this)} socketConnected={this.props.socketConnected} /> : null}
       </div>
       {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} openModal={this.props.openModal} onSubmission={this.toggleReplyBox.bind(this)} socketConnected={this.props.socketConnected} /> : null}
