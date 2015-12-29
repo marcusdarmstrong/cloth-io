@@ -272,7 +272,7 @@ app.post('/api/addPost', (req, res) => {
 
   const link = (validate(URL_REX, req.body.link)) ? req.body.link : null;
   const title = (validate(TITLE_REX, req.body.title)) ? req.body.title.trim() : null;
-  const urlStringRoot = title.toLowerCase().replace(/ /g, '-').replace(/[^a-z-]/g, '');
+  const urlStringRoot = title.toLowerCase().replace(/ /g, '-').replace(/[^a-z-1234567890]/g, '');
 
   if (userId && body && body !== '') {
     pg.connect(process.env.DATABASE_URL, (pgErr, client, done) => {
