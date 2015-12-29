@@ -1,21 +1,11 @@
 import React from 'react';
 import Modal from './modal';
+import ScrollWatch from './scroll-watch';
 
 class Nav extends React.Component {
   constructor() {
     super();
     this.state = {signOut: false, hidden: false};
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.markScroll.bind(this));
-    this.scrollHandler = setInterval(this.delegateScroll.bind(this), 100);
-    this.lastScrollTop = 0;
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.markScroll.bind(this));
-    clearInterval(this.scrollHandler);
   }
 
   showSignoutLink() {
@@ -28,30 +18,17 @@ class Nav extends React.Component {
       .then(() => this.props.loginUser(null));
   }
 
-  markScroll() {
-    this.hasScrolled = true;
-  }
-
-  delegateScroll() {
-    if (this.hasScrolled) {
-      this.handleScroll.bind(this)();
-      this.hasScrolled = false;
-    }
-  }
-
-  handleScroll() {
-    const st = window.scrollY;
-
-    if (Math.abs(this.lastScrollTop - st) <= 5) {
+  handleScroll(diff) {
+    const delta = Math.abs(diff);
+    if (delta <= 5) {
       return;
     }
 
-    if (st > this.lastScrollTop && st > 44) {
+    if (diff > 0 && delta > 44) {
       this.setState({hidden: true});
-    } else if (st + window.innerHeight < document.body.clientHeight) {
+    } else if (diff < 0) {
       this.setState({hidden: false});
     }
-    this.lastScrollTop = st;
   }
 
   render() {
@@ -83,6 +60,7 @@ class Nav extends React.Component {
 
     return (
       <div className={this.state.hidden ? 'hidden-nav nav-container' : 'nav-container'}>
+        <ScrollWatch onScroll={this.handleScroll.bind(this)} />
         <nav>
           {userNav}
           {(noShareForm) ? '' : (<a className="button pull-left" href="/share">Share</a>)}
