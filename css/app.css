@@ -126,7 +126,7 @@ nav {
   transition: top 0.2s linear;
 }
 
-.hidden-nav {
+.hidden-nav nav {
   top: -3rem;
 }
 
