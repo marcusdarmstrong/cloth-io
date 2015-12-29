@@ -18,13 +18,13 @@ class Nav extends React.Component {
       .then(() => this.props.loginUser(null));
   }
 
-  handleScroll(diff) {
+  handleScroll(newTop, diff) {
     const delta = Math.abs(diff);
     if (delta <= 5) {
       return;
     }
 
-    if (diff > 0 && delta > 44) {
+    if (diff > 0 && newTop > 44) {
       this.setState({hidden: true});
     } else if (diff < 0) {
       this.setState({hidden: false});

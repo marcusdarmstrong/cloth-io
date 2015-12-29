@@ -28,7 +28,7 @@ class ScrollWatch extends React.Component {
     if (this.hasScrolled) {
       const newTop = scrollTop();
       const diff = newTop - this.lastScrollTop;
-      this.lastScrollTop += diff;
+      this.lastScrollTop = newTop;
       this.props.onScroll(newTop, diff);
       this.hasScrolled = false;
     }
