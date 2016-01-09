@@ -4,9 +4,9 @@ const scrollTop = () => {
   return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
 };
 
-class ScrollWatch extends React.Component {
-  constructor() {
-    super();
+export default class ScrollWatch extends React.Component {
+  static propTypes = {
+    onScroll: React.PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -38,9 +38,3 @@ class ScrollWatch extends React.Component {
     return null;
   }
 }
-
-ScrollWatch.propTypes = {
-  onScroll: React.PropTypes.func.isRequired,
-};
-
-export default ScrollWatch;

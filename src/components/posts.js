@@ -1,7 +1,17 @@
 import React from 'react';
 import Headline from './headline';
 
-class Posts extends React.Component {
+export default class Posts extends React.Component {
+  static propTypes = {
+    posts: React.PropTypes.arrayOf(
+      React.PropTypes.shape({
+        id: React.PropTypes.string,
+        urlstring: React.PropTypes.string,
+        title: React.PropTypes.string,
+      })
+    ),
+  }
+
   render() {
     let firstPost = true;
     return (
@@ -17,15 +27,3 @@ class Posts extends React.Component {
     );
   }
 }
-
-Posts.propTypes = {
-  posts: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      id: React.PropTypes.string,
-      urlstring: React.PropTypes.string,
-      title: React.PropTypes.string,
-    })
-  ),
-};
-
-export default Posts;

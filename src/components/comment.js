@@ -2,11 +2,30 @@ import React from 'react';
 import TimeAgo from './time-ago';
 import AddCommentBox from './add-comment-box';
 
-class Comment extends React.Component {
-  constructor() {
-    super();
-    this.state = {commentBoxExpanded: false};
+export default class Comment extends React.Component {
+  static propTypes = {
+    comment: React.PropTypes.shape({
+      name: React.PropTypes.string,
+      color: React.PropTypes.string,
+      created: React.PropTypes.number,
+      body: React.PropTypes.string,
+      nestLevel: React.PropTypes.number,
+      hasReplies: React.PropTypes.bool,
+      fork: React.PropTypes.bool,
+      child: React.PropTypes.bool,
+    }).isRequired,
+    user: React.PropTypes.shape({
+      name: React.PropTypes.string,
+      color: React.PropTypes.string,
+    }),
+    openModal: React.PropTypes.func.isRequired,
+    socketConnected: React.PropTypes.bool.isRequired,
   }
+
+  state = {
+    commentBoxExpanded: false,
+  }
+
   toggleReplyBox() {
     if (this.props.user) {
       this.setState({commentBoxExpanded: !this.state.commentBoxExpanded});
@@ -14,6 +33,7 @@ class Comment extends React.Component {
       this.props.openModal('login');
     }
   }
+
   render() {
     let classString = 'comment';
     if (this.props.comment.hasReplies || this.state.commentBoxExpanded) {
@@ -53,24 +73,3 @@ class Comment extends React.Component {
     return markup;
   }
 }
-
-Comment.propTypes = {
-  comment: React.PropTypes.shape({
-    name: React.PropTypes.string,
-    color: React.PropTypes.string,
-    created: React.PropTypes.number,
-    body: React.PropTypes.string,
-    nestLevel: React.PropTypes.number,
-    hasReplies: React.PropTypes.bool,
-    fork: React.PropTypes.bool,
-    child: React.PropTypes.bool,
-  }).isRequired,
-  user: React.PropTypes.shape({
-    name: React.PropTypes.string,
-    color: React.PropTypes.string,
-  }),
-  openModal: React.PropTypes.func.isRequired,
-  socketConnected: React.PropTypes.bool.isRequired,
-};
-
-export default Comment;

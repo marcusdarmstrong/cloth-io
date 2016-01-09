@@ -1,16 +1,26 @@
 import React from 'react';
 
-class LoginForm extends React.Component {
-  constructor() {
-    super();
-    this.state = {email: '', password: '', error: ''};
+export default class LoginForm extends React.Component {
+  static propTypes = {
+    openModal: React.PropTypes.func.isRequired,
+    closeModal: React.PropTypes.func.isRequired,
+    loginUser: React.PropTypes.func.isRequired,
   }
+
+  state = {
+    email: '',
+    password: '',
+    error: '',
+  }
+
   handleEmailChange(e) {
     this.setState({email: e.target.value});
   }
+
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
   }
+
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.email === '') {
@@ -43,6 +53,7 @@ class LoginForm extends React.Component {
         }
       });
   }
+
   render() {
     const errorState = (this.state.error === '') ? null : (<p className="error">{this.state.error}</p>);
     return (
@@ -61,11 +72,3 @@ class LoginForm extends React.Component {
     );
   }
 }
-
-LoginForm.propTypes = {
-  openModal: React.PropTypes.func.isRequired,
-  closeModal: React.PropTypes.func.isRequired,
-  loginUser: React.PropTypes.func.isRequired,
-};
-
-export default LoginForm;

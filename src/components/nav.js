@@ -2,10 +2,24 @@ import React from 'react';
 import Modal from './modal';
 import ScrollWatch from './scroll-watch';
 
-class Nav extends React.Component {
-  constructor() {
-    super();
-    this.state = {signOut: false, hidden: false};
+export default class Nav extends React.Component {
+  static propTypes = {
+    modal: React.PropTypes.shape({
+      component: React.PropTypes.func,
+    }),
+    user: React.PropTypes.shape({
+      name: React.PropTypes.string,
+      color: React.PropTypes.string,
+      status: React.PropTypes.number,
+    }),
+    openModal: React.PropTypes.func.isRequired,
+    loginUser: React.PropTypes.func.isRequired,
+    noShareForm: React.PropTypes.bool,
+  }
+
+  state = {
+    signOut: false,
+    hidden: false,
   }
 
   showSignoutLink() {
@@ -71,19 +85,3 @@ class Nav extends React.Component {
     );
   }
 }
-
-Nav.propTypes = {
-  modal: React.PropTypes.shape({
-    component: React.PropTypes.func,
-  }),
-  user: React.PropTypes.shape({
-    name: React.PropTypes.string,
-    color: React.PropTypes.string,
-    status: React.PropTypes.number,
-  }),
-  openModal: React.PropTypes.func.isRequired,
-  loginUser: React.PropTypes.func.isRequired,
-  noShareForm: React.PropTypes.bool,
-};
-
-export default Nav;

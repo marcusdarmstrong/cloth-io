@@ -2,13 +2,26 @@ import React from 'react';
 import ContentEditable from './content-editable';
 import fetch from 'isomorphic-fetch';
 
-class AddCommentBox extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      value: '',
-      sending: false,
-    };
+export default class AddCommentBox extends React.Component {
+  static propTypes = {
+    user: React.PropTypes.shape({
+      color: React.PropTypes.string,
+      name: React.PropTypes.string,
+    }),
+    parentComment: React.PropTypes.shape({
+      id: React.PropTypes.string,
+      post_id: React.PropTypes.string,
+    }),
+    fork: React.PropTypes.bool,
+    openModal: React.PropTypes.func.isRequired,
+    onSubmission: React.PropTypes.func,
+    postId: React.PropTypes.string,
+    socketConnected: React.PropTypes.bool.isRequired,
+  }
+
+  state = {
+    value: '',
+    sending: false,
   }
 
   handleChange(event) {
@@ -87,21 +100,3 @@ class AddCommentBox extends React.Component {
     );
   }
 }
-
-AddCommentBox.propTypes = {
-  user: React.PropTypes.shape({
-    color: React.PropTypes.string,
-    name: React.PropTypes.string,
-  }),
-  parentComment: React.PropTypes.shape({
-    id: React.PropTypes.string,
-    post_id: React.PropTypes.string,
-  }),
-  fork: React.PropTypes.bool,
-  openModal: React.PropTypes.func.isRequired,
-  onSubmission: React.PropTypes.func,
-  postId: React.PropTypes.string,
-  socketConnected: React.PropTypes.bool.isRequired,
-};
-
-export default AddCommentBox;

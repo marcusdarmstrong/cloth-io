@@ -3,20 +3,18 @@ import { validate, TITLE_REX, URL_REX } from '../validator';
 import fetch from 'isomorphic-fetch';
 import ContentEditable from './content-editable';
 
-class ShareForm extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      title: '',
-      link: '',
-      body: '',
-      titleError: false,
-      titleHelperText: 'The title of your post. 10-35 characters.',
-      linkError: false,
-      linkHelperText: 'Optional external link to share.',
-      submissionError: '',
-    };
+export default class ShareForm extends React.Component {
+  state = {
+    title: '',
+    link: '',
+    body: '',
+    titleError: false,
+    titleHelperText: 'The title of your post. 10-35 characters.',
+    linkError: false,
+    linkHelperText: 'Optional external link to share.',
+    submissionError: '',
   }
+
   handleTitleChange(e) {
     const newTitle = e.target.value;
     const failure = !validate(TITLE_REX, newTitle);
@@ -34,6 +32,7 @@ class ShareForm extends React.Component {
       this.setState({titleHelperText: 'Looks good!'});
     }
   }
+
   handleLinkChange(e) {
     const newLink = e.target.value;
     this.setState({link: newLink});
@@ -50,9 +49,11 @@ class ShareForm extends React.Component {
       this.setState({linkError: false, linkHelperText: 'Optional external link to share.'});
     }
   }
+
   handleBodyChange(e) {
     this.setState({body: e.target.value});
   }
+
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.titleError || this.state.linkError) {
@@ -80,6 +81,7 @@ class ShareForm extends React.Component {
         }
       });
   }
+
   render() {
     const titleClass = (this.state.titleError) ? ' error' : '';
     const linkClass = (this.state.linkError) ? ' error' : '';
@@ -107,5 +109,3 @@ class ShareForm extends React.Component {
     );
   }
 }
-
-export default ShareForm;

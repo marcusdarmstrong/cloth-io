@@ -4,7 +4,15 @@ import TimeAgo from './time-ago';
 import previewer from '../previewer';
 import uriParser from '../uri-parser';
 
-class Headline extends React.Component {
+export default class Headline extends React.Component {
+  static propTypes = {
+    post: React.PropTypes.shape({
+      urlstring: React.PropTypes.string,
+      title: React.PropTypes.string,
+    }),
+    hasSeparator: React.PropTypes.bool,
+  }
+
   render() {
     const { post, hasSeparator } = this.props;
     const preview = previewer(post.body);
@@ -60,13 +68,3 @@ class Headline extends React.Component {
     );
   }
 }
-
-Headline.propTypes = {
-  post: React.PropTypes.shape({
-    urlstring: React.PropTypes.string,
-    title: React.PropTypes.string,
-  }),
-  hasSeparator: React.PropTypes.bool,
-};
-
-export default Headline;

@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class ContentEditable extends React.Component {
+export default class ContentEditable extends React.Component {
+  static propTypes = {
+    html: React.PropTypes.string,
+    onChange: React.PropTypes.func,
+    autoFocus: React.PropTypes.bool,
+  }
+
   componentDidMount() {
     if (this.props.autoFocus) {
       ReactDOM.findDOMNode(this).focus();
@@ -42,11 +48,3 @@ class ContentEditable extends React.Component {
     );
   }
 }
-
-ContentEditable.propTypes = {
-  html: React.PropTypes.string,
-  onChange: React.PropTypes.func,
-  autoFocus: React.PropTypes.bool,
-};
-
-export default ContentEditable;

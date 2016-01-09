@@ -27,10 +27,15 @@ function numToString(num) {
   }
 }
 
-class TimeAgo extends React.Component {
+export default class TimeAgo extends React.Component {
+  static propTypes = {
+    timestamp: React.PropTypes.number.isRequired,
+  }
+
   componentDidMount() {
     this.tick();
   }
+
   componentDidUpdate(lastProps) {
     if (this.props.timestamp !== lastProps.timestamp) {
       if (this.timeoutId) {
@@ -40,12 +45,14 @@ class TimeAgo extends React.Component {
       this.tick();
     }
   }
+
   componentWillUnmount() {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
       this.timeoutId = undefined;
     }
   }
+
   tick() {
     const then = this.props.timestamp;
     const now = Math.round(Date.now() / 1000);
@@ -63,6 +70,7 @@ class TimeAgo extends React.Component {
     }
     this.forceUpdate();
   }
+
   render() {
     const then = this.props.timestamp;
     const now = Math.round(Date.now() / 1000);
@@ -86,7 +94,3 @@ class TimeAgo extends React.Component {
     return (<div className="comment-timestamp pull-right">{value}</div>);
   }
 }
-
-TimeAgo.propTypes = { timestamp: React.PropTypes.number.isRequired };
-
-export default TimeAgo;
