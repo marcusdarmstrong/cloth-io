@@ -21,7 +21,7 @@ export default class SignupForm extends React.Component {
     submissionError: '',
   };
 
-  handleNameChange(e) {
+  handleNameChange = (e) => {
     const newName = e.target.value;
     const failure = !validate(NAME_REX, newName);
     this.setState({name: newName});
@@ -47,9 +47,9 @@ export default class SignupForm extends React.Component {
           }
         });
     }
-  }
+  };
 
-  handleEmailChange(e) {
+  handleEmailChange = (e) => {
     const newEmail = e.target.value;
     const failure = !validate(EMAIL_REX, newEmail);
     this.setState({email: newEmail});
@@ -69,9 +69,9 @@ export default class SignupForm extends React.Component {
           }
         });
     }
-  }
+  };
 
-  handlePasswordChange(e) {
+  handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     const failure = !validate(PASSWORD_REX, newPassword);
     this.setState({password: newPassword});
@@ -81,9 +81,9 @@ export default class SignupForm extends React.Component {
     } else {
       this.setState({passwordHelperText: 'Looks good!'});
     }
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.nameError || this.state.emailError || this.state.passwordError) {
       return;
@@ -110,7 +110,7 @@ export default class SignupForm extends React.Component {
           this.setState({submissionError: 'Something went wrong.'});
         }
       });
-  }
+  };
 
   render() {
     const nameClass = (this.state.nameError) ? ' error' : '';
@@ -128,16 +128,16 @@ export default class SignupForm extends React.Component {
       ? null : (<p className="error">{this.state.submissionError}</p>);
 
     return (
-      <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
+      <form className="login-form" onSubmit={this.handleSubmit}>
         {submissionError}
         <label htmlFor="name">Display name:</label>
-        <input type="text" className={nameClass} autoFocus name="name" value={this.state.name} onChange={this.handleNameChange.bind(this)} />
+        <input type="text" className={nameClass} autoFocus name="name" value={this.state.name} onChange={this.handleNameChange} />
         <div className={'form-helper' + nameClass}>{this.state.nameHelperText}</div>
         <label htmlFor="email">Email address:</label>
-        <input type="email" className={emailClass} name="email" value={this.state.email} onChange={this.handleEmailChange.bind(this)} />
+        <input type="email" className={emailClass} name="email" value={this.state.email} onChange={this.handleEmailChange} />
         <div className={'form-helper' + emailClass}>{this.state.emailHelperText}</div>
         <label htmlFor="password">Password:</label>
-        <input type="password" className={passwordClass} name="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
+        <input type="password" className={passwordClass} name="password" value={this.state.password} onChange={this.handlePasswordChange} />
         <div className={'form-helper' + passwordClass}>{this.state.passwordHelperText}</div>
         <input type="submit" name="submit" className={submitClass} value="Create account" />
       </form>

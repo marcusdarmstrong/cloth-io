@@ -10,21 +10,21 @@ export default class ScrollWatch extends React.Component {
   };
 
   componentDidMount() {
-    window.addEventListener('scroll', this.markScroll.bind(this));
-    this.scrollHandler = setInterval(this.delegateScroll.bind(this), 100);
+    window.addEventListener('scroll', this.markScroll);
+    this.scrollHandler = setInterval(this.delegateScroll, 100);
     this.lastScrollTop = 0;
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.markScroll.bind(this));
+    window.removeEventListener('scroll', this.markScroll);
     clearInterval(this.scrollHandler);
   }
 
-  markScroll() {
+  markScroll = () => {
     this.hasScrolled = true;
-  }
+  };
 
-  delegateScroll() {
+  delegateScroll = () => {
     if (this.hasScrolled) {
       const newTop = scrollTop();
       const diff = newTop - this.lastScrollTop;
@@ -32,7 +32,7 @@ export default class ScrollWatch extends React.Component {
       this.props.onScroll(newTop, diff);
       this.hasScrolled = false;
     }
-  }
+  };
 
   render() {
     return null;

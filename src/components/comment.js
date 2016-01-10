@@ -26,13 +26,13 @@ export default class Comment extends React.Component {
     commentBoxExpanded: false,
   };
 
-  toggleReplyBox() {
+  toggleReplyBox = () => {
     if (this.props.user) {
       this.setState({commentBoxExpanded: !this.state.commentBoxExpanded});
     } else {
       this.props.openModal('login');
     }
-  }
+  };
 
   render() {
     let classString = 'comment';
@@ -60,11 +60,11 @@ export default class Comment extends React.Component {
         </div>
         <div className="comment-text" dangerouslySetInnerHTML={{__html: this.props.comment.body}}></div>
         {(replyNestLevel <= 4) ? (<div className="comment-options">
-          <div className={replyState} onClick={this.toggleReplyBox.bind(this)}>Reply</div>
+          <div className={replyState} onClick={this.toggleReplyBox}>Reply</div>
         </div>) : null}
-        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork openModal={this.props.openModal} onSubmission={this.toggleReplyBox.bind(this)} socketConnected={this.props.socketConnected} /> : null}
+        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} fork openModal={this.props.openModal} onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected} /> : null}
       </div>
-      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} openModal={this.props.openModal} onSubmission={this.toggleReplyBox.bind(this)} socketConnected={this.props.socketConnected} /> : null}
+      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} openModal={this.props.openModal} onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected} /> : null}
     </div>);
 
     for (let i = this.props.comment.nestLevel; i > 0; i--) {

@@ -22,17 +22,17 @@ export default class Nav extends React.Component {
     hidden: false,
   };
 
-  showSignoutLink() {
+  showSignoutLink = () => {
     this.setState({signOut: true});
-  }
+  };
 
-  signOut() {
+  signOut = () => {
     this.setState({signOut: false});
     fetch('/api/signOut', {credentials: 'same-origin'})
       .then(() => this.props.loginUser(null));
-  }
+  };
 
-  handleScroll(newTop, diff) {
+  handleScroll = (newTop, diff) => {
     const delta = Math.abs(diff);
     if (delta <= 5) {
       return;
@@ -43,7 +43,11 @@ export default class Nav extends React.Component {
     } else if (diff < 0) {
       this.setState({hidden: false});
     }
-  }
+  };
+
+  openLoginModal = () => {
+    return this.props.openModal('login');
+  };
 
   render() {
     let modal = null;
@@ -55,17 +59,17 @@ export default class Nav extends React.Component {
       );
     }
 
-    let userNav = (<div className="button pull-right" onClick={this.props.openModal.bind(this, 'login')}>Log in</div>);
+    let userNav = (<div className="button pull-right" onClick={this.openLoginModal}>Log in</div>);
     if (this.props.user) {
       if (this.state.signOut) {
         userNav = (
-          <div className="button pull-right" onClick={this.signOut.bind(this)}>Log out</div>
+          <div className="button pull-right" onClick={this.signOut}>Log out</div>
         );
       } else {
         const color = '#' + this.props.user.color;
         const letter = this.props.user.name.substr(0, 1).toUpperCase();
         userNav = (
-          <div className="avatar pull-right" style={{backgroundColor: color}} onClick={this.showSignoutLink.bind(this)}>{letter}</div>
+          <div className="avatar pull-right" style={{backgroundColor: color}} onClick={this.showSignoutLink}>{letter}</div>
         );
       }
     }
@@ -74,7 +78,7 @@ export default class Nav extends React.Component {
 
     return (
       <div className={this.state.hidden ? 'hidden-nav nav-container' : 'nav-container'}>
-        <ScrollWatch onScroll={this.handleScroll.bind(this)} />
+        <ScrollWatch onScroll={this.handleScroll} />
         <nav>
           {userNav}
           {(noShareForm) ? '' : (<a className="button pull-left" href="/share">Share</a>)}

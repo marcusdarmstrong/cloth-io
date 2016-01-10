@@ -53,7 +53,7 @@ export default class TimeAgo extends React.Component {
     }
   }
 
-  tick() {
+  tick = () => {
     const then = this.props.timestamp;
     const now = Math.round(Date.now() / 1000);
     const seconds = Math.abs(now - then);
@@ -66,10 +66,10 @@ export default class TimeAgo extends React.Component {
     }
 
     if (!!period) {
-      this.timeoutId = setTimeout(this.tick.bind(this), period);
+      this.timeoutId = setTimeout(this.tick, period);
     }
     this.forceUpdate();
-  }
+  };
 
   render() {
     const then = this.props.timestamp;

@@ -15,7 +15,7 @@ export default class ShareForm extends React.Component {
     submissionError: '',
   };
 
-  handleTitleChange(e) {
+  handleTitleChange = (e) => {
     const newTitle = e.target.value;
     const failure = !validate(TITLE_REX, newTitle);
     this.setState({title: newTitle});
@@ -31,9 +31,9 @@ export default class ShareForm extends React.Component {
     } else {
       this.setState({titleHelperText: 'Looks good!'});
     }
-  }
+  };
 
-  handleLinkChange(e) {
+  handleLinkChange = (e) => {
     const newLink = e.target.value;
     this.setState({link: newLink});
 
@@ -48,13 +48,13 @@ export default class ShareForm extends React.Component {
     } else {
       this.setState({linkError: false, linkHelperText: 'Optional external link to share.'});
     }
-  }
+  };
 
-  handleBodyChange(e) {
+  handleBodyChange = (e) => {
     this.setState({body: e.target.value});
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.titleError || this.state.linkError) {
       return;
@@ -80,7 +80,7 @@ export default class ShareForm extends React.Component {
           this.setState({submissionError: 'Something went wrong.'});
         }
       });
-  }
+  };
 
   render() {
     const titleClass = (this.state.titleError) ? ' error' : '';
@@ -94,16 +94,16 @@ export default class ShareForm extends React.Component {
       ? null : (<p className="error">{this.state.submissionError}</p>);
 
     return (
-      <form className="share-form" onSubmit={this.handleSubmit.bind(this)}>
+      <form className="share-form" onSubmit={this.handleSubmit}>
         {submissionError}
         <label htmlFor="title">Post Title:</label>
-        <input type="text" className={titleClass} autoFocus name="title" value={this.state.title} onChange={this.handleTitleChange.bind(this)} />
+        <input type="text" className={titleClass} autoFocus name="title" value={this.state.title} onChange={this.handleTitleChange} />
         <div className={'form-helper' + titleClass}>{this.state.titleHelperText}</div>
         <label htmlFor="link">Link: (Optional)</label>
-        <input type="url" className={linkClass} name="link" value={this.state.link} onChange={this.handleLinkChange.bind(this)} />
+        <input type="url" className={linkClass} name="link" value={this.state.link} onChange={this.handleLinkChange} />
         <div className={'form-helper' + linkClass}>{this.state.linkHelperText}</div>
         <label htmlFor="link">Commentary:</label>
-        <ContentEditable onChange={this.handleBodyChange.bind(this)} html={this.state.body} />
+        <ContentEditable onChange={this.handleBodyChange} html={this.state.body} />
         <input type="submit" name="submit" className={submitClass} value="Create post" />
       </form>
     );

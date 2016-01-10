@@ -24,7 +24,7 @@ export default class ContentEditable extends React.Component {
     }
   }
 
-  emitChange() {
+  emitChange = () => {
     const html = ReactDOM.findDOMNode(this).innerHTML;
     if (this.props.onChange && html !== this.lastHtml) {
       this.props.onChange({
@@ -34,14 +34,14 @@ export default class ContentEditable extends React.Component {
       });
     }
     this.lastHtml = html;
-  }
+  };
 
   render() {
     return (
       <div id="contenteditable"
         className="textarea"
-        onInput={this.emitChange.bind(this)}
-        onBlur={this.emitChange.bind(this)}
+        onInput={this.emitChange}
+        onBlur={this.emitChange}
         contentEditable
         dangerouslySetInnerHTML={{__html: this.props.html}}>
       </div>
