@@ -51,11 +51,11 @@ export default class AddCommentBox extends React.Component {
           this.setState({value: '', sending: false});
         }
       });
-  }
+  };
 
   openLoginModal = () => {
     return this.props.openModal('login');
-  }
+  };
 
   render() {
     const {user, parentComment, fork, socketConnected} = this.props;
