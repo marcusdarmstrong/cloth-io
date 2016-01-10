@@ -24,11 +24,11 @@ export default class AddCommentBox extends React.Component {
     sending: false,
   };
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({value: event.target.value});
-  }
+  };
 
-  addComment() {
+  addComment = () => {
     this.setState({sending: true});
     fetch('/api/addComment', {
       method: 'post',
@@ -53,6 +53,10 @@ export default class AddCommentBox extends React.Component {
       });
   }
 
+  openLoginModal = () => {
+    return this.props.openModal('login');
+  }
+
   render() {
     const {user, parentComment, fork, socketConnected} = this.props;
     const color = (user) ? '#' + user.color : '#ddd';
@@ -67,7 +71,7 @@ export default class AddCommentBox extends React.Component {
 
     const disabledCopy = (this.state.sending) ? 'Sending...' : 'Connecting...';
     const postButton = (socketConnected && !this.state.sending) ?
-          (<div className="button pull-right" onClick={this.addComment.bind(this)}>Post Comment</div>)
+          (<div className="button pull-right" onClick={this.addComment}>Post Comment</div>)
           :
           (<div className="button pull-right disabled">{disabledCopy}</div>);
 
@@ -79,7 +83,7 @@ export default class AddCommentBox extends React.Component {
           </div>
         </div>
         <div className="textarea-container">
-          <ContentEditable onChange={this.handleChange.bind(this)} html={this.state.value} autoFocus={(!!parentComment)} />
+          <ContentEditable onChange={this.handleChange} html={this.state.value} autoFocus={(!!parentComment)} />
           <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
         <div className="comment-options">{postButton}</div>
@@ -87,7 +91,7 @@ export default class AddCommentBox extends React.Component {
     ) : (
       <div className="add-comment-container">
         <div className="comment-login-cta">
-          <div className="button" onClick={this.props.openModal.bind(this, 'login')}>Log in to comment</div>
+          <div className="button" onClick={this.openLoginModal}>Log in to comment</div>
         </div>
       </div>
     );
