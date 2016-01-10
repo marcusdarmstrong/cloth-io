@@ -17,12 +17,12 @@ export default class AddCommentBox extends React.Component {
     onSubmission: React.PropTypes.func,
     postId: React.PropTypes.string,
     socketConnected: React.PropTypes.bool.isRequired,
-  }
+  };
 
   state = {
     value: '',
     sending: false,
-  }
+  };
 
   handleChange(event) {
     this.setState({value: event.target.value});

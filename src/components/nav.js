@@ -15,12 +15,12 @@ export default class Nav extends React.Component {
     openModal: React.PropTypes.func.isRequired,
     loginUser: React.PropTypes.func.isRequired,
     noShareForm: React.PropTypes.bool,
-  }
+  };
 
   state = {
     signOut: false,
     hidden: false,
-  }
+  };
 
   showSignoutLink() {
     this.setState({signOut: true});

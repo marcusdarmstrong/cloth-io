@@ -11,7 +11,7 @@ export default class Headline extends React.Component {
       title: React.PropTypes.string,
     }),
     hasSeparator: React.PropTypes.bool,
-  }
+  };
 
   render() {
     const { post, hasSeparator } = this.props;

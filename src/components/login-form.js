@@ -5,13 +5,13 @@ export default class LoginForm extends React.Component {
     openModal: React.PropTypes.func.isRequired,
     closeModal: React.PropTypes.func.isRequired,
     loginUser: React.PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     email: '',
     password: '',
     error: '',
-  }
+  };
 
   handleEmailChange(e) {
     this.setState({email: e.target.value});

@@ -10,7 +10,7 @@ export default class Posts extends React.Component {
         title: React.PropTypes.string,
       })
     ),
-  }
+  };
 
   render() {
     let firstPost = true;

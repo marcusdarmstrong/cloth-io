@@ -2,22 +2,25 @@ import React from 'react';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from '../validator';
 import fetch from 'isomorphic-fetch';
 
-class SignupForm extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      name: '',
-      email: '',
-      password: '',
-      nameError: false,
-      nameHelperText: 'Your name around the site. 4-20 characters.',
-      emailError: false,
-      emailHelperText: 'You\'ll use this to log in.',
-      passwordError: false,
-      passwordHelperText: 'Password must be 6 or more characters.',
-      submissionError: '',
-    };
-  }
+export default class SignupForm extends React.Component {
+  static propTypes = {
+    closeModal: React.PropTypes.func.isRequired,
+    loginUser: React.PropTypes.func.isRequired,
+  };
+
+  state = {
+    name: '',
+    email: '',
+    password: '',
+    nameError: false,
+    nameHelperText: 'Your name around the site. 4-20 characters.',
+    emailError: false,
+    emailHelperText: 'You\'ll use this to log in.',
+    passwordError: false,
+    passwordHelperText: 'Password must be 6 or more characters.',
+    submissionError: '',
+  };
+
   handleNameChange(e) {
     const newName = e.target.value;
     const failure = !validate(NAME_REX, newName);
@@ -45,6 +48,7 @@ class SignupForm extends React.Component {
         });
     }
   }
+
   handleEmailChange(e) {
     const newEmail = e.target.value;
     const failure = !validate(EMAIL_REX, newEmail);
@@ -66,6 +70,7 @@ class SignupForm extends React.Component {
         });
     }
   }
+
   handlePasswordChange(e) {
     const newPassword = e.target.value;
     const failure = !validate(PASSWORD_REX, newPassword);
@@ -77,6 +82,7 @@ class SignupForm extends React.Component {
       this.setState({passwordHelperText: 'Looks good!'});
     }
   }
+
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.nameError || this.state.emailError || this.state.passwordError) {
@@ -105,6 +111,7 @@ class SignupForm extends React.Component {
         }
       });
   }
+
   render() {
     const nameClass = (this.state.nameError) ? ' error' : '';
     const emailClass = (this.state.emailError) ? ' error' : '';
@@ -137,10 +144,3 @@ class SignupForm extends React.Component {
     );
   }
 }
-
-SignupForm.propTypes = {
-  closeModal: React.PropTypes.func.isRequired,
-  loginUser: React.PropTypes.func.isRequired,
-};
-
-export default SignupForm;

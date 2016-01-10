@@ -24,6 +24,7 @@ const Post = (props) => {
       </div>
     );
   }
+
   return (
     <div>
       <Nav {...props} />

@@ -7,7 +7,7 @@ const scrollTop = () => {
 export default class ScrollWatch extends React.Component {
   static propTypes = {
     onScroll: React.PropTypes.func.isRequired,
-  }
+  };
 
   componentDidMount() {
     window.addEventListener('scroll', this.markScroll.bind(this));

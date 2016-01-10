@@ -6,7 +6,7 @@ export default class ContentEditable extends React.Component {
     html: React.PropTypes.string,
     onChange: React.PropTypes.func,
     autoFocus: React.PropTypes.bool,
-  }
+  };
 
   componentDidMount() {
     if (this.props.autoFocus) {

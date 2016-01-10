@@ -30,7 +30,7 @@ function numToString(num) {
 export default class TimeAgo extends React.Component {
   static propTypes = {
     timestamp: React.PropTypes.number.isRequired,
-  }
+  };
 
   componentDidMount() {
     this.tick();

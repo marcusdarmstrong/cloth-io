@@ -20,11 +20,11 @@ export default class Comment extends React.Component {
     }),
     openModal: React.PropTypes.func.isRequired,
     socketConnected: React.PropTypes.bool.isRequired,
-  }
+  };
 
   state = {
     commentBoxExpanded: false,
-  }
+  };
 
   toggleReplyBox() {
     if (this.props.user) {

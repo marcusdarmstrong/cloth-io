@@ -13,7 +13,7 @@ export default class ShareForm extends React.Component {
     linkError: false,
     linkHelperText: 'Optional external link to share.',
     submissionError: '',
-  }
+  };
 
   handleTitleChange(e) {
     const newTitle = e.target.value;
