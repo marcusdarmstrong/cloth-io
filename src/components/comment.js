@@ -2,6 +2,7 @@ import React from 'react';
 import TimeAgo from './time-ago';
 import AddCommentBox from './add-comment-box';
 import Avatar from './avatar';
+
 export default class Comment extends React.Component {
   static propTypes = {
     comment: React.PropTypes.shape({
@@ -39,6 +40,7 @@ export default class Comment extends React.Component {
     if (this.props.comment.hasReplies || this.state.commentBoxExpanded) {
       classString += ' has-replies';
     }
+
     if (this.props.comment.child) {
       classString += ' child';
     } else if (this.props.comment.fork) {

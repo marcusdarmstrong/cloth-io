@@ -2,7 +2,7 @@ import React from 'react';
 import AddCommentBox from './add-comment-box';
 import Comment from './comment';
 
-export default ({post, user, comments, openModal, socketConnected}) => (
+const Comments = ({post, user, comments, openModal, socketConnected}) => (
   <section className="comments">
     <div className="comment-summary">
       <h2>{comments.length} {(comments.length === 1) ? 'Comment' : 'Comments'}</h2>
@@ -14,3 +14,18 @@ export default ({post, user, comments, openModal, socketConnected}) => (
     )}
   </section>
 );
+
+Comments.propTypes = {
+  post: React.PropTypes.shape({
+    id: React.PropTypes.number,
+  }),
+  user: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    color: React.PropTypes.string,
+  }),
+  comments: React.PropTypes.array,
+  openModal: React.PropTypes.func.isRequired,
+  socketConnected: React.PropTypes.bool.isRequired,
+};
+
+export default Comments;
