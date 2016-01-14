@@ -7,8 +7,14 @@ import uriParser from '../util/uri-parser';
 export default class Headline extends React.Component {
   static propTypes = {
     post: React.PropTypes.shape({
-      urlstring: React.PropTypes.string,
-      title: React.PropTypes.string,
+      urlstring: React.PropTypes.string.isRequired,
+      title: React.PropTypes.string.isRequired,
+      body: React.PropTypes.string.isRequired,
+      created: React.PropTypes.number.isRequired,
+      commentcount: React.PropTypes.number.isRequired,
+      url: React.PropTypes.string,
+      name: React.PropTypes.string.isRequired,
+      color: React.PropTypes.string.isRequired,
     }),
     hasSeparator: React.PropTypes.bool,
   };

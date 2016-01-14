@@ -6,17 +6,16 @@ import fetch from 'isomorphic-fetch';
 export default class AddCommentBox extends React.Component {
   static propTypes = {
     user: React.PropTypes.shape({
-      color: React.PropTypes.string,
-      name: React.PropTypes.string,
+      color: React.PropTypes.string.isRequired,
+      name: React.PropTypes.string.isRequired,
     }),
     parentComment: React.PropTypes.shape({
-      id: React.PropTypes.string,
-      post_id: React.PropTypes.string,
+      id: React.PropTypes.string.isRequired,
     }),
     fork: React.PropTypes.bool,
     openModal: React.PropTypes.func.isRequired,
     onSubmission: React.PropTypes.func,
-    postId: React.PropTypes.string,
+    postId: React.PropTypes.string.isRequired,
     socketConnected: React.PropTypes.bool.isRequired,
   };
 
@@ -41,7 +40,7 @@ export default class AddCommentBox extends React.Component {
       body: JSON.stringify({
         comment: this.state.value,
         parentId: (this.props.parentComment) ? this.props.parentComment.id : null,
-        postId: (this.props.parentComment) ? this.props.parentComment.post_id : this.props.postId,
+        postId: this.props.postId,
       }),
     }).then(res => res.json())
       .then(data => {

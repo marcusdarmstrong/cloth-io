@@ -5,9 +5,14 @@ export default class Posts extends React.Component {
   static propTypes = {
     posts: React.PropTypes.arrayOf(
       React.PropTypes.shape({
-        id: React.PropTypes.string,
-        urlstring: React.PropTypes.string,
-        title: React.PropTypes.string,
+        urlstring: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string.isRequired,
+        body: React.PropTypes.string.isRequired,
+        created: React.PropTypes.number.isRequired,
+        commentcount: React.PropTypes.number.isRequired,
+        url: React.PropTypes.string,
+        name: React.PropTypes.string.isRequired,
+        color: React.PropTypes.string.isRequired,
       })
     ),
   };

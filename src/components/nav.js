@@ -5,12 +5,12 @@ import ScrollWatch from './scroll-watch';
 export default class Nav extends React.Component {
   static propTypes = {
     modal: React.PropTypes.shape({
-      component: React.PropTypes.func,
+      component: React.PropTypes.func.isRequired,
     }),
     user: React.PropTypes.shape({
-      name: React.PropTypes.string,
-      color: React.PropTypes.string,
-      status: React.PropTypes.number,
+      name: React.PropTypes.string.isRequired,
+      color: React.PropTypes.string.isRequired,
+      status: React.PropTypes.number.isRequired,
     }),
     openModal: React.PropTypes.func.isRequired,
     loginUser: React.PropTypes.func.isRequired,

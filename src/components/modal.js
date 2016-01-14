@@ -18,12 +18,12 @@ const Modal = (props) => (
 
 Modal.propTypes = {
   modal: React.PropTypes.shape({
-    title: React.PropTypes.string,
+    title: React.PropTypes.string.isRequired,
   }),
   children: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node,
-  ]),
+  ]).isRequired,
   closeModal: React.PropTypes.func.isRequired,
 };
 

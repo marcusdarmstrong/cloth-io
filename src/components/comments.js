@@ -17,13 +17,25 @@ const Comments = ({post, user, comments, openModal, socketConnected}) => (
 
 Comments.propTypes = {
   post: React.PropTypes.shape({
-    id: React.PropTypes.number,
-  }),
+    id: React.PropTypes.number.isRequired,
+  }).isRequired,
   user: React.PropTypes.shape({
-    name: React.PropTypes.string,
-    color: React.PropTypes.string,
+    name: React.PropTypes.string.isRequired,
+    color: React.PropTypes.string.isRequired,
   }),
-  comments: React.PropTypes.array,
+  comments: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      color: React.PropTypes.string.isRequired,
+      created: React.PropTypes.number.isRequired,
+      body: React.PropTypes.string.isRequired,
+      nestLevel: React.PropTypes.number.isRequired,
+      post_id: React.PropTypes.number.isRequired,
+      hasReplies: React.PropTypes.bool,
+      fork: React.PropTypes.bool,
+      child: React.PropTypes.bool,
+    })
+  ).isRequired,
   openModal: React.PropTypes.func.isRequired,
   socketConnected: React.PropTypes.bool.isRequired,
 };
