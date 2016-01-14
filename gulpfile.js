@@ -1,9 +1,7 @@
 'use strict';
 var gulp = require('gulp');
 var eslint = require('gulp-eslint');
-var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
 var browserify = require('browserify');
 var babelify = require('babelify');

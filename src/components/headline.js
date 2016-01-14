@@ -1,8 +1,8 @@
 import React from 'react';
 import Avatar from './avatar';
 import TimeAgo from './time-ago';
-import previewer from '../previewer';
-import uriParser from '../uri-parser';
+import previewer from '../util/previewer';
+import uriParser from '../util/uri-parser';
 
 export default class Headline extends React.Component {
   static propTypes = {

@@ -5,7 +5,7 @@ const Modal = (props) => (
     <div className="modal-container">
       <div className="modal-frame">
         <div className="modal-header">
-          <span className="close-button pull-right" onClick={props.closeModal.bind(this, 'login')}>&times;</span>
+          <span className="close-button pull-right" onClick={props.closeModal}>&times;</span>
           <h2>{props.modal.title}</h2>
         </div>
         <div className="modal-content">

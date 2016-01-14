@@ -16,7 +16,7 @@ import sanitizeHtml from 'sanitize-html';
 import favicon from 'serve-favicon';
 
 import layout from './layout';
-import sql from './sql';
+import sql from './util/sql';
 import reducer from './reducer';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX, URL_REX, TITLE_REX } from './validator';
 import { createAuthToken, decodeAuthToken } from './auth-token';
