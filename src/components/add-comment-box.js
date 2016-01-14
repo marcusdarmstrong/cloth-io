@@ -1,5 +1,6 @@
 import React from 'react';
 import ContentEditable from './content-editable';
+import Avatar from './avatar';
 import fetch from 'isomorphic-fetch';
 
 export default class AddCommentBox extends React.Component {
@@ -59,9 +60,7 @@ export default class AddCommentBox extends React.Component {
 
   render() {
     const {user, parentComment, fork, socketConnected} = this.props;
-    const color = (user) ? '#' + user.color : '#ddd';
-    const letter = (user) ? user.name.substr(0, 1).toUpperCase() : '?';
-    const avatar = (<div className="avatar" style={{backgroundColor: color}}>{letter}</div>);
+
     let className = 'add-comment-box';
     if (fork) {
       className += ' fork';
@@ -98,7 +97,7 @@ export default class AddCommentBox extends React.Component {
 
     return (
       <div className={className}>
-        <div className="author">{avatar}</div>
+        <div className="author"><Avatar name={(user) ? user.name : '?'} hex={(user) ? user.color : 'ddd'} /></div>
         {body}
       </div>
     );

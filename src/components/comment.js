@@ -1,7 +1,7 @@
 import React from 'react';
 import TimeAgo from './time-ago';
 import AddCommentBox from './add-comment-box';
-
+import Avatar from './avatar';
 export default class Comment extends React.Component {
   static propTypes = {
     comment: React.PropTypes.shape({
@@ -44,13 +44,12 @@ export default class Comment extends React.Component {
     } else if (this.props.comment.fork) {
       classString += ' fork';
     }
-    const avatar = this.props.comment.name.charAt(0).toUpperCase();
-    const avatarColor = '#' + this.props.comment.color;
+
     const replyState = (this.state.commentBoxExpanded) ? 'button pull-right engaged' : 'button pull-right';
     const replyNestLevel = (this.props.comment.hasReplies) ? this.props.comment.nestLevel + 1 : this.props.comment.nestLevel;
 
     let markup = (<div className={classString}>
-      <div className="author"><div className="avatar" style={{backgroundColor: avatarColor}}>{avatar}</div></div>
+      <div className="author"><Avatar name={this.props.comment.name} hex={this.props.comment.color} /></div>
       <div className="comment-container">
         <div className="comment-header">
           <TimeAgo timestamp={this.props.comment.created} />
