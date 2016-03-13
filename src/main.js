@@ -1,5 +1,6 @@
 process.env.TZ = 'America/New_York';
 
+import 'babel-polyfill';
 import express from 'express';
 import path from 'path';
 import SocketIO from 'socket.io';
