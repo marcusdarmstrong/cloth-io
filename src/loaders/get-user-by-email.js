@@ -1,6 +1,6 @@
 import connect from '../connection';
 import sql from '../util/sql';
-import onError from '../util/onError';
+import onError from '../util/on-error';
 
 export default onError(async function getUserByEmail(email, db = connect()) {
   return await db.one(
