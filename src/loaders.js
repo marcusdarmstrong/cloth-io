@@ -1,6 +1,6 @@
-import homeLoader from './loaders/home';
-import postLoader from './loaders/post';
-import shareLoader from './loaders/share';
+import homeLoader from './handlers/home';
+import postLoader from './handlers/post';
+import shareLoader from './handlers/share';
 import { Map as map } from 'immutable';
 
 export default (routes) => {
