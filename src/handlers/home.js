@@ -1,5 +1,5 @@
 import { native as pg } from 'pg';
-import sql from '../sql';
+import sql from '../util/sql';
 import { Map as map } from 'immutable';
 
 export default (cb) => {

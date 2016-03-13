@@ -1,7 +1,7 @@
 import { native as pg } from 'pg';
 import { List as list, Map as map } from 'immutable';
 import commentOrdering from '../comment-ordering';
-import sql from '../sql';
+import sql from '../util/sql';
 
 const commentQuery = (post, user) =>
   sql`select
