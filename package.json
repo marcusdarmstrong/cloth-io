@@ -2,9 +2,9 @@
   "name": "cloth-io",
   "version": "0.1.0",
   "description": "A community website.",
-  "main": "bin/server.js",
+  "main": "bin/main.js",
   "scripts": {
-    "start": "node bin/server.js",
+    "start": "node bin/main.js",
     "postinstall": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -45,6 +45,7 @@
     "md5": "^2.0.0",
     "pg": "^4.4.3",
     "pg-native": "^1.9.0",
+    "pg-promise": "^3.1.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",

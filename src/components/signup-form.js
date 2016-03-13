@@ -36,7 +36,7 @@ export default class SignupForm extends React.Component {
       }
     } else {
       this.setState({nameHelperText: 'Checking...'});
-      fetch('/api/isUsernameTaken?name=' + encodeURIComponent(newName))
+      fetch('/api/isNameAvailable?name=' + encodeURIComponent(newName))
         .then(res => res.json())
         .then(data => {
           if (data.success) {
@@ -58,7 +58,7 @@ export default class SignupForm extends React.Component {
       this.setState({emailHelperText: 'Double check your email.'});
     } else {
       this.setState({emailHelperText: 'Checking...'});
-      fetch('/api/isEmailTaken?email=' + encodeURIComponent(newEmail))
+      fetch('/api/isEmailAvailable?email=' + encodeURIComponent(newEmail))
         .then(res => res.json())
         .then(data => {
           if (data.success) {

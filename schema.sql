@@ -38,3 +38,15 @@ create table t_comment (
 
 create unique index on t_comment (id);
 create index on t_comment (post_id);
+
+create table t_comment_minimizations (
+    id bigserial not null,
+    status int not null default 0
+    created bigint not null default (extract('epoch' from now())),
+    user_id bigint not null,
+    comment_id bigint not null
+)
+
+create unique index on t_comment_minimizations (id);
+create index on t_comment_minimizations (user_id);
+create index on t_comment_minimizations (comment_id);
