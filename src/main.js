@@ -22,7 +22,7 @@ import extract from './util/extract';
 
 import addPost from './api/add-post';
 import addComment from './api/add-comment';
-import createAccount from './api/createAccount';
+import createAccount from './api/create-account';
 import login from './api/login';
 import signOut from './api/sign-out';
 import isEmailAvailable from './api/is-email-available';
