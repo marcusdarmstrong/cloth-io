@@ -3,10 +3,6 @@ import sql from '../util/sql';
 import onError from '../util/on-error';
 
 export default onError(async function getTopPosts(db = connect()) {
-  // eslint-disable-next-line
-  console.log(`args: ${JSON.stringify(arguments, (k, v) => (v === undefined) ? 'undefined' : v)}`);
-  console.log(`db: ${JSON.stringify(db, (k, v) => (v === undefined) ? 'undefined' : v)}`);
-  console.log(`conn: ${connect.toString()}`);
   return await db.query(
     sql`select
       p.*,

@@ -60,7 +60,7 @@ Object.keys(routes).forEach(route => {
         namespaces.push(io.of(state.get('socket')));
       }
 
-      const component = binder(components[componentName]);
+      const component = binder(componentName);
       const store = createStore(reducer, state);
       res.send(
         layout(
