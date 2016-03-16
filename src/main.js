@@ -16,7 +16,6 @@ import favicon from 'serve-favicon';
 import layout from './layout';
 import routes from './route-handlers';
 import binder from './components/binder';
-import components from './components';
 import reducer from './reducer';
 
 import addPost from './api/add-post';
