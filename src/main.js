@@ -65,7 +65,7 @@ Object.keys(routes).forEach(route => {
           state.title,
           ReactDOMServer.renderToString(
             <Provider store={store}>
-              {React.createElement(binder(ccomponent))}
+              {React.createElement(binder(component))}
             </Provider>
           ),
           state
