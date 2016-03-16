@@ -78,6 +78,6 @@ Object.keys(routes).forEach(route => {
 });
 
 app.use((err, req, res) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+  console.log(err.stack);
+  res.status(500).send('Something broke!';
 });
