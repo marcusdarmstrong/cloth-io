@@ -29,14 +29,14 @@ export default onErrorTry(async (req, res) => {
     if (user && user.status > 0) {
       const insertResult = await db.one(sql`insert into t_post (user_id, title, urlstring, body, url) values (${userId}, ${title}, ${urlString}, ${body}, ${link}) returning id`);
       if (insertResult) {
-        res.send(JSON.stringify({success: true, post: { urlstring: urlString }}));
+        res.json({success: true, post: { urlstring: urlString }});
       } else {
-        res.send(JSON.stringify({success: false, message: 'insert failed'}));
+        res.json({success: false, message: 'insert failed'});
       }
     } else {
-      res.send(JSON.stringify({success: false, message: 'No permissions'}));
+      res.json({success: false, message: 'No permissions'});
     }
   } else {
-    res.send(JSON.stringify({success: false, message: 'Didn\'t validate'}));
+    res.json({success: false, message: 'Didn\'t validate'});
   }
-}, (req, res) => res.status(500).send(JSON.stringify({success: false, message: 'Internal Error'})));
+}, (req, res) => res.status(500).json({success: false, message: 'Internal Error'}));

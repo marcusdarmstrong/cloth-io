@@ -52,7 +52,6 @@ app.get('/api/signOut', signOut);
 app.get('/api/isEmailAvailable', isEmailAvailable);
 app.get('/api/isNameAvailable', isNameAvailable);
 
-// The following doesn't work. it also doesn't really even make sense.
 Object.keys(routes).forEach(route => {
   app.get(route, async (req, res) => {
     try {

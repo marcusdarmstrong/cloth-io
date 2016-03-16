@@ -5,7 +5,7 @@ import { validate, NAME_REX } from '../validator';
 export default onErrorTry(async function isNameAvailable(req, res) {
   const name = req.query.name;
   if (name && validate(NAME_REX, name)) {
-    return res.send(JSON.stringify({success: !!(await getUserByName(name.trim()))}));
+    return res.json({success: !!(await getUserByName(name.trim()))});
   }
-  return res.send(JSON.stringify({success: false}));
-}, (req, res) => res.status(500).send(JSON.stringify({success: false})));
+  return res.json({success: false});
+}, (req, res) => res.status(500).json({success: false}));

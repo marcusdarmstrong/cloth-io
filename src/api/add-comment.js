@@ -31,14 +31,14 @@ export default (io) => onErrorTry(async (req, res) => {
           'comment': body,
         };
         io.of('/comments-' + postId).emit('ADD_COMMENT', comment);
-        res.send(JSON.stringify({success: true, 'comment': comment}));
+        res.json({success: true, 'comment': comment});
       } else {
-        res.send(JSON.stringify({success: false}));
+        res.json({success: false});
       }
     } else {
-      res.send(JSON.stringify({success: false}));
+      res.json({success: false});
     }
   } else {
-    res.send(JSON.stringify({success: false}));
+    res.json({success: false});
   }
-}, (req, res) => res.status(500).send(JSON.stringify({success: false})));
+}, (req, res) => res.status(500).json({success: false}));

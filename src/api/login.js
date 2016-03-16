@@ -11,8 +11,8 @@ export default onErrorTry(async function login(req, res) {
   const user = await getUserByEmail(email);
   if (checkPassword(user.name, user.passhash, password)) {
     setAuthTokenCookieForUserId(res, user.id);
-    res.send(JSON.stringify({success: true, user: { id: user.id, name: user.name, status: user.status, color: user.color }}));
+    res.json({success: true, user: { id: user.id, name: user.name, status: user.status, color: user.color }});
   } else {
-    res.send(JSON.stringify({success: false, error: 'Sorry, that password doesn\'t match'}));
+    res.json({success: false, error: 'Sorry, that password doesn\'t match'});
   }
-}, (req, res) => res.status(500).send(JSON.stringify({success: false})));
+}, (req, res) => res.status(500).json({success: false}));
