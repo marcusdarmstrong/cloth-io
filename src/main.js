@@ -74,7 +74,7 @@ Object.keys(routes).forEach(route => {
         )
       );
     } catch (e) {
-      console.log('m:' + e + ' -- st: ' + e.stack);
+      console.error(e.stack);
       res.status(500).send('Something broke!');
     }
   });
