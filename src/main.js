@@ -74,8 +74,7 @@ Object.keys(routes).forEach(route => {
         )
       );
     } catch (e) {
-      console.log('FAILED TO BUILD STATE');
-      console.log(e);
+      console.log('m:' + e + ' -- st: ' + e.stack);
       res.status(500).send('Something broke!');
     }
   });
