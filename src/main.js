@@ -54,19 +54,18 @@ app.get('/api/isNameAvailable', isNameAvailable);
 Object.keys(routes).forEach(route => {
   app.get(route, async (req, res) => {
     try {
-      const { state, componentName } = await routes[route](req);
+      const { state, component } = await routes[route](req);
       if (state.socket && state.socket.namespace) {
         namespaces.push(io.of(state.get('socket')));
       }
 
-      const component = binder(componentName);
       const store = createStore(reducer, state);
       res.send(
         layout(
           state.title,
           ReactDOMServer.renderToString(
             <Provider store={store}>
-              {React.createElement(component)}
+              {React.createElement(binder(ccomponent))}
             </Provider>
           ),
           state
