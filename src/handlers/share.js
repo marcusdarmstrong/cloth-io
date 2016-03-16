@@ -1,5 +1,7 @@
 import { Map as map } from 'immutable';
+import Share from '../components/share';
 
-export default (cb) => {
-  cb(map({ title: 'Share a Story / New York Jets / cloth.io' }));
-};
+export default () => ({
+  state: map({ title: 'Share a Story / New York Jets / cloth.io' }),
+  component: Share,
+});
