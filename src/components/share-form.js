@@ -18,40 +18,40 @@ export default class ShareForm extends React.Component {
   handleTitleChange = (e) => {
     const newTitle = e.target.value;
     const failure = !validate(TITLE_REX, newTitle);
-    this.setState({title: newTitle});
-    this.setState({titleError: failure});
+    this.setState({ title: newTitle });
+    this.setState({ titleError: failure });
     if (failure) {
       if (newTitle.length < 10) {
-        this.setState({titleHelperText: 'Make sure you have at least 10 characters.'});
+        this.setState({ titleHelperText: 'Make sure you have at least 10 characters.' });
       } else if (newTitle.length > 35) {
-        this.setState({titleHelperText: 'Keep it under 35 characters.'});
+        this.setState({ titleHelperText: 'Keep it under 35 characters.' });
       } else {
-        this.setState({titleHelperText: 'Avoid any weird whitespace.'});
+        this.setState({ titleHelperText: 'Avoid any weird whitespace.' });
       }
     } else {
-      this.setState({titleHelperText: 'Looks good!'});
+      this.setState({ titleHelperText: 'Looks good!' });
     }
   };
 
   handleLinkChange = (e) => {
     const newLink = e.target.value;
-    this.setState({link: newLink});
+    this.setState({ link: newLink });
 
     if (newLink !== '') {
       const failure = !validate(URL_REX, newLink);
-      this.setState({linkError: failure});
+      this.setState({ linkError: failure });
       if (failure) {
-        this.setState({linkHelperText: 'Double check your link.'});
+        this.setState({ linkHelperText: 'Double check your link.' });
       } else {
-        this.setState({linkHelperText: 'Looks good!'});
+        this.setState({ linkHelperText: 'Looks good!' });
       }
     } else {
-      this.setState({linkError: false, linkHelperText: 'Optional external link to share.'});
+      this.setState({ linkError: false, linkHelperText: 'Optional external link to share.' });
     }
   };
 
   handleBodyChange = (e) => {
-    this.setState({body: e.target.value});
+    this.setState({ body: e.target.value });
   };
 
   handleSubmit = (e) => {
@@ -63,7 +63,7 @@ export default class ShareForm extends React.Component {
     fetch('/api/addPost', {
       method: 'post',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       credentials: 'same-origin',
@@ -75,9 +75,9 @@ export default class ShareForm extends React.Component {
     }).then(res => res.json())
       .then(data => {
         if (data.success && data.post && data.post.urlstring) {
-          window.location = '/p/' + data.post.urlstring;
+          window.location = `/p/${data.post.urlstring}`;
         } else {
-          this.setState({submissionError: 'Something went wrong.'});
+          this.setState({ submissionError: 'Something went wrong.' });
         }
       });
   };
@@ -97,11 +97,15 @@ export default class ShareForm extends React.Component {
       <form className="share-form" onSubmit={this.handleSubmit}>
         {submissionError}
         <label htmlFor="title">Post Title:</label>
-        <input type="text" className={titleClass} autoFocus name="title" value={this.state.title} onChange={this.handleTitleChange} />
-        <div className={'form-helper' + titleClass}>{this.state.titleHelperText}</div>
+        <input type="text" className={titleClass} autoFocus name="title"
+          value={this.state.title} onChange={this.handleTitleChange}
+        />
+        <div className={`form-helper${titleClass}`}>{this.state.titleHelperText}</div>
         <label htmlFor="link">Link: (Optional)</label>
-        <input type="url" className={linkClass} name="link" value={this.state.link} onChange={this.handleLinkChange} />
-        <div className={'form-helper' + linkClass}>{this.state.linkHelperText}</div>
+        <input type="url" className={linkClass} name="link"
+          value={this.state.link} onChange={this.handleLinkChange}
+        />
+        <div className={`form-helper${linkClass}`}>{this.state.linkHelperText}</div>
         <label htmlFor="link">Commentary:</label>
         <ContentEditable onChange={this.handleBodyChange} html={this.state.body} />
         <input type="submit" name="submit" className={submitClass} value="Create post" />

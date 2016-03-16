@@ -1,8 +1,7 @@
 import React from 'react';
 
-const scrollTop = () => {
-  return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-};
+const scrollTop = () =>
+  window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
 
 export default class ScrollWatch extends React.Component {
   static propTypes = {

@@ -14,7 +14,7 @@ export function addComment(comment) {
 export function openModal(modalType) {
   return {
     type: OPEN_MODAL,
-    modalType: modalType,
+    modalType,
   };
 }
 

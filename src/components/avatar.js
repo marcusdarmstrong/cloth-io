@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Avatar = ({name, hex}) => {
+const Avatar = ({ name, hex }) => {
   const avatar = name.charAt(0).toUpperCase();
-  const color = '#' + hex;
+  const color = `#${hex}`;
   return (
-    <div className="avatar" style={{backgroundColor: color}}>{avatar}</div>
+    <div className="avatar" style={{ backgroundColor: color }}>{avatar}</div>
   );
 };
 

@@ -4,6 +4,7 @@ import TimeAgo from './time-ago';
 import previewer from '../util/previewer';
 import uriParser from '../util/uri-parser';
 
+// eslint-disable-next-line
 export default class Headline extends React.Component {
   static propTypes = {
     post: React.PropTypes.shape({
@@ -28,11 +29,11 @@ export default class Headline extends React.Component {
     if (commentCount === 1) {
       commentCountText = '1 Comment';
     } else if (commentCount > 1) {
-      commentCountText = commentCount + ' Comments';
+      commentCountText = `${commentCount} Comments`;
     }
 
     const link = (post.url) ? uriParser(post.url).host : null;
-    const postLink = '/p/' + post.urlstring;
+    const postLink = `/p/${post.urlstring}`;
     if (link) {
       return (
         <div>
@@ -47,7 +48,7 @@ export default class Headline extends React.Component {
               <div className="byline">
                 <TimeAgo timestamp={ts} />
                 <div className="byline-name">{post.name}</div>
-                <p className="headline-preview" dangerouslySetInnerHTML={{__html: preview}}></p>
+                <p className="headline-preview" dangerouslySetInnerHTML={{ __html: preview }}></p>
                 <div className="comment-count">{commentCountText}</div>
               </div>
             </a>
@@ -65,7 +66,7 @@ export default class Headline extends React.Component {
             <div className="byline">
               <TimeAgo timestamp={ts} />
               <div className="byline-name">{post.name}</div>
-              <p className="headline-preview" dangerouslySetInnerHTML={{__html: preview}}></p>
+              <p className="headline-preview" dangerouslySetInnerHTML={{ __html: preview }}></p>
               <div className="comment-count">{commentCountText}</div>
             </div>
           </div>

@@ -16,7 +16,7 @@
   "author": "Marcus Armstrong",
   "license": "MIT",
   "dependencies": {
-    "babel-eslint": "^5.0.0",
+    "babel-eslint": "^6.0.0-beta.6",
     "babel-plugin-transform-class-properties": "*",
     "babel-polyfill": "*",
     "babel-preset-es2015": "*",

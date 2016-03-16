@@ -30,7 +30,7 @@ export default class Comment extends React.Component {
 
   toggleReplyBox = () => {
     if (this.props.user) {
-      this.setState({commentBoxExpanded: !this.state.commentBoxExpanded});
+      this.setState({ commentBoxExpanded: !this.state.commentBoxExpanded });
     } else {
       this.props.openModal('login');
     }
@@ -48,11 +48,15 @@ export default class Comment extends React.Component {
       classString += ' fork';
     }
 
-    const replyState = (this.state.commentBoxExpanded) ? 'button pull-right engaged' : 'button pull-right';
-    const replyNestLevel = (this.props.comment.hasReplies) ? this.props.comment.nestLevel + 1 : this.props.comment.nestLevel;
+    const replyState = (this.state.commentBoxExpanded) ?
+      'button pull-right engaged' : 'button pull-right';
+    const replyNestLevel = (this.props.comment.hasReplies) ?
+      this.props.comment.nestLevel + 1 : this.props.comment.nestLevel;
 
     let markup = (<div className={classString}>
-      <div className="author"><Avatar name={this.props.comment.name} hex={this.props.comment.color} /></div>
+      <div className="author">
+        <Avatar name={this.props.comment.name} hex={this.props.comment.color} />
+      </div>
       <div className="comment-container">
         <div className="comment-header">
           <TimeAgo timestamp={this.props.comment.created} />
@@ -60,13 +64,27 @@ export default class Comment extends React.Component {
             {this.props.comment.name}
           </div>
         </div>
-        <div className="comment-text" dangerouslySetInnerHTML={{__html: this.props.comment.body}}></div>
+        <div className="comment-text"
+          dangerouslySetInnerHTML={{ __html: this.props.comment.body }}
+        ></div>
         {(replyNestLevel <= 4) ? (<div className="comment-options">
           <div className={replyState} onClick={this.toggleReplyBox}>Reply</div>
         </div>) : null}
-        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} postId={this.props.comment.post_id} fork openModal={this.props.openModal} onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected} /> : null}
+        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ?
+          <AddCommentBox user={this.props.user} parentComment={this.props.comment}
+            postId={this.props.comment.post_id} fork openModal={this.props.openModal}
+            onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
+          />
+          : null
+        }
       </div>
-      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ? <AddCommentBox user={this.props.user} parentComment={this.props.comment} postId={this.props.comment.post_id} openModal={this.props.openModal} onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected} /> : null}
+      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ?
+        <AddCommentBox user={this.props.user} parentComment={this.props.comment}
+          postId={this.props.comment.post_id} openModal={this.props.openModal}
+          onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
+        />
+        : null
+      }
     </div>);
 
     for (let i = this.props.comment.nestLevel; i > 0; i--) {

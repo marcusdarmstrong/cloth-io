@@ -15,13 +15,12 @@ const store = createStore(reducer, state);
 
 const socketName = state.get('socket');
 if (socketName) {
-  const socket = io(socketName, {'force new connection': true});
-  socket.on('connect', () => store.dispatch({type: 'SOCKET_CONNECT'}));
-  const bindAction = actionName => {
-    return data => store.dispatch({type: actionName, comment: data});
-  };
+  const socket = io(socketName, { 'force new connection': true });
+  socket.on('connect', () => store.dispatch({ type: 'SOCKET_CONNECT' }));
+  const bindAction = actionName => data => store.dispatch({ type: actionName, comment: data });
+
   for (const action in actions) {
-    if (actions.hasOwnProperty(action) && (typeof action === 'string' || action instanceof String)) {
+    if (actions.hasOwnProperty(action) && action instanceof String) {
       socket.on(action, bindAction(action));
     }
   }

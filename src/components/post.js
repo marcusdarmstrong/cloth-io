@@ -21,9 +21,9 @@ const Post = (props) => {
         <div className="container">
           <article className="article">
             {title}
-            <div dangerouslySetInnerHTML={{__html: props.post.body}}></div>
+            <div dangerouslySetInnerHTML={{ __html: props.post.body }}></div>
           </article>
-          <Comments {...props}/>
+          <Comments {...props} />
         </div>
       </div>
     </div>

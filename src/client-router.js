@@ -7,4 +7,5 @@ export default (routes, path) => {
       return route.component;
     }
   }
+  return null;
 };

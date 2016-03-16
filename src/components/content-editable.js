@@ -43,7 +43,8 @@ export default class ContentEditable extends React.Component {
         onInput={this.emitChange}
         onBlur={this.emitChange}
         contentEditable
-        dangerouslySetInnerHTML={{__html: this.props.html}}>
+        dangerouslySetInnerHTML={{ __html: this.props.html }}
+      >
       </div>
     );
   }

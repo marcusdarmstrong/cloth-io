@@ -1,9 +1,9 @@
-import Home from './components/home';
-import Post from './components/post';
-import Share from './components/share';
+import HomeComp from './components/home';
+import PostComp from './components/post';
+import ShareComp from './components/share';
 
 export default {
-  'Share': Share,
-  'Post': Post,
-  'Home': Home,
+  Share: ShareComp,
+  Post: PostComp,
+  Home: HomeComp,
 };

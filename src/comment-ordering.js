@@ -1,6 +1,6 @@
 function sortAndBucket(comments) { // I think O(n log n)
   if (!comments || (comments && comments.length === 0)) {
-    return {0: []};
+    return { 0: [] };
   }
   comments.sort((b, a) => a.created - b.created);
   const buckets = {};
@@ -45,6 +45,6 @@ function markAndFlatten(buckets, parentId, fork, nestLevel) { // I think O(n)
   return result;
 }
 
-export default function(rawComments) {
+export default function (rawComments) {
   return markAndFlatten(sortAndBucket(rawComments), 0, false, 0);
 }

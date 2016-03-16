@@ -39,7 +39,7 @@ app.use('/public', express.static(path.join(__dirname, '..', 'public'), {
   maxAge: 1000 * 60 * 60 * 24 * 365,
 }));
 
-app.use(favicon(__dirname + '/../public/favicon.ico'));
+app.use(favicon(`${__dirname}/../public/favicon.ico`));
 app.use(cookieParser());
 app.use(bodyParser.json());
 

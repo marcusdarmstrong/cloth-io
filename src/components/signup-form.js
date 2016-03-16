@@ -24,26 +24,26 @@ export default class SignupForm extends React.Component {
   handleNameChange = (e) => {
     const newName = e.target.value;
     const failure = !validate(NAME_REX, newName);
-    this.setState({name: newName});
-    this.setState({nameError: failure});
+    this.setState({ name: newName });
+    this.setState({ nameError: failure });
     if (failure) {
       if (newName.length < 4) {
-        this.setState({nameHelperText: 'Make sure you have at least 4 characters.'});
+        this.setState({ nameHelperText: 'Make sure you have at least 4 characters.' });
       } else if (newName.length > 20) {
-        this.setState({nameHelperText: 'Keep it under 20 characters.'});
+        this.setState({ nameHelperText: 'Keep it under 20 characters.' });
       } else {
-        this.setState({nameHelperText: 'Avoid any special characters.'});
+        this.setState({ nameHelperText: 'Avoid any special characters.' });
       }
     } else {
-      this.setState({nameHelperText: 'Checking...'});
-      fetch('/api/isNameAvailable?name=' + encodeURIComponent(newName))
+      this.setState({ nameHelperText: 'Checking...' });
+      fetch(`/api/isNameAvailable?name=${encodeURIComponent(newName)}`)
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            this.setState({nameHelperText: 'Looks good!'});
+            this.setState({ nameHelperText: 'Looks good!' });
           } else {
-            this.setState({nameHelperText: 'That name is taken. Try another.'});
-            this.setState({nameError: true});
+            this.setState({ nameHelperText: 'That name is taken. Try another.' });
+            this.setState({ nameError: true });
           }
         });
     }
@@ -52,20 +52,20 @@ export default class SignupForm extends React.Component {
   handleEmailChange = (e) => {
     const newEmail = e.target.value;
     const failure = !validate(EMAIL_REX, newEmail);
-    this.setState({email: newEmail});
-    this.setState({emailError: failure});
+    this.setState({ email: newEmail });
+    this.setState({ emailError: failure });
     if (failure) {
-      this.setState({emailHelperText: 'Double check your email.'});
+      this.setState({ emailHelperText: 'Double check your email.' });
     } else {
-      this.setState({emailHelperText: 'Checking...'});
-      fetch('/api/isEmailAvailable?email=' + encodeURIComponent(newEmail))
+      this.setState({ emailHelperText: 'Checking...' });
+      fetch(`/api/isEmailAvailable?email=${encodeURIComponent(newEmail)}`)
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            this.setState({emailHelperText: 'Looks good!'});
+            this.setState({ emailHelperText: 'Looks good!' });
           } else {
-            this.setState({emailHelperText: 'That email is taken. Try another.'});
-            this.setState({emailError: true});
+            this.setState({ emailHelperText: 'That email is taken. Try another.' });
+            this.setState({ emailError: true });
           }
         });
     }
@@ -74,12 +74,12 @@ export default class SignupForm extends React.Component {
   handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     const failure = !validate(PASSWORD_REX, newPassword);
-    this.setState({password: newPassword});
-    this.setState({passwordError: failure});
+    this.setState({ password: newPassword });
+    this.setState({ passwordError: failure });
     if (failure) {
-      this.setState({passwordHelperText: 'Password must be 6 or more characters.'});
+      this.setState({ passwordHelperText: 'Password must be 6 or more characters.' });
     } else {
-      this.setState({passwordHelperText: 'Looks good!'});
+      this.setState({ passwordHelperText: 'Looks good!' });
     }
   };
 
@@ -92,7 +92,7 @@ export default class SignupForm extends React.Component {
     fetch('/api/createAccount', {
       method: 'post',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       credentials: 'same-origin',
@@ -107,7 +107,7 @@ export default class SignupForm extends React.Component {
           this.props.closeModal();
           this.props.loginUser(data.user);
         } else {
-          this.setState({submissionError: 'Something went wrong.'});
+          this.setState({ submissionError: 'Something went wrong.' });
         }
       });
   };
@@ -131,14 +131,20 @@ export default class SignupForm extends React.Component {
       <form className="login-form" onSubmit={this.handleSubmit}>
         {submissionError}
         <label htmlFor="name">Display name:</label>
-        <input type="text" className={nameClass} autoFocus name="name" value={this.state.name} onChange={this.handleNameChange} />
-        <div className={'form-helper' + nameClass}>{this.state.nameHelperText}</div>
+        <input type="text" className={nameClass} autoFocus name="name"
+          value={this.state.name} onChange={this.handleNameChange}
+        />
+        <div className={`form-helper${nameClass}`}>{this.state.nameHelperText}</div>
         <label htmlFor="email">Email address:</label>
-        <input type="email" className={emailClass} name="email" value={this.state.email} onChange={this.handleEmailChange} />
-        <div className={'form-helper' + emailClass}>{this.state.emailHelperText}</div>
+        <input type="email" className={emailClass} name="email"
+          value={this.state.email} onChange={this.handleEmailChange}
+        />
+        <div className={`form-helper${emailClass}`}>{this.state.emailHelperText}</div>
         <label htmlFor="password">Password:</label>
-        <input type="password" className={passwordClass} name="password" value={this.state.password} onChange={this.handlePasswordChange} />
-        <div className={'form-helper' + passwordClass}>{this.state.passwordHelperText}</div>
+        <input type="password" className={passwordClass} name="password"
+          value={this.state.password} onChange={this.handlePasswordChange}
+        />
+        <div className={`form-helper${passwordClass}`}>{this.state.passwordHelperText}</div>
         <input type="submit" name="submit" className={submitClass} value="Create account" />
       </form>
     );

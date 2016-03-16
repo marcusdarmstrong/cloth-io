@@ -23,12 +23,12 @@ export default class Nav extends React.Component {
   };
 
   showSignoutLink = () => {
-    this.setState({signOut: true});
+    this.setState({ signOut: true });
   };
 
   signOut = () => {
-    this.setState({signOut: false});
-    fetch('/api/signOut', {credentials: 'same-origin'})
+    this.setState({ signOut: false });
+    fetch('/api/signOut', { credentials: 'same-origin' })
       .then(() => this.props.loginUser(null));
   };
 
@@ -39,15 +39,13 @@ export default class Nav extends React.Component {
     }
 
     if (diff > 0 && newTop > 44) {
-      this.setState({hidden: true});
+      this.setState({ hidden: true });
     } else if (diff < 0) {
-      this.setState({hidden: false});
+      this.setState({ hidden: false });
     }
   };
 
-  openLoginModal = () => {
-    return this.props.openModal('login');
-  };
+  openLoginModal = () => this.props.openModal('login');
 
   render() {
     let modal = null;
@@ -66,10 +64,15 @@ export default class Nav extends React.Component {
           <div className="button pull-right" onClick={this.signOut}>Log out</div>
         );
       } else {
-        const color = '#' + this.props.user.color;
+        const color = `#${this.props.user.color}`;
         const letter = this.props.user.name.substr(0, 1).toUpperCase();
         userNav = (
-          <div className="avatar pull-right" style={{backgroundColor: color}} onClick={this.showSignoutLink}>{letter}</div>
+          <div className="avatar pull-right"
+            style={{ backgroundColor: color }}
+            onClick={this.showSignoutLink}
+          >
+            {letter}
+          </div>
         );
       }
     }

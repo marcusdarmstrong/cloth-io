@@ -25,15 +25,15 @@ export default class AddCommentBox extends React.Component {
   };
 
   handleChange = (event) => {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   };
 
   addComment = () => {
-    this.setState({sending: true});
+    this.setState({ sending: true });
     fetch('/api/addComment', {
       method: 'post',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       credentials: 'same-origin',
@@ -48,17 +48,15 @@ export default class AddCommentBox extends React.Component {
           if (this.props.onSubmission) {
             this.props.onSubmission();
           }
-          this.setState({value: '', sending: false});
+          this.setState({ value: '', sending: false });
         }
       });
   };
 
-  openLoginModal = () => {
-    return this.props.openModal('login');
-  };
+  openLoginModal = () => this.props.openModal('login');
 
   render() {
-    const {user, parentComment, fork, socketConnected} = this.props;
+    const { user, parentComment, fork, socketConnected } = this.props;
 
     let className = 'add-comment-box';
     if (fork) {
@@ -81,7 +79,9 @@ export default class AddCommentBox extends React.Component {
           </div>
         </div>
         <div className="textarea-container">
-          <ContentEditable onChange={this.handleChange} html={this.state.value} autoFocus={(!!parentComment)} />
+          <ContentEditable onChange={this.handleChange} html={this.state.value}
+            autoFocus={(!!parentComment)}
+          />
           <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
         <div className="comment-options">{postButton}</div>
@@ -96,7 +96,9 @@ export default class AddCommentBox extends React.Component {
 
     return (
       <div className={className}>
-        <div className="author"><Avatar name={(user) ? user.name : '?'} hex={(user) ? user.color : 'ddd'} /></div>
+        <div className="author">
+          <Avatar name={(user) ? user.name : '?'} hex={(user) ? user.color : 'ddd'} />
+        </div>
         {body}
       </div>
     );

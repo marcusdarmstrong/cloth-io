@@ -15,13 +15,13 @@ export default onErrorTry(async function createAccount(req, res) {
   const password = req.body.password || '';
 
   if (!name || !validate(NAME_REX, name)) {
-    return res.json({success: false, nameError: 'Invalid name'});
+    return res.json({ success: false, nameError: 'Invalid name' });
   }
   if (!email || !validate(EMAIL_REX, email)) {
-    return res.json({success: false, emailError: 'Invalid email'});
+    return res.json({ success: false, emailError: 'Invalid email' });
   }
   if (!password || !validate(PASSWORD_REX, password)) {
-    return res.json({success: false, passwordError: 'Invalid password'});
+    return res.json({ success: false, passwordError: 'Invalid password' });
   }
 
   const passHash = createPassHash(name, password);
@@ -30,16 +30,28 @@ export default onErrorTry(async function createAccount(req, res) {
 
   const emailUser = await getUserByEmail(email, db);
   if (emailUser) {
-    return res.json({success: false, emailError: 'Email is already taken.'});
+    return res.json({ success: false, emailError: 'Email is already taken.' });
   }
   const nameUser = await getUserByName(name, db);
   if (nameUser) {
-    return res.json({success: false, nameError: 'Name is already taken.'});
+    return res.json({ success: false, nameError: 'Name is already taken.' });
   }
 
-  const insertResult = await db.one(sql`insert into t_user (name, email, passhash, color) values (${name}, ${email}, ${passHash}, ${color}) returning id, status`);
+  const insertResult = await db.one(
+    sql`insert into t_user (name, email, passhash, color)
+      values (${name}, ${email}, ${passHash}, ${color})
+      returning id, status`
+  );
   const id = insertResult.id;
 
   setAuthTokenCookieForUserId(res, id);
-  return res.send(JSON.stringify({success: true, user: { id, name, color, status: insertResult.status }}));
-}, (req, res) => res.status(500).json({success: false}));
+  return res.send(JSON.stringify({
+    success: true,
+    user: {
+      id,
+      name,
+      color,
+      status: insertResult.status,
+    },
+  }));
+}, (req, res) => res.status(500).json({ success: false }));

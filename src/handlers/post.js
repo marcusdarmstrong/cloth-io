@@ -23,7 +23,7 @@ export default async (req) => {
       comments: list(commentOrdering(comments)),
       user,
       modal: null,
-      socket: '/comments-' + post.id,
+      socket: `/comments-${post.id}`,
       socketConnected: false,
     }),
     component: Post,
