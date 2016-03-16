@@ -5,6 +5,6 @@ export default function onErrorTry(func, alternate) {
     } catch (e) {
       console.error(e.stack);
     }
-    return alternate(...args);
+    return alternate.apply(args);
   };
 }
