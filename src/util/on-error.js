@@ -3,7 +3,7 @@ export default function onError(func, value = null) {
     try {
       return await func(...args);
     } catch (e) {
-      console.error(e);
+      console.error(e.stack);
     }
     return value;
   };
