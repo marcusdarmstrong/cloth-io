@@ -18,7 +18,6 @@ import routes from './route-handlers';
 import binder from './components/binder';
 import components from './components';
 import reducer from './reducer';
-import extract from './util/extract';
 
 import addPost from './api/add-post';
 import addComment from './api/add-comment';
@@ -56,28 +55,29 @@ app.get('/api/isNameAvailable', isNameAvailable);
 // The following doesn't work. it also doesn't really even make sense.
 Object.keys(routes).forEach(route => {
   app.get(route, async (req, res) => {
-    const { state, componentName } = extract(await routes[route](req));
-    if (state.socket && state.socket.namespace) {
-      namespaces.push(io.of(state.get('socket')));
+    try {
+      const { state, componentName } = await routes[route](req);
+      if (state.socket && state.socket.namespace) {
+        namespaces.push(io.of(state.get('socket')));
+      }
+
+      const component = binder(components[componentName]);
+      const store = createStore(reducer, state);
+      res.send(
+        layout(
+          state.title,
+          ReactDOMServer.renderToString(
+            <Provider store={store}>
+              {React.createElement(component)}
+            </Provider>
+          ),
+          state
+        )
+      );
+    } catch (e) {
+      console.log('FAILED TO BUILD STATE');
+      console.log(JSON.stringify(e));
+      res.status(500).send('Something broke!');
     }
-
-    const component = binder(components[componentName]);
-    const store = createStore(reducer, state);
-    res.send(
-      layout(
-        state.title,
-        ReactDOMServer.renderToString(
-          <Provider store={store}>
-            {React.createElement(component)}
-          </Provider>
-        ),
-        state
-      )
-    );
   });
-});
-
-app.use((err, req, res) => {
-  console.log(err.stack);
-  res.status(500).send('Something broke!');
 });
