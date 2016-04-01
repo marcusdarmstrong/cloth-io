@@ -1,10 +1,9 @@
 import connect from '../connection';
-import sql from '../util/sql';
 import onError from '../util/on-error';
 
 export default onError(async function getTopPosts(db = connect()) {
   return await db.query(
-    sql`select
+    `select
       p.*,
       u.name,
       u.color,
