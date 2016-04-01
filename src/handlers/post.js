@@ -11,7 +11,7 @@ export default async (req) => {
   const userId = readAuthTokenFromCookies(req);
 
   const db = connect();
-
+  console.error(`Params: ${JSON.stringify(req.params)}`);
   const post = await getPostForUrlString(req.params.urlString, db);
   const comments = await getCommentsForPostAndUser(post.id, userId, db);
   const user = await getUserById(userId, db);
