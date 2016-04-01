@@ -23,7 +23,8 @@ export default onError(async function getTopPosts(db = connect()) {
     order by created desc
     limit 10`
   )).map((post) => {
-    post.created = parseInt(post.created);
-    return post;
+    const newPost = post;
+    newPost.created = Number(newPost.created);
+    return newPost;
   });
 }, []);
