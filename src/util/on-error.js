@@ -7,6 +7,12 @@ export default function onError(func, value = null) {
       if (e.stack) {
         console.error(e.stack);
       }
+      if (e.query) {
+        console.error(e.query);
+      }
+      if (e.params) {
+        console.error(JSON.stringify(e.params));
+      }
     }
     return value;
   };
