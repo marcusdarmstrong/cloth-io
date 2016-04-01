@@ -2,7 +2,7 @@ import connect from '../connection';
 import onError from '../util/on-error';
 
 export default onError(async function getTopPosts(db = connect()) {
-  return await db.query(
+  return (await db.query(
     `select
       p.*,
       u.name,
@@ -22,5 +22,8 @@ export default onError(async function getTopPosts(db = connect()) {
       on cc.post_id = p.id
     order by created desc
     limit 10`
-  );
+  )).map((post) => {
+    post.created = parseInt(post.created);
+    return post;
+  });
 }, []);
