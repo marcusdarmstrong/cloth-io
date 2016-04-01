@@ -5,7 +5,7 @@ import connect from '../connection';
 import getPostForUrlString from '../loaders/get-post-by-urlstring';
 import getUserById from '../loaders/get-user-by-id';
 import getCommentsForPostAndUser from '../loaders/get-comments-for-post-and-user';
-import readAuthTokenFromCookies from '../auth-token';
+import { readAuthTokenFromCookies } from '../auth-token';
 
 export default async (req) => {
   const userId = readAuthTokenFromCookies(req);
