@@ -1,6 +1,5 @@
 import readAuthTokenFromCookies from '../auth-token';
 import connect from '../connection';
-import sql from '../util/sql';
 import getUserById from '../loaders/get-user-by-id';
 import onErrorTry from '../util/on-error-try';
 import sanitizeHtml from 'sanitize-html';
@@ -21,9 +20,10 @@ export default (io) => onErrorTry(async (req, res) => {
     const user = await getUserById(userId, db);
     if (user) {
       const insertResult = await db.one(
-        sql`insert into t_comment (user_id, post_id, parent_id, body)
-          values (${userId}, ${postId}, ${parentId}, ${body})
-          returning id, created`
+        `insert into t_comment (user_id, post_id, parent_id, body)
+          values ($(userId), $(postId), $(parentId), $(body))
+          returning id, created`,
+        { userId, postId, parentId, body }
       );
       if (insertResult) {
         const comment = {
