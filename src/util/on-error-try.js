@@ -1,10 +1,10 @@
 export default function onErrorTry(func, alternate) {
-  return async (...args) => {
+  return async () => {
     try {
-      return await func.apply(args);
+      return await func.apply(arguments);
     } catch (e) {
       console.error(e.stack);
     }
-    return alternate.apply(args);
+    return alternate.apply(arguments);
   };
 }
