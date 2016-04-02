@@ -6,8 +6,10 @@ import Avatar from './avatar';
 export default class Comment extends React.Component {
   static propTypes = {
     comment: React.PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      color: React.PropTypes.string.isRequired,
+      user: React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired,
+        color: React.PropTypes.string.isRequired,
+      }).isRequired,
       created: React.PropTypes.number.isRequired,
       body: React.PropTypes.string.isRequired,
       nestLevel: React.PropTypes.number.isRequired,
@@ -55,13 +57,13 @@ export default class Comment extends React.Component {
 
     let markup = (<div className={classString}>
       <div className="author">
-        <Avatar name={this.props.comment.name} hex={this.props.comment.color} />
+        <Avatar name={this.props.comment.user.name} hex={this.props.comment.user.color} />
       </div>
       <div className="comment-container">
         <div className="comment-header">
           <TimeAgo timestamp={this.props.comment.created} />
           <div className="author-name">
-            {this.props.comment.name}
+            {this.props.comment.user.name}
           </div>
         </div>
         <div className="comment-text"

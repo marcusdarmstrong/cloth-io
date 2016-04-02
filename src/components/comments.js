@@ -29,8 +29,10 @@ Comments.propTypes = {
   }),
   comments: React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      color: React.PropTypes.string.isRequired,
+      user: React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired,
+        color: React.PropTypes.string.isRequired,
+      }).isRequired,
       created: React.PropTypes.number.isRequired,
       body: React.PropTypes.string.isRequired,
       nestLevel: React.PropTypes.number.isRequired,
