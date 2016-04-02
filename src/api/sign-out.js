@@ -1,4 +1,4 @@
-import deleteAuthTokenFromCookies from '../auth-token';
+import { deleteAuthTokenFromCookies } from '../auth-token';
 
 export default (req, res) => {
   deleteAuthTokenFromCookies(res);

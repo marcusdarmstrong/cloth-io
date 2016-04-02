@@ -1,4 +1,4 @@
-import readAuthTokenFromCookies from '../auth-token';
+import { readAuthTokenFromCookies } from '../auth-token';
 import connect from '../connection';
 import getUserById from '../loaders/get-user-by-id';
 import onErrorTry from '../util/on-error-try';

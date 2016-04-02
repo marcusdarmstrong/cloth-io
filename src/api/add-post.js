@@ -1,4 +1,4 @@
-import readAuthTokenFromCookies from '../auth-token';
+import { readAuthTokenFromCookies } from '../auth-token';
 import { validate, URL_REX, TITLE_REX } from '../validator';
 import connect from '../connection';
 import getUserById from '../loaders/get-user-by-id';

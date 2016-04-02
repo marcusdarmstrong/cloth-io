@@ -1,6 +1,6 @@
 import getUserByEmail from '../loaders/get-user-by-email';
-import setAuthTokenCookieForUserId from '../auth-token';
-import checkPassword from '../passhash';
+import { setAuthTokenCookieForUserId } from '../auth-token';
+import { checkPassword } from '../passhash';
 import onErrorTry from '../util/on-error-try';
 
 export default onErrorTry(async function login(req, res) {
