@@ -24,6 +24,7 @@ export default onError(async function getTopPosts(db = connect()) {
     limit 10`
   )).map((post) => {
     const newPost = post;
+    newPost.id = Number(newPost.id);
     newPost.created = Number(newPost.created);
     newPost.commentcount = Number(newPost.commentcount);
     return newPost;

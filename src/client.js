@@ -20,7 +20,7 @@ if (socketName) {
   const bindAction = actionName => data => store.dispatch({ type: actionName, comment: data });
 
   for (const action in actions) {
-    if (actions.hasOwnProperty(action) && action instanceof String) {
+    if (actions.hasOwnProperty(action) && (typeof action) === String) {
       socket.on(action, bindAction(action));
     }
   }
