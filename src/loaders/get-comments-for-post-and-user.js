@@ -23,6 +23,12 @@ export default onError(async function getCommentsForPostAndUser(postId, userId, 
     newComment.id = Number(newComment.id);
     newComment.post_id = Number(newComment.post_id);
     newComment.created = Number(newComment.created);
+    newComment.user = {
+      name: comment.name,
+      color: comment.color,
+    };
+    delete newComment.name;
+    delete newComment.color;
     return newComment;
   });
 }, []);
