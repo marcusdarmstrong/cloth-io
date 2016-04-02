@@ -32,7 +32,7 @@ export default (io) => onErrorTry(async (req, res) => {
           user,
           parentId: Number(parentId),
           postId: Number(postId),
-          body: body,
+          body,
         };
         io.of(`/comments-${postId}`).emit('ADD_COMMENT', comment);
         res.json({ success: true, comment });
