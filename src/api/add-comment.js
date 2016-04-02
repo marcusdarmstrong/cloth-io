@@ -1,10 +1,10 @@
 import { readAuthTokenFromCookies } from '../auth-token';
 import connect from '../connection';
 import getUserById from '../loaders/get-user-by-id';
-import onErrorTry from '../util/on-error-try';
+import onError from '../util/on-error';
 import sanitizeHtml from 'sanitize-html';
 
-export default (io) => onErrorTry(async (req, res) => {
+export default (io) => onError(async (req, res) => {
   const userId = readAuthTokenFromCookies(req);
   const body = sanitizeHtml(req.body.comment, {
     allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'br', 'div'],

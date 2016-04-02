@@ -1,8 +1,8 @@
 import getUserByName from '../loaders/get-user-by-name';
-import onErrorTry from '../util/on-error-try';
+import onError from '../util/on-error';
 import { validate, NAME_REX } from '../validator';
 
-export default onErrorTry(async function isNameAvailable(req, res) {
+export default onError(async function isNameAvailable(req, res) {
   const name = req.query.name;
   if (name && validate(NAME_REX, name)) {
     return res.json({ success: !!(await getUserByName(name.trim())) });

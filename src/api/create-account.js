@@ -2,11 +2,11 @@ import { setAuthTokenCookieForUserId } from '../auth-token';
 import connect from '../connection';
 import getUserByEmail from '../loaders/get-user-by-email';
 import getUserByName from '../loaders/get-user-by-name';
-import onErrorTry from '../util/on-error-try';
+import onError from '../util/on-error';
 import { validate, NAME_REX, EMAIL_REX, PASSWORD_REX } from '../validator';
 import { createPassHash } from '../passhash';
 
-export default onErrorTry(async function createAccount(req, res) {
+export default onError(async function createAccount(req, res) {
   let name = req.body.name || '';
   name = name.trim();
   let email = req.body.email || '';

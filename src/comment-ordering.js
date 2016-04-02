@@ -34,7 +34,6 @@ function markAndFlatten(buckets, parentId, fork, nestLevel) { // I think O(n)
       root.fork = true;
     }
     root.nestLevel = childNestLevel;
-    root.created = Number(root.created);
     result.push(root);
     if (children) {
       root.hasReplies = true;

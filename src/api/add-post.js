@@ -2,10 +2,10 @@ import { readAuthTokenFromCookies } from '../auth-token';
 import { validate, URL_REX, TITLE_REX } from '../validator';
 import connect from '../connection';
 import getUserById from '../loaders/get-user-by-id';
-import onErrorTry from '../util/on-error-try';
+import onError from '../util/on-error';
 import sanitizeHtml from 'sanitize-html';
 
-export default onErrorTry(async (req, res) => {
+export default onError(async (req, res) => {
   const userId = readAuthTokenFromCookies(req);
   const body = sanitizeHtml(req.body.body, {
     allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'br', 'div', 'h2', 'h3'],
