@@ -3,7 +3,7 @@ import getTopPosts from '../loaders/get-top-posts';
 import getUserById from '../loaders/get-user-by-id';
 import { readAuthTokenFromCookies } from '../auth-token';
 import Home from '../components/home';
-import connect from '../connect';
+import connect from '../connection';
 
 export default async (req) => {
   const db = connect();
