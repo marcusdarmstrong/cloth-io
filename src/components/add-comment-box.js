@@ -15,7 +15,7 @@ export default class AddCommentBox extends React.Component {
     fork: React.PropTypes.bool,
     openModal: React.PropTypes.func.isRequired,
     onSubmission: React.PropTypes.func,
-    postId: React.PropTypes.string.isRequired,
+    postId: React.PropTypes.number.isRequired,
     socketConnected: React.PropTypes.bool.isRequired,
   };
 
