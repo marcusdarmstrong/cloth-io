@@ -1,7 +1,7 @@
 export default function onError(func, value = null) {
-  return async () => {
+  return async (...args) => {
     try {
-      return await func.apply(arguments);
+      return await func.apply(func, args);
     } catch (e) {
       console.error(e.toString());
       if (e.stack) {
