@@ -30,7 +30,7 @@ export default (io) => onErrorTry(async (req, res) => {
           id: Number(insertResult.id),
           created: Number(insertResult.created),
           user,
-          parentId: Number(parentId),
+          parent_id: Number(parentId),
           post_id: Number(postId),
           body,
         };

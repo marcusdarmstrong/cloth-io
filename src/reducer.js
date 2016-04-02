@@ -6,11 +6,14 @@ import commentOrdering from './comment-ordering';
 
 export default (state = map, action) => {
   switch (action.type) {
-    // eslint-disable-next-line
     case ADD_COMMENT:
-      const comments = state.get('comments').toJS();
-      comments.push(action.comment);
-      return state.set('comments', fromJS(commentOrdering(comments)));
+      return state.set('comments',
+        fromJS(
+          commentOrdering(
+            state.get('comments').push(action.comment).toJS()
+          )
+        )
+      );
     case OPEN_MODAL:
       if (action.modalType === 'login') {
         return state.set('modal', map({ component: LoginForm, title: 'Log in' }));
