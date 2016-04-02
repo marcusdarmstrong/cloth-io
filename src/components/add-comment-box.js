@@ -10,7 +10,7 @@ export default class AddCommentBox extends React.Component {
       name: React.PropTypes.string.isRequired,
     }),
     parentComment: React.PropTypes.shape({
-      id: React.PropTypes.string.isRequired,
+      id: React.PropTypes.number.isRequired,
     }),
     fork: React.PropTypes.bool,
     openModal: React.PropTypes.func.isRequired,
