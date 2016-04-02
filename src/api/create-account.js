@@ -1,6 +1,5 @@
 import setAuthTokenCookieForUserId from '../auth-token';
 import connect from '../connection';
-import sql from '../util/sql';
 import getUserByEmail from '../loaders/get-user-by-email';
 import getUserByName from '../loaders/get-user-by-name';
 import onErrorTry from '../util/on-error-try';
@@ -38,9 +37,10 @@ export default onErrorTry(async function createAccount(req, res) {
   }
 
   const insertResult = await db.one(
-    sql`insert into t_user (name, email, passhash, color)
-      values (${name}, ${email}, ${passHash}, ${color})
-      returning id, status`
+    `insert into t_user (name, email, passhash, color)
+      values ($(name), $(email), $(passHash), $(color))
+      returning id, status`,
+    { name, email, passHash, color }
   );
   const id = insertResult.id;
 

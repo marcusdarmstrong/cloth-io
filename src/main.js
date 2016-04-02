@@ -55,7 +55,7 @@ Object.keys(routes).forEach(route => {
   app.get(route, async (req, res) => {
     try {
       const { state, component } = await routes[route](req);
-      if (state.socket && state.socket.namespace) {
+      if (state.has('socket')) {
         namespaces.push(io.of(state.get('socket')));
       }
 

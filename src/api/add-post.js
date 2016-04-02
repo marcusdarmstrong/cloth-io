@@ -1,7 +1,6 @@
 import readAuthTokenFromCookies from '../auth-token';
 import { validate, URL_REX, TITLE_REX } from '../validator';
 import connect from '../connection';
-import sql from '../util/sql';
 import getUserById from '../loaders/get-user-by-id';
 import onErrorTry from '../util/on-error-try';
 import sanitizeHtml from 'sanitize-html';
@@ -24,16 +23,18 @@ export default onErrorTry(async (req, res) => {
     const urlStringLike = `${urlStringRoot}%`;
 
     const countResult = await db.one(
-      sql`select count(*) as count from t_post where urlstring like ${urlStringLike}`
+      'select count(*) as count from t_post where urlstring like $(urlStringLike)',
+      { urlStringLike }
     );
     const urlString = (Number(countResult.count) === 0) ?
       urlStringRoot : `${urlStringRoot}-${countResult.count}`;
     const user = await getUserById(userId);
     if (user && user.status > 0) {
       const insertResult = await db.one(
-        sql`insert into t_post (user_id, title, urlstring, body, url)
-          values (${userId}, ${title}, ${urlString}, ${body}, ${link})
-          returning id`
+        `insert into t_post (user_id, title, urlstring, body, url)
+          values ($(userId), $(title), $(urlString), $(body), $(link))
+          returning id`,
+        { userId, title, urlString, body, link }
       );
       if (insertResult) {
         res.json({ success: true, post: { urlstring: urlString } });
