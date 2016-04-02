@@ -31,7 +31,7 @@ export default (io) => onErrorTry(async (req, res) => {
           created: Number(insertResult.created),
           user,
           parentId: Number(parentId),
-          postId: Number(postId),
+          post_id: Number(postId),
           body,
         };
         io.of(`/comments-${postId}`).emit('ADD_COMMENT', comment);
