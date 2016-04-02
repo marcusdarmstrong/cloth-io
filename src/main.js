@@ -43,7 +43,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.post('/api/addPost', addPost);
-app.post('/api/addComment', addComment);
+app.post('/api/addComment', addComment(io));
 app.post('/api/createAccount', createAccount);
 app.post('/api/login', login);
 
@@ -62,7 +62,7 @@ Object.keys(routes).forEach(route => {
       const store = createStore(reducer, state);
       res.send(
         layout(
-          state.title,
+          state.get('title'),
           ReactDOMServer.renderToString(
             <Provider store={store}>
               {React.createElement(binder(component))}

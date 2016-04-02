@@ -18,5 +18,11 @@ const commentQuery = () =>
       c.post_id=$(postId)`;
 
 export default onError(async function getCommentsForPostAndUser(postId, userId, db = connect()) {
-  return await db.any(commentQuery(), { postId, userId });
+  return (await db.any(commentQuery(), { postId, userId })).map(comment => {
+    const newComment = comment;
+    newComment.id = Number(newComment.id);
+    newComment.post_id = Number(newComment.post_id);
+    newComment.created = Number(newComment.created);
+    return newComment;
+  });
 }, []);

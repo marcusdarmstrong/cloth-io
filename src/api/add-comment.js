@@ -27,11 +27,11 @@ export default (io) => onErrorTry(async (req, res) => {
       );
       if (insertResult) {
         const comment = {
-          id: insertResult.id,
-          created: insertResult.created,
+          id: Number(insertResult.id),
+          created: Number(insertResult.created),
           user,
-          parentId,
-          postId,
+          parentId: Number(parentId),
+          postId: Number(postId),
           comment: body,
         };
         io.of(`/comments-${postId}`).emit('ADD_COMMENT', comment);

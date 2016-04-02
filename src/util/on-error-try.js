@@ -3,7 +3,10 @@ export default function onErrorTry(func, alternate) {
     try {
       return await func.apply(func, args);
     } catch (e) {
-      console.error(e.stack);
+      console.error(e.toString());
+      if (e.stack) {
+        console.error(e.stack);
+      }
     }
     return alternate.apply(alternate, args);
   };
