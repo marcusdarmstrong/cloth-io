@@ -33,7 +33,7 @@ export default class Comment extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.commentBox && nextProps.received.contains(this.state.commentBox)) {
+    if (this.state.commentBox && nextProps.received.indexOf(this.state.commentBox) !== -1) {
       this.setState({ commentBox: false });
     }
   }
