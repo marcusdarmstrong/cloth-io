@@ -22,7 +22,7 @@ import signOut from './api/sign-out';
 import isEmailAvailable from './api/is-email-available';
 import isNameAvailable from './api/is-name-available';
 
-import { readAuthTokenFromCookies } from '../auth-token';
+import { readAuthTokenFromCookies } from './auth-token';
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
