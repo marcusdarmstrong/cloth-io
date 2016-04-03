@@ -1,4 +1,3 @@
-import binder from './binder';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -11,7 +10,7 @@ class Route extends React.Component {
 
   render() {
     const { route, name, children } = this.props;
-    return ((route === name) ? binder(children) : null);
+    return ((route === name) ? children : null);
   }
 }
 
