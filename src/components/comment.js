@@ -77,20 +77,12 @@ export default class Comment extends React.Component {
         {(replyNestLevel <= 4) ? (<div className="comment-options">
           <div className={replyState} onClick={this.toggleReplyBox}>Reply</div>
         </div>) : null}
-        {(this.state.commentBox && this.props.comment.hasReplies) ?
-          <AddCommentBox user={this.props.user} parentComment={this.props.comment}
-            postId={this.props.comment.post_id} fork openModal={this.props.openModal}
-            onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
-            key={this.state.commentBox}
-          />
-          : null
-        }
       </div>
-      {(this.state.commentBox && !this.props.comment.hasReplies) ?
+      {(this.state.commentBox) ?
         <AddCommentBox user={this.props.user} parentComment={this.props.comment}
           postId={this.props.comment.post_id} openModal={this.props.openModal}
           onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
-          key={this.state.commentBox}
+          key={this.state.commentBox} fork={this.props.comment.hasReplies}
         />
         : null
       }
