@@ -2,6 +2,7 @@ import React from 'react';
 import TimeAgo from './time-ago';
 import AddCommentBox from './add-comment-box';
 import Avatar from './avatar';
+import guid from '../util/guid';
 
 export default class Comment extends React.Component {
   static propTypes = {
@@ -27,12 +28,16 @@ export default class Comment extends React.Component {
   };
 
   state = {
-    commentBoxExpanded: false,
+    commentBox: false,
   };
 
   toggleReplyBox = () => {
     if (this.props.user) {
-      this.setState({ commentBoxExpanded: !this.state.commentBoxExpanded });
+      if (this.state.commentBox) {
+        this.setState({ commentBox: false });
+      } else {
+        this.setState({ commentBox: guid() });
+      }
     } else {
       this.props.openModal('login');
     }
@@ -40,7 +45,7 @@ export default class Comment extends React.Component {
 
   render() {
     let classString = 'comment';
-    if (this.props.comment.hasReplies || this.state.commentBoxExpanded) {
+    if (this.props.comment.hasReplies || this.state.commentBox) {
       classString += ' has-replies';
     }
 
@@ -50,7 +55,7 @@ export default class Comment extends React.Component {
       classString += ' fork';
     }
 
-    const replyState = (this.state.commentBoxExpanded) ?
+    const replyState = (this.state.commentBox) ?
       'button pull-right engaged' : 'button pull-right';
     const replyNestLevel = (this.props.comment.hasReplies) ?
       this.props.comment.nestLevel + 1 : this.props.comment.nestLevel;
@@ -72,18 +77,20 @@ export default class Comment extends React.Component {
         {(replyNestLevel <= 4) ? (<div className="comment-options">
           <div className={replyState} onClick={this.toggleReplyBox}>Reply</div>
         </div>) : null}
-        {(this.state.commentBoxExpanded && this.props.comment.hasReplies) ?
+        {(this.state.commentBox && this.props.comment.hasReplies) ?
           <AddCommentBox user={this.props.user} parentComment={this.props.comment}
             postId={this.props.comment.post_id} fork openModal={this.props.openModal}
             onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
+            key={this.state.commentBox}
           />
           : null
         }
       </div>
-      {(this.state.commentBoxExpanded && !this.props.comment.hasReplies) ?
+      {(this.state.commentBox && !this.props.comment.hasReplies) ?
         <AddCommentBox user={this.props.user} parentComment={this.props.comment}
           postId={this.props.comment.post_id} openModal={this.props.openModal}
           onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
+          key={this.state.commentBox}
         />
         : null
       }
