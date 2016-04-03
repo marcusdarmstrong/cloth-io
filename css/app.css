@@ -488,6 +488,13 @@ nav .avatar {
   margin-top: 1rem;
 }
 
+.post-attribution {
+  font-family: "Open Sans", Helvetica, sans-serif;
+}
+
+.attribution-name {
+  line-height: 2rem;
+}
 
 @media (min-width: 800px) {
   .comments {

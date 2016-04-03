@@ -25,10 +25,12 @@ const Post = (props) => {
             {title}
             <div className="post-attribution">
               <Avatar name={props.post.user.name} hex={props.post.user.color} />
-              {props.post.user.name}
-              <span className="post-time">
-                <TimeAgo timestamp={props.post.created} />
-              </span>
+              <div className="attribution-info">
+                <span className="attribution-name">{props.post.user.name}</span>
+                <span className="post-time">
+                  <TimeAgo timestamp={props.post.created} />
+                </span>
+              </div>
             </div>
             <div dangerouslySetInnerHTML={{ __html: props.post.body }}></div>
           </article>
