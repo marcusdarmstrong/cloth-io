@@ -34,6 +34,9 @@ export default (io) => onError(async (req, res) => {
           post_id: Number(postId),
           body,
         };
+        if (req.body.clientId) {
+          comment.clientId = req.body.clientId;
+        }
         io.of(`/comments-${postId}`).emit('ADD_COMMENT', comment);
         res.json({ success: true, comment });
       } else {

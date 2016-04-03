@@ -25,11 +25,18 @@ export default class Comment extends React.Component {
     }),
     openModal: React.PropTypes.func.isRequired,
     socketConnected: React.PropTypes.bool.isRequired,
+    received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   };
 
   state = {
     commentBox: false,
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.commentBox && nextProps.received.contains(this.state.commentBox)) {
+      this.setState({ commentBox: false });
+    }
+  }
 
   toggleReplyBox = () => {
     if (this.props.user) {
@@ -83,6 +90,7 @@ export default class Comment extends React.Component {
           postId={this.props.comment.post_id} openModal={this.props.openModal}
           onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
           key={this.state.commentBox} fork={this.props.comment.hasReplies}
+          clientId={this.state.commentBox}
         />
         : null
       }

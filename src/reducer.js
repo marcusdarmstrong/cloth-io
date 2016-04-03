@@ -4,16 +4,19 @@ import LoginForm from './components/login-form';
 import SignupForm from './components/signup-form';
 import commentOrdering from './comment-ordering';
 
-export default (state = map, action) => {
+export default (state = map(), action) => {
   switch (action.type) {
     case ADD_COMMENT:
-      return state.set('comments',
-        fromJS(
-          commentOrdering(
+      if (action.comment.clientId) {
+        return state.get('received').push(action.comment.clientId).set('comments',
+          fromJS(commentOrdering(
             state.get('comments').push(action.comment).toJS()
-          )
-        )
-      );
+          ))
+        );
+      }
+      return state.set('comments', fromJS(commentOrdering(
+        state.get('comments').push(action.comment).toJS()
+      )));
     case OPEN_MODAL:
       if (action.modalType === 'login') {
         return state.set('modal', map({ component: LoginForm, title: 'Log in' }));

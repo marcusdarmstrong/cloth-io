@@ -25,6 +25,7 @@ export default async (req) => {
       modal: null,
       socket: `/comments-${post.id}`,
       socketConnected: false,
+      received: list(),
     }),
     component: Post,
   };

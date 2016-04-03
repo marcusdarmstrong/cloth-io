@@ -17,6 +17,7 @@ export default class AddCommentBox extends React.Component {
     onSubmission: React.PropTypes.func,
     postId: React.PropTypes.number.isRequired,
     socketConnected: React.PropTypes.bool.isRequired,
+    clientId: React.PropTypes.string,
   };
 
   state = {
@@ -41,6 +42,7 @@ export default class AddCommentBox extends React.Component {
         comment: this.state.value,
         parentId: (this.props.parentComment) ? this.props.parentComment.id : null,
         postId: this.props.postId,
+        clientId: this.props.clientId,
       }),
     }).then(res => res.json())
       .then(data => {
