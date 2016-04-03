@@ -3,7 +3,7 @@ import connect from '../connection';
 import getUserById from '../loaders/get-user-by-id';
 import sanitizeHtml from 'sanitize-html';
 
-export default async (userId, rawLink, rawTitle, rawBody) => {
+export default async (userId, rawTitle, rawLink, rawBody) => {
   const body = sanitizeHtml(rawBody, {
     allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'br', 'div', 'h2', 'h3'],
     allowedAttributes: {
