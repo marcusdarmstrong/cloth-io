@@ -5,7 +5,7 @@ import connect from '../connection';
 export default async (userId, page = 0) => {
   const db = connect();
 
-  let posts = await getTopPosts(page, defaultPageSize + 1, db);
+  let posts = await getTopPosts(page, defaultPageSize + 1, defaultPageSize, db);
   let nextPage = undefined;
   const prevPage = (page > 0) ? page - 1 : undefined;
 

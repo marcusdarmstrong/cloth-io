@@ -8,7 +8,7 @@ const Home = (props) => (
     <div className="spacer">
       <div className="container">
         <h1 className="intro">Today's top stories...</h1>
-        <Posts posts={props.posts} page={props.page} />
+        <Posts posts={props.posts} nextPage={props.nextPage} prevPage={props.prevPage} />
       </div>
     </div>
   </div>
@@ -27,7 +27,8 @@ Home.propTypes = {
       color: React.PropTypes.string.isRequired,
     }),
   ),
-  page: React.PropTypes.number.isRequired,
+  nextPage: React.PropTypes.number,
+  prevPage: React.PropTypes.number,
 };
 
 export default Home;

@@ -3,7 +3,8 @@ import onError from '../util/on-error';
 
 export const defaultPageSize = 10;
 
-export default onError(async (page, pageSize = defaultPageSize, db = connect()) =>
+export default onError(
+  async (page, toFetch = defaultPageSize, pageSize = defaultPageSize, db = connect()) =>
   (await db.query(
     `select p.*, u.name, u.color, cc.commentCount
     from t_post p
@@ -14,7 +15,7 @@ export default onError(async (page, pageSize = defaultPageSize, db = connect()) 
       group by post_id
     ) as cc on cc.post_id = p.id
     order by created desc
-    limit ${pageSize} offset $1`,
+    limit ${toFetch} offset $1`,
     page * pageSize
   )).map((post) => {
     const newPost = post;
