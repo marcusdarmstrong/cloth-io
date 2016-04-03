@@ -15,6 +15,7 @@ export default class Posts extends React.Component {
         color: React.PropTypes.string.isRequired,
       })
     ),
+    page: React.PropTypes.number.isRequired,
   };
 
   render() {
@@ -28,6 +29,10 @@ export default class Posts extends React.Component {
           firstPost = false;
           return retval;
         })}
+        <div className="time-nav-container">
+          {this.props.page > 0 ? <div className="button">Newer Posts</div> : null}
+          <div className="button pull-right">Older Posts</div>
+        </div>
       </div>
     );
   }

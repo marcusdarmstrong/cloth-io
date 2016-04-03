@@ -10,5 +10,6 @@ export default async (userId, page = 0) => {
     posts: await getTopPosts(page, db),
     user: await getUserById(userId, db),
     route: 'Home',
+    page,
   };
 };
