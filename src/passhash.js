@@ -5,5 +5,7 @@ export function createPassHash(salt, password) {
 }
 
 export function checkPassword(salt, password, passhash) {
+  console.error(`For ${salt} and ${password} with ${passhash} should be
+    ${createPassHash(salt, password)}`);
   return salt && password && passhash && createPassHash(salt, password) === passhash;
 }
