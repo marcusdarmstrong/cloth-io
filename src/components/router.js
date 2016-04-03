@@ -1,1 +1,1 @@
-export default () => this.props.children;
+export default ({ children }) => children;
