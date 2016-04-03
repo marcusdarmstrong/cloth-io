@@ -1,14 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import Route from './route';
-import Router from './router';
 import Post from './post';
 import Home from './home';
 import Share from './share';
 
 const App = ({ store }) =>
   (<Provider store={store}>
-    <Router>
+    <div>
       <Route name="Post">
         <Post />
       </Route>
@@ -18,7 +17,7 @@ const App = ({ store }) =>
       <Route name="Home">
         <Home />
       </Route>
-    </Router>
+    </div>
   </Provider>);
 
 App.propTypes = {
