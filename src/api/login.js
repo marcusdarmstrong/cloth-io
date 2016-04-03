@@ -9,7 +9,7 @@ export default onError(async function login(req, res) {
   const password = req.body.password || '';
 
   const user = await getUserByEmail(email);
-  if (checkPassword(user.name, user.passhash, password)) {
+  if (checkPassword(user.name, password, user.passhash)) {
     setAuthTokenCookieForUserId(res, user.id);
     res.json({
       success: true,
