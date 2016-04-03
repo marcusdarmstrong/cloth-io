@@ -21,8 +21,10 @@ export default class Posts extends React.Component {
 
   render() {
     let firstPost = true;
-    const nextPage = this.props.nextPage;
-    const prevPage = this.props.prevPage;
+
+    const nextPage = (this.props.nextPage === 0) ? '/' : `?page=${this.props.nextPage}`;
+    const prevPage = `?page=${this.props.prevPage}`;
+
     return (
       <div className="headlines">
         {this.props.posts.map(post => {
@@ -34,9 +36,9 @@ export default class Posts extends React.Component {
         })}
         <div className="time-nav-container">
           {prevPage ?
-            <a className="button pull-right" href={`?page=${prevPage}`}>Newer Posts</a> : null}
+            <a className="button pull-right" href={prevPage}`}>Newer Posts</a> : null}
           {nextPage ?
-            <a className="button" href={`?page=${nextPage}`}>Older Posts</a> : null}
+            <a className="button" href={nextPage}>Older Posts</a> : null}
         </div>
       </div>
     );
