@@ -7,12 +7,10 @@ import connect from '../connection';
 export default async (req) => {
   const db = connect();
 
-  return {
-    state: map({
-      title: 'New York Jets / cloth.io',
-      posts: await getTopPosts(db),
-      user: await getUserById(readAuthTokenFromCookies(req), db),
-      route: 'Home',
-    }),
-  };
+  return map({
+    title: 'New York Jets / cloth.io',
+    posts: await getTopPosts(db),
+    user: await getUserById(readAuthTokenFromCookies(req), db),
+    route: 'Home',
+  });
 };

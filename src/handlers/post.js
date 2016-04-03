@@ -15,17 +15,15 @@ export default async (req) => {
   const comments = await getCommentsForPostAndUser(post.id, userId, db);
   const user = await getUserById(userId, db);
 
-  return {
-    state: map({
-      title: post.title,
-      post,
-      comments: list(commentOrdering(comments)),
-      user,
-      modal: null,
-      socket: `/comments-${post.id}`,
-      socketConnected: false,
-      received: list(),
-      route: 'Post',
-    }),
-  };
+  return map({
+    title: post.title,
+    post,
+    comments: list(commentOrdering(comments)),
+    user,
+    modal: null,
+    socket: `/comments-${post.id}`,
+    socketConnected: false,
+    received: list(),
+    route: 'Post',
+  });
 };
