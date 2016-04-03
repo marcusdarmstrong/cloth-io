@@ -5,11 +5,12 @@ import layout from './layout';
 import App from './components/app';
 import reducer from './reducer';
 import onError from './util/on-error';
+import { Map as map } from 'immutable';
 
 const namespaces = {};
 
 export default (io) => (handler) => onError(async (req, res) => {
-  const state = await handler(req);
+  const state = map(await handler(req));
 
   if (state.has('socket')) {
     const name = state.get('socket');

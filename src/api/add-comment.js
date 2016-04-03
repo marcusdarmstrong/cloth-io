@@ -1,19 +1,14 @@
-import { readAuthTokenFromCookies } from '../auth-token';
 import connect from '../connection';
 import getUserById from '../loaders/get-user-by-id';
-import onError from '../util/on-error';
 import sanitizeHtml from 'sanitize-html';
 
-export default (io) => onError(async (req, res) => {
-  const userId = readAuthTokenFromCookies(req);
-  const body = sanitizeHtml(req.body.comment, {
+export default (io) => async (userId, postId, parentId, clientId, text) => {
+  const body = sanitizeHtml(text, {
     allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'br', 'div'],
     allowedAttributes: {
       a: ['href'],
     },
   });
-  const parentId = req.body.parentId;
-  const postId = req.body.postId;
 
   if (userId && body && body !== '') {
     const db = connect();
@@ -34,18 +29,13 @@ export default (io) => onError(async (req, res) => {
           post_id: Number(postId),
           body,
         };
-        if (req.body.clientId) {
-          comment.clientId = req.body.clientId;
+        if (clientId) {
+          comment.clientId = clientId;
         }
         io.of(`/comments-${postId}`).emit('ADD_COMMENT', comment);
-        res.json({ success: true, comment });
-      } else {
-        res.json({ success: false });
+        return { success: true };
       }
-    } else {
-      res.json({ success: false });
     }
-  } else {
-    res.json({ success: false });
   }
-}, (req, res) => res.status(500).json({ success: false }));
+  return { success: false };
+};
