@@ -2,7 +2,7 @@ import binder from './binder';
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Route = ({ route, name }) => ((route === name) ? binder(this.props.children) : null);
+const Route = ({ route, name, children }) => ((route === name) ? binder(children) : null);
 
 Route.propTypes = {
   route: React.PropTypes.string.isRequired,
