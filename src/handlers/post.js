@@ -1,6 +1,5 @@
 import { List as list, Map as map } from 'immutable';
 import commentOrdering from '../comment-ordering';
-import Post from '../components/post';
 import connect from '../connection';
 import getPostByUrlString from '../loaders/get-post-by-urlstring';
 import getUserById from '../loaders/get-user-by-id';
@@ -26,7 +25,7 @@ export default async (req) => {
       socket: `/comments-${post.id}`,
       socketConnected: false,
       received: list(),
+      route: 'Post',
     }),
-    component: Post,
   };
 };

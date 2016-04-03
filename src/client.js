@@ -2,13 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import reducer from './reducer';
-import { Provider } from 'react-redux';
 import { fromJS } from 'immutable';
 import io from 'socket.io-client';
-import router from './client-router';
-import routes from './routes';
 import * as actions from './actions';
-import binder from './components/binder';
+import App from './components/app';
 
 const state = fromJS(window.__INITIAL_STATE__);
 const store = createStore(reducer, state);
@@ -28,8 +25,6 @@ if (socketName) {
 }
 
 ReactDOM.render(
-  <Provider store={store}>
-    {React.createElement(binder(router(routes, window.location.pathname)))}
-  </Provider>,
+  <App store={store} />,
   document.getElementById('react-container')
 );

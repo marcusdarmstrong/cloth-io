@@ -7,7 +7,6 @@ import SocketIO from 'socket.io';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -15,7 +14,7 @@ import favicon from 'serve-favicon';
 
 import layout from './layout';
 import routes from './route-handlers';
-import binder from './components/binder';
+import App from './components/app';
 import reducer from './reducer';
 
 import addPost from './api/add-post';
@@ -54,7 +53,7 @@ app.get('/api/isNameAvailable', isNameAvailable);
 Object.keys(routes).forEach(route => {
   app.get(route, async (req, res) => {
     try {
-      const { state, component } = await routes[route](req);
+      const state = await routes[route](req);
       if (state.has('socket')) {
         namespaces.push(io.of(state.get('socket')));
       }
@@ -63,11 +62,7 @@ Object.keys(routes).forEach(route => {
       res.send(
         layout(
           state.get('title'),
-          ReactDOMServer.renderToString(
-            <Provider store={store}>
-              {React.createElement(binder(component))}
-            </Provider>
-          ),
+          ReactDOMServer.renderToString(<App store={store} />),
           state
         )
       );
