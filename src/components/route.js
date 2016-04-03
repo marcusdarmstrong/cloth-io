@@ -6,7 +6,7 @@ class Route extends React.Component {
   static propTypes = {
     route: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
-    children: React.PropTypes.node.isRequired,
+    children: React.PropTypes.element.isRequired,
   };
 
   render() {
