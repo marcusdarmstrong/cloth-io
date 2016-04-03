@@ -4,14 +4,15 @@ import connect from '../connection';
 
 export default async (userId, page = 0) => {
   const db = connect();
+  const numPage = Number(page);
 
-  let posts = await getTopPosts(page, defaultPageSize + 1, defaultPageSize, db);
+  let posts = await getTopPosts(numPage, defaultPageSize + 1, defaultPageSize, db);
   let nextPage = undefined;
-  const prevPage = (page > 0) ? page - 1 : undefined;
+  const prevPage = (numPage > 0) ? numPage - 1 : undefined;
 
   if (posts.length > defaultPageSize) {
     posts = posts.slice(0, defaultPageSize);
-    nextPage = page + 1;
+    nextPage = numPage + 1;
   }
 
   return {
