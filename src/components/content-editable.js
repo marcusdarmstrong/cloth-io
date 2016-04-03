@@ -10,7 +10,9 @@ export default class ContentEditable extends React.Component {
 
   componentDidMount() {
     if (this.props.autoFocus) {
-      ReactDOM.findDOMNode(this).click();
+      const node = ReactDOM.findDOMNode(this);
+      node.focus();
+      node.scrollIntoView();
     }
   }
 
