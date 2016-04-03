@@ -490,7 +490,7 @@ nav .avatar {
 
 .post-attribution {
   font-family: "Open Sans", Helvetica, sans-serif;
-  margin-bottom: 1rem;
+  margin: -.5rem 0 1rem;
 }
 
 .post-attribution .comment-timestamp {
