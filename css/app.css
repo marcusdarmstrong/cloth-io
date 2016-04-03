@@ -534,7 +534,8 @@ nav .avatar {
 }
 
 @media (max-width: 800px) {
-  .article {
+  .article-body,
+  .article-title {
     font-size: .75rem;
   }
 }

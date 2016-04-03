@@ -22,7 +22,7 @@ const Post = (props) => {
       <div className="spacer">
         <div className="container">
           <article className="article">
-            {title}
+            <div className="article-title">{title}</div>
             <div className="post-attribution">
               <Avatar name={props.post.user.name} hex={props.post.user.color} />
               <div className="attribution-info">
@@ -32,7 +32,7 @@ const Post = (props) => {
                 </span>
               </div>
             </div>
-            <div dangerouslySetInnerHTML={{ __html: props.post.body }}></div>
+            <div className="article-body" dangerouslySetInnerHTML={{ __html: props.post.body }}></div>
           </article>
           <Comments {...props} />
         </div>
