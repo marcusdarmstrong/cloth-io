@@ -36,7 +36,7 @@ export default class Posts extends React.Component {
         })}
         <div className="time-nav-container">
           {prevPage ?
-            <a className="button pull-right" href={prevPage}`}>Newer Posts</a> : null}
+            <a className="button pull-right" href={prevPage}>Newer Posts</a> : null}
           {nextPage ?
             <a className="button" href={nextPage}>Older Posts</a> : null}
         </div>
