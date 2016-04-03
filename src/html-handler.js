@@ -1,0 +1,27 @@
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { createStore } from 'redux';
+import layout from './layout';
+import App from './components/app';
+import reducer from './reducer';
+import onError from './util/on-error';
+
+const namespaces = {};
+
+export default (io) => (handler) => onError(async (req, res) => {
+  const state = await handler(req);
+
+  if (state.has('socket')) {
+    const name = state.get('socket');
+    namespaces[name] = io.of(name);
+  }
+
+  const store = createStore(reducer, state);
+  res.send(
+    layout(
+      state.get('title'),
+      ReactDOMServer.renderToString(<App store={store} />),
+      state
+    )
+  );
+}, (req, res) => res.status(500).send('Something broke!'));

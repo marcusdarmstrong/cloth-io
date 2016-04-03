@@ -4,18 +4,15 @@ import 'babel-polyfill';
 import express from 'express';
 import path from 'path';
 import SocketIO from 'socket.io';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import { createStore } from 'redux';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import favicon from 'serve-favicon';
 
-import layout from './layout';
-import routes from './route-handlers';
-import App from './components/app';
-import reducer from './reducer';
+import htmlHandler from './html-handler';
+import postHandler from './handlers/post';
+import homeHandler from './handlers/home';
+import shareHandler from './handlers/share';
 
 import addPost from './api/add-post';
 import addComment from './api/add-comment';
@@ -25,11 +22,11 @@ import signOut from './api/sign-out';
 import isEmailAvailable from './api/is-email-available';
 import isNameAvailable from './api/is-name-available';
 
-const namespaces = [];
 const app = express();
 app.set('port', (process.env.PORT || 5000));
 const server = app.listen(app.get('port'));
 const io = SocketIO.listen(server);
+const handleWith = htmlHandler(io);
 
 app.use(compression());
 
@@ -50,25 +47,6 @@ app.get('/api/signOut', signOut);
 app.get('/api/isEmailAvailable', isEmailAvailable);
 app.get('/api/isNameAvailable', isNameAvailable);
 
-Object.keys(routes).forEach(route => {
-  app.get(route, async (req, res) => {
-    try {
-      const state = await routes[route](req);
-      if (state.has('socket')) {
-        namespaces.push(io.of(state.get('socket')));
-      }
-
-      const store = createStore(reducer, state);
-      res.send(
-        layout(
-          state.get('title'),
-          ReactDOMServer.renderToString(<App store={store} />),
-          state
-        )
-      );
-    } catch (e) {
-      console.error(e.stack);
-      res.status(500).send('Something broke!');
-    }
-  });
-});
+app.get('/', handleWith(homeHandler));
+app.get('/p/:urlString', handleWith(postHandler));
+app.get('/share', handleWith(shareHandler));
