@@ -22,11 +22,12 @@ import signOut from './api/sign-out';
 import isEmailAvailable from './api/is-email-available';
 import isNameAvailable from './api/is-name-available';
 
+import { readAuthTokenFromCookies } from '../auth-token';
+
 const app = express();
 app.set('port', (process.env.PORT || 5000));
 const server = app.listen(app.get('port'));
 const io = SocketIO.listen(server);
-const handleWith = htmlHandler(io);
 
 app.use(compression());
 
@@ -47,6 +48,8 @@ app.get('/api/signOut', signOut);
 app.get('/api/isEmailAvailable', isEmailAvailable);
 app.get('/api/isNameAvailable', isNameAvailable);
 
-app.get('/', handleWith(homeHandler));
-app.get('/p/:urlString', handleWith(postHandler));
-app.get('/share', handleWith(shareHandler));
+const handle = htmlHandler(io);
+const getUserId = req => readAuthTokenFromCookies(req);
+app.get('/', handle(req => homeHandler(getUserId(req), req.query.page)));
+app.get('/p/:urlString', handle(req => postHandler(getUserId(req), req.params.urlString)));
+app.get('/share', handle(req => shareHandler(getUserId(req))));

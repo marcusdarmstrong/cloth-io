@@ -1,7 +1,9 @@
 import connect from '../connection';
 import onError from '../util/on-error';
 
-export default onError(async function getTopPosts(db = connect()) {
+const pageSize = 10;
+
+export default onError(async function getTopPosts(page, db = connect()) {
   return (await db.query(
     `select
       p.*,
@@ -21,7 +23,8 @@ export default onError(async function getTopPosts(db = connect()) {
     ) as cc
       on cc.post_id = p.id
     order by created desc
-    limit 10`
+    limit ${pageSize} offset $1`,
+    page * pageSize
   )).map((post) => {
     const newPost = post;
     newPost.id = Number(newPost.id);
