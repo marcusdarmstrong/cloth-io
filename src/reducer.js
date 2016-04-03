@@ -8,8 +8,8 @@ export default (state = map(), action) => {
   switch (action.type) {
     case ADD_COMMENT:
       if (action.comment.clientId) {
-        return state.get('received').push(action.comment.clientId).set('comments',
-          fromJS(commentOrdering(
+        return state.set('received', state.get('received').push(action.comment.clientId))
+          .set('comments', fromJS(commentOrdering(
             state.get('comments').push(action.comment).toJS()
           ))
         );
