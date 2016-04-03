@@ -164,6 +164,7 @@ nav {
   user-select: none;
   cursor: default;
   text-shadow: 1px 1px 1px #666;
+  font-weight: normal;
 }
 
 .container {
