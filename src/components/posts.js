@@ -22,11 +22,11 @@ export default class Posts extends React.Component {
   render() {
     let firstPost = true;
 
-    let nextPage = undefined;
-    if (this.props.nextPage) {
-      nextPage = (this.props.nextPage === 0) ? '/' : `?page=${this.props.nextPage}`;
+    let prevPage = undefined;
+    if (this.props.prevPage) {
+      prevPage = (this.props.prevPage === 0) ? '/' : `?page=${this.props.prevPage}`;
     }
-    const prevPage = (this.props.prevPage) ? `?page=${this.props.prevPage}` : undefined;
+    const nextPage = (this.props.nextPage) ? `?page=${this.props.nextPage}` : undefined;
 
     return (
       <div className="headlines">
