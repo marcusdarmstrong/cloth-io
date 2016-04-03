@@ -15,12 +15,14 @@ export default class Posts extends React.Component {
         color: React.PropTypes.string.isRequired,
       })
     ),
-    page: React.PropTypes.number.isRequired,
+    nextPage: React.PropTypes.number,
+    prevPage: React.PropTypes.number,
   };
 
   render() {
     let firstPost = true;
-    const page = this.props.page;
+    const nextPage = this.props.nextPage;
+    const prevPage = this.props.prevPage;
     return (
       <div className="headlines">
         {this.props.posts.map(post => {
@@ -31,8 +33,10 @@ export default class Posts extends React.Component {
           return retval;
         })}
         <div className="time-nav-container">
-          <a className="button pull-right" href={`?page=${page + 1}`}>Older Posts</a>
-          {page > 0 ? <a className="button" href={`?page=${page - 1}`}>Newer Posts</a> : null}
+          {prevPage ?
+            <a className="button pull-right" href={`?page=${prevPage}`}>Newer Posts</a> : null}
+          {nextPage ?
+            <a className="button" href={`?page=${nextPage}`}>Older Posts</a> : null}
         </div>
       </div>
     );
