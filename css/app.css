@@ -268,6 +268,7 @@ nav {
 
 .add-comment-box {
   margin-left: .5rem;
+  padding-top: 1rem;
 }
 
 .add-comment-box.fork {
