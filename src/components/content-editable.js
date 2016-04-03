@@ -9,11 +9,10 @@ export default class ContentEditable extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.autoFocus) {
-      const node = ReactDOM.findDOMNode(this);
-      node.focus();
-      node.blur();
-      node.focus();
+    if (this.props.autoFocus && typeof window.orientation !== 'undefined') {
+      // We use orientation as a proxy for devices with an on-screen keyboard.
+      // They don't respond well to auto-focusing, so disabling it for now.
+      ReactDOM.findDOMNode(this).focus();
     }
   }
 
