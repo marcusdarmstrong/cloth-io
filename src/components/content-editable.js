@@ -12,7 +12,8 @@ export default class ContentEditable extends React.Component {
     if (this.props.autoFocus) {
       const node = ReactDOM.findDOMNode(this);
       node.focus();
-      node.scrollIntoView();
+      node.blur();
+      node.focus();
     }
   }
 
