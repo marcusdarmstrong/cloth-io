@@ -45,9 +45,10 @@ export default class AddCommentBox extends React.Component {
     }).then(res => res.json())
       .then(data => {
         if (data.success) {
-          this.setState({ value: '', sending: false });
           if (this.props.onSubmission) {
-            this.props.onSubmission();
+            this.setState({ value: '', sending: false }, this.props.onSubmission);
+          } else {
+            this.setState({ value: '', sending: false });
           }
         }
       });
