@@ -23,7 +23,7 @@ export default class Posts extends React.Component {
     let firstPost = true;
 
     let prevPage = undefined;
-    if (this.props.prevPage) {
+    if (typeof this.props.prevPage !== 'undefined') {
       prevPage = (this.props.prevPage === 0) ? '/' : `?page=${this.props.prevPage}`;
     }
     const nextPage = (this.props.nextPage) ? `?page=${this.props.nextPage}` : undefined;
