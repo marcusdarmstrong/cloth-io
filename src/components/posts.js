@@ -20,6 +20,7 @@ export default class Posts extends React.Component {
 
   render() {
     let firstPost = true;
+    const page = this.props.page;
     return (
       <div className="headlines">
         {this.props.posts.map(post => {
@@ -30,8 +31,8 @@ export default class Posts extends React.Component {
           return retval;
         })}
         <div className="time-nav-container">
-          {this.props.page > 0 ? <div className="button">Newer Posts</div> : null}
-          <div className="button pull-right">Older Posts</div>
+          <a className="button pull-right" href={`?page=${page + 1}`}>Older Posts</a>
+          {page > 0 ? <a className="button" href={`?page=${page - 1}`}>Newer Posts</a> : null}
         </div>
       </div>
     );

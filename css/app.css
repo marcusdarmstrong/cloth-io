@@ -484,6 +484,11 @@ nav .avatar {
   border-bottom: 1px solid #ddd;
 }
 
+.time-nav-container {
+  margin-top: 1rem;
+}
+
+
 @media (min-width: 800px) {
   .comments {
     margin-left: -1.5rem;
