@@ -167,6 +167,23 @@ nav {
   font-weight: normal;
 }
 
+.comments .avatar {
+  cursor: pointer;
+}
+
+.comments .avatar:hover .avatar-letter {
+  display: none;
+}
+
+.comments .avatar:hover {
+  background-color: #666 !important;
+}
+
+.comments .avatar:hover:after {
+  content: '—';
+  font-weight: bold;
+}
+
 .container {
   max-width: 700px;
   margin: 0 auto;
