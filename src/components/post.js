@@ -32,7 +32,8 @@ const Post = (props) => {
                 </span>
               </div>
             </div>
-            <div className="article-body" dangerouslySetInnerHTML={{ __html: props.post.body }}></div>
+            <div className="article-body" dangerouslySetInnerHTML={{ __html: props.post.body }}>
+            </div>
           </article>
           <Comments {...props} />
         </div>
