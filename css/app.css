@@ -182,6 +182,8 @@ nav {
 .comments .avatar:hover:after {
   content: '—';
   font-weight: bold;
+  vertical-align: top;
+  line-height: 1.75rem;
 }
 
 .container {
