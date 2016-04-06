@@ -2,7 +2,8 @@ import React from 'react';
 import AddCommentBox from './add-comment-box';
 import Comment from './comment';
 
-const Comments = ({ post, user, comments, openModal, socketConnected, received }) => (
+const Comments = ({ post, user, comments, openModal,
+  socketConnected, received, minimizeComment }) => (
   <section className="comments">
     <div className="comment-summary">
       <h2>{comments.length} {(comments.length === 1) ? 'Comment' : 'Comments'}</h2>
@@ -19,7 +20,7 @@ const Comments = ({ post, user, comments, openModal, socketConnected, received }
       }
       return (<Comment key={comment.id} comment={comment} user={user} openModal={openModal}
         socketConnected={socketConnected} received={received}
-        minimizeComment={this.props.minimizeComment}
+        minimizeComment={minimizeComment}
       />);
     })}
   </section>
