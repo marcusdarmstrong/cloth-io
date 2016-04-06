@@ -48,6 +48,8 @@ function markAndFlatten(buckets, parentId, fork, nestLevel, hidden) { // I think
       );
       root.descendents = descendents.length;
       result = result.concat(descendents);
+    } else {
+      root.descendents = 0;
     }
   }
   return result;

@@ -53,6 +53,7 @@ Comments.propTypes = {
   ).isRequired,
   openModal: React.PropTypes.func.isRequired,
   socketConnected: React.PropTypes.bool.isRequired,
+  minimizeComment: React.PropTypes.func.isRequired,
   received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 };
 
