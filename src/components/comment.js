@@ -41,6 +41,7 @@ export default class Comment extends React.Component {
   }
 
   minimize = () => {
+    this.props.minimizeComment(this.props.comment.id);
     fetch('/api/minimizeComment', {
       method: 'post',
       headers: {
@@ -51,12 +52,7 @@ export default class Comment extends React.Component {
       body: JSON.stringify({
         commentId: this.props.comment.id,
       }),
-    }).then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          this.props.minimizeComment(this.props.comment.id);
-        }
-      });
+    });
   };
 
   toggleReplyBox = () => {

@@ -18,6 +18,7 @@ export default class HiddenComment extends React.Component {
   };
 
   maximize = () => {
+    this.props.maximizeComment(this.props.comment.id);
     fetch('/api/maximizeComment', {
       method: 'post',
       headers: {
@@ -28,12 +29,7 @@ export default class HiddenComment extends React.Component {
       body: JSON.stringify({
         commentId: this.props.comment.id,
       }),
-    }).then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          this.props.maximizeComment(this.props.comment.id);
-        }
-      });
+    });
   };
 
   render() {
@@ -45,7 +41,7 @@ export default class HiddenComment extends React.Component {
     }
 
     let markup = (<div className={classString}>
-      <div className="hidden-comment" onClick={this.maximize}>
+      <div className="hidden-comment author" onClick={this.maximize}>
         <Avatar name={this.props.comment.user.name} hex={this.props.comment.user.color} />
       </div>
       <div className="comment-container">

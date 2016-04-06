@@ -48,5 +48,6 @@ create table t_comment_minimization (
 )
 
 create unique index on t_comment_minimization (id);
+create unique index on t_comment_minimization (user_id, comment_id);
 create index on t_comment_minimization (user_id);
 create index on t_comment_minimization (comment_id);
