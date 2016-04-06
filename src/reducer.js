@@ -38,7 +38,7 @@ export default (state = map(), action) => {
           commentOrdering(
             comments.update(
               comments.findIndex(
-                comment => comment.id === action.commentId
+                comment => comment.get('id') === action.commentId
               ),
               comment => comment.set('minimized', true)
             ).toJS()
@@ -51,7 +51,7 @@ export default (state = map(), action) => {
           commentOrdering(
             comments.update(
               comments.findIndex(
-                comment => comment.id === action.commentId
+                comment => comment.get('id') === action.commentId
               ),
               comment => comment.set('minimized', false)
             ).toJS()
