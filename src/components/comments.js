@@ -16,7 +16,7 @@ const Comments = ({ post, user, comments, openModal,
       if (comment.hidden) {
         return null;
       } else if (comment.minimized) {
-        return `${comment.descendents} hidden comments`;
+        return `${comment.descendents + 1} hidden comments`;
       }
       return (<Comment key={comment.id} comment={comment} user={user} openModal={openModal}
         socketConnected={socketConnected} received={received}
