@@ -24,6 +24,7 @@ import signOut from './api/sign-out';
 import isEmailAvailable from './api/is-email-available';
 import isNameAvailable from './api/is-name-available';
 import minimizeComment from './api/minimize-comment';
+import maximizeComment from './api/maximize-comment';
 
 import { readAuthTokenFromCookies } from './auth-token';
 
@@ -55,6 +56,9 @@ app.post('/api/addComment', jsonHandler(
 ));
 app.post('/api/minimizeComment', jsonHandler(
   req => minimizeComment(getUserId(req), Number(req.body.commentId)))
+);
+app.post('/api/maximizeComment', jsonHandler(
+  req => maximizeComment(getUserId(req), Number(req.body.commentId)))
 );
 
 app.post('/api/addPost', jsonHandler(

@@ -9,7 +9,9 @@ export default async function minimizeComment(userId, commentId) {
       const insertResult = await db.one(
         `insert into t_comment_minimization (user_id, comment_id)
           values ($(userId), $(commentId))
-          returning id, created`,
+          returning id, created
+        on conflict (user_id, comment_id) do
+          update status = 0`,
         { userId, commentId }
       );
       if (insertResult) {

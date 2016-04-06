@@ -1,6 +1,7 @@
 import {
   ADD_COMMENT, OPEN_MODAL, CLOSE_MODAL,
   LOGIN_USER, SOCKET_CONNECT, MINIMIZE_COMMENT,
+  MAXIMIZE_COMMENT,
 } from './actions';
 import { Map as map, fromJS } from 'immutable';
 import LoginForm from './components/login-form';
@@ -40,6 +41,19 @@ export default (state = map(), action) => {
                 comment => comment.id === action.commentId
               ),
               comment => comment.set('minimized', true)
+            ).toJS()
+          )
+        )
+      );
+    case MAXIMIZE_COMMENT:
+      return state.update('comments',
+        comments => fromJS(
+          commentOrdering(
+            comments.update(
+              comments.findIndex(
+                comment => comment.id === action.commentId
+              ),
+              comment => comment.set('minimized', false)
             ).toJS()
           )
         )

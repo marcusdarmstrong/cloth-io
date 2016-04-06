@@ -4,6 +4,7 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const LOGIN_USER = 'LOGIN_USER';
 export const SOCKET_CONNECT = 'SOCKET_CONNECT';
 export const MINIMIZE_COMMENT = 'MINIMIZE_COMMENT';
+export const MAXIMIZE_COMMENT = 'MAXIMIZE_COMMENT';
 
 export function addComment(comment) {
   return {
@@ -35,6 +36,13 @@ export function loginUser(user) {
 export function minimizeComment(commentId) {
   return {
     type: MINIMIZE_COMMENT,
+    commentId,
+  };
+}
+
+export function maximizeComment(commentId) {
+  return {
+    type: MAXIMIZE_COMMENT,
     commentId,
   };
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import AddCommentBox from './add-comment-box';
 import Comment from './comment';
+import HiddenComment from './hidden-comment';
 
 const Comments = ({ post, user, comments, openModal,
-  socketConnected, received, minimizeComment }) => (
+  socketConnected, received, minimizeComment, maximizeComment }) => (
   <section className="comments">
     <div className="comment-summary">
       <h2>{comments.length} {(comments.length === 1) ? 'Comment' : 'Comments'}</h2>
@@ -16,7 +17,7 @@ const Comments = ({ post, user, comments, openModal,
       if (comment.hidden) {
         return null;
       } else if (comment.minimized) {
-        return `${comment.descendents + 1} hidden comments`;
+        return (<HiddenComment comment={comment} maximizeComment={maximizeComment} />);
       }
       return (<Comment key={comment.id} comment={comment} user={user} openModal={openModal}
         socketConnected={socketConnected} received={received}
@@ -56,6 +57,7 @@ Comments.propTypes = {
   openModal: React.PropTypes.func.isRequired,
   socketConnected: React.PropTypes.bool.isRequired,
   minimizeComment: React.PropTypes.func.isRequired,
+  maximizeComment: React.PropTypes.func.isRequired,
   received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 };
 

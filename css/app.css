@@ -186,10 +186,14 @@ nav {
   line-height: 1.75rem;
 }
 
-.comments .avatar.hidden {
+.comments .hidden-comment .avatar .avatar-letter {
+  display: none;
+}
+
+.comments .hidden-comment .avatar {
   background-color: #666 !important;
 }
-.comments .avatar.hidden:after {
+.comments .hidden-comment .avatar:after {
   content: '+';
   font-weight: 100;
   vertical-align: top;
