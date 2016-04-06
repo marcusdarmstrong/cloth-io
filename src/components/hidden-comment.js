@@ -33,7 +33,7 @@ export default class HiddenComment extends React.Component {
   };
 
   render() {
-    let classString = 'comment';
+    let classString = 'comment hidden-comment';
     if (this.props.comment.child) {
       classString += ' child';
     } else if (this.props.comment.fork) {
@@ -41,15 +41,12 @@ export default class HiddenComment extends React.Component {
     }
 
     let markup = (<div className={classString}>
-      <div className="hidden-comment author" onClick={this.maximize}>
+      <div className="author" onClick={this.maximize}>
         <Avatar name={this.props.comment.user.name} hex={this.props.comment.user.color} />
       </div>
       <div className="comment-container">
-        <div className="comment-header">
-          <div className="hidden-desc">
-            {this.props.comment.descendents + 1} hidden comments
-          </div>
-        </div>
+        {this.props.comment.descendents + 1} hidden {this.props.comment.descendents === 0 ?
+          'comment' : 'comments'}
       </div>
     </div>);
 

@@ -201,6 +201,12 @@ nav {
   font-size: 2rem;
 }
 
+.comments .hidden-comment .comment-container {
+  line-height: 2rem;
+  font-weight: 100;
+  cursor: default;
+}
+
 .container {
   max-width: 700px;
   margin: 0 auto;
