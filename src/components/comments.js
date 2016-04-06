@@ -17,7 +17,9 @@ const Comments = ({ post, user, comments, openModal,
       if (comment.hidden) {
         return null;
       } else if (comment.minimized) {
-        return (<HiddenComment key={comment.id} comment={comment} maximizeComment={maximizeComment} />);
+        return (<HiddenComment key={comment.id} comment={comment}
+          maximizeComment={maximizeComment}
+        />);
       }
       return (<Comment key={comment.id} comment={comment} user={user} openModal={openModal}
         socketConnected={socketConnected} received={received}
