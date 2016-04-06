@@ -10,7 +10,7 @@ export default async function maximizeComment(userId, commentId) {
         `insert into t_comment_minimization (user_id, comment_id)
           values ($(userId), $(commentId))
         on conflict (user_id, comment_id) do
-          update status = 1`
+          update set status = 1`
         ,
         { userId, commentId }
       );
