@@ -7,6 +7,7 @@ import guid from '../util/guid';
 export default class Comment extends React.Component {
   static propTypes = {
     comment: React.PropTypes.shape({
+      id: React.PropTypes.number.isRequired,
       user: React.PropTypes.shape({
         name: React.PropTypes.string.isRequired,
         color: React.PropTypes.string.isRequired,
@@ -25,6 +26,7 @@ export default class Comment extends React.Component {
     }),
     openModal: React.PropTypes.func.isRequired,
     socketConnected: React.PropTypes.bool.isRequired,
+    minimizeComment: React.PropTypes.func.isRequired,
     received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   };
 
@@ -37,6 +39,25 @@ export default class Comment extends React.Component {
       this.setState({ commentBox: false });
     }
   }
+
+  minimize = () => {
+    fetch('/api/minimizeComment', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify({
+        commentId: this.props.comment.id,
+      }),
+    }).then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          this.props.minimizeComment(this.props.comment.id);
+        }
+      });
+  };
 
   toggleReplyBox = () => {
     if (this.props.user) {
@@ -68,7 +89,7 @@ export default class Comment extends React.Component {
       this.props.comment.nestLevel + 1 : this.props.comment.nestLevel;
 
     let markup = (<div className={classString}>
-      <div className="author">
+      <div className="author" onClick={this.minimize}>
         <Avatar name={this.props.comment.user.name} hex={this.props.comment.user.color} />
       </div>
       <div className="comment-container">

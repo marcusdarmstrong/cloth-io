@@ -1,4 +1,7 @@
-import { ADD_COMMENT, OPEN_MODAL, CLOSE_MODAL, LOGIN_USER, SOCKET_CONNECT } from './actions';
+import {
+  ADD_COMMENT, OPEN_MODAL, CLOSE_MODAL,
+  LOGIN_USER, SOCKET_CONNECT, MINIMIZE_COMMENT,
+} from './actions';
 import { Map as map, fromJS } from 'immutable';
 import LoginForm from './components/login-form';
 import SignupForm from './components/signup-form';
@@ -8,14 +11,14 @@ export default (state = map(), action) => {
   switch (action.type) {
     case ADD_COMMENT:
       if (action.comment.clientId) {
-        return state.set('received', state.get('received').push(action.comment.clientId))
-          .set('comments', fromJS(commentOrdering(
-            state.get('comments').push(action.comment).toJS()
+        return state.update('received', received => received.push(action.comment.clientId))
+          .update('comments', comments => fromJS(commentOrdering(
+            comments.push(action.comment).toJS()
           ))
         );
       }
-      return state.set('comments', fromJS(commentOrdering(
-        state.get('comments').push(action.comment).toJS()
+      return state.update('comments', comments => fromJS(commentOrdering(
+        comments.push(action.comment).toJS()
       )));
     case OPEN_MODAL:
       if (action.modalType === 'login') {
@@ -28,6 +31,19 @@ export default (state = map(), action) => {
       return state.set('user', action.user);
     case SOCKET_CONNECT:
       return state.set('socketConnected', true);
+    case MINIMIZE_COMMENT:
+      return state.update('comments',
+        comments => fromJS(
+          commentOrdering(
+            comments.update(
+              comments.findIndex(
+                comment => comment.id === action.commentId
+              ),
+              comment => comment.set('minimized', true)
+            ).toJS()
+          )
+        )
+      );
     default:
       return state;
   }

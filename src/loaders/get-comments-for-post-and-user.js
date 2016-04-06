@@ -23,6 +23,7 @@ export default onError(async function getCommentsForPostAndUser(postId, userId, 
     newComment.id = Number(newComment.id);
     newComment.post_id = Number(newComment.post_id);
     newComment.created = Number(newComment.created);
+    newComment.minimized = !!newComment.minimized;
     newComment.user = {
       name: comment.name,
       color: comment.color,

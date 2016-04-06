@@ -3,6 +3,7 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const LOGIN_USER = 'LOGIN_USER';
 export const SOCKET_CONNECT = 'SOCKET_CONNECT';
+export const MINIMIZE_COMMENT = 'MINIMIZE_COMMENT';
 
 export function addComment(comment) {
   return {
@@ -28,5 +29,12 @@ export function loginUser(user) {
   return {
     type: LOGIN_USER,
     user,
+  };
+}
+
+export function minimizeComment(commentId) {
+  return {
+    type: MINIMIZE_COMMENT,
+    commentId,
   };
 }

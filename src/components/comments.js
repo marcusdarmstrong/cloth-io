@@ -11,11 +11,16 @@ const Comments = ({ post, user, comments, openModal, socketConnected, received }
       />
     </div>
     <div className="separator">&middot;&nbsp;&middot;&nbsp;&middot;</div>
-    {comments.map((comment) =>
-      <Comment key={comment.id} comment={comment} user={user} openModal={openModal}
+    {comments.map((comment) => {
+      if (comment.hidden) {
+        return null;
+      } else if (comment.minimized) {
+        return `${comment.descendents} hidden comments`;
+      }
+      return (<Comment key={comment.id} comment={comment} user={user} openModal={openModal}
         socketConnected={socketConnected} received={received}
-      />
-    )}
+      />);
+    })}
   </section>
 );
 
@@ -29,6 +34,7 @@ Comments.propTypes = {
   }),
   comments: React.PropTypes.arrayOf(
     React.PropTypes.shape({
+      id: React.PropTypes.number.isRequired,
       user: React.PropTypes.shape({
         name: React.PropTypes.string.isRequired,
         color: React.PropTypes.string.isRequired,
@@ -40,6 +46,9 @@ Comments.propTypes = {
       hasReplies: React.PropTypes.bool,
       fork: React.PropTypes.bool,
       child: React.PropTypes.bool,
+      descendents: React.PropTypes.number.isRequired,
+      hidden: React.PropTypes.bool,
+      minimized: React.PropTypes.bool,
     })
   ).isRequired,
   openModal: React.PropTypes.func.isRequired,

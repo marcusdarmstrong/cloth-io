@@ -186,6 +186,17 @@ nav {
   line-height: 1.75rem;
 }
 
+.comments .avatar.hidden {
+  background-color: #666 !important;
+}
+.comments .avatar.hidden:after {
+  content: '+';
+  font-weight: 100;
+  vertical-align: top;
+  line-height: 1.75rem;
+  font-size: 2rem;
+}
+
 .container {
   max-width: 700px;
   margin: 0 auto;
