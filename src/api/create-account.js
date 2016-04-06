@@ -37,8 +37,8 @@ export default onError(async function createAccount(req, res) {
   }
 
   const insertResult = await db.one(
-    `insert into t_user (name, email, passhash, color)
-      values ($(name), $(email), $(passHash), $(color))
+    `insert into t_user (name, email, passhash, color, status)
+      values ($(name), $(email), $(passHash), $(color), 1)
       returning id, status`,
     { name, email, passHash, color }
   );
