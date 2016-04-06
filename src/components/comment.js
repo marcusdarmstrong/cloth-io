@@ -111,7 +111,7 @@ export default class Comment extends React.Component {
           postId={this.props.comment.post_id} openModal={this.props.openModal}
           onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
           key={this.state.commentBox} fork={this.props.comment.hasReplies}
-          clientId={this.state.commentBox} minimizeComment={this.props.minimizeComment}
+          clientId={this.state.commentBox}
         />
         : null
       }

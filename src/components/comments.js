@@ -19,6 +19,7 @@ const Comments = ({ post, user, comments, openModal, socketConnected, received }
       }
       return (<Comment key={comment.id} comment={comment} user={user} openModal={openModal}
         socketConnected={socketConnected} received={received}
+        minimizeComment={this.props.minimizeComment}
       />);
     })}
   </section>
