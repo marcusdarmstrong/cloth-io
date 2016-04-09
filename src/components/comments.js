@@ -38,23 +38,7 @@ Comments.propTypes = {
     color: React.PropTypes.string.isRequired,
   }),
   comments: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      id: React.PropTypes.number.isRequired,
-      user: React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-        color: React.PropTypes.string.isRequired,
-      }).isRequired,
-      created: React.PropTypes.number.isRequired,
-      body: React.PropTypes.string.isRequired,
-      nestLevel: React.PropTypes.number.isRequired,
-      post_id: React.PropTypes.number.isRequired,
-      hasReplies: React.PropTypes.bool,
-      fork: React.PropTypes.bool,
-      child: React.PropTypes.bool,
-      descendents: React.PropTypes.number.isRequired,
-      hidden: React.PropTypes.bool,
-      minimized: React.PropTypes.bool,
-    })
+    Comment.propTypes.comment
   ).isRequired,
   openModal: React.PropTypes.func.isRequired,
   socketConnected: React.PropTypes.bool.isRequired,
