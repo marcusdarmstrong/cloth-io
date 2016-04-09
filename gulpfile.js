@@ -8,7 +8,7 @@ var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var babel = require('gulp-babel');
-var minifyCss = require('gulp-minify-css');
+var cleanCss = require('gulp-clean-css');
 var rev = require('gulp-rev');
 var insert = require('gulp-insert');
 var rename = require('gulp-rename');
@@ -70,7 +70,7 @@ gulp.task('generate-manifest', ['css'], function() {
 
 gulp.task('css', ['client'], function() {
   return gulp.src('css/**/*.css')
-    .pipe(minifyCss())
+    .pipe(cleanCss())
     .pipe(gulp.dest('public'))
     .pipe(rev())
     .pipe(gulp.dest('public'))
