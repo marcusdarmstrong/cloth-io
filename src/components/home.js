@@ -1,16 +1,10 @@
 import React from 'react';
-import Nav from './nav';
 import Posts from './posts';
 
-const Home = (props) => (
+const Home = ({ posts, nextPage, prevPage }) => (
   <div>
-    <Nav {...props} />
-    <div className="spacer">
-      <div className="container">
-        <h1 className="intro">Today's top stories...</h1>
-        <Posts posts={props.posts} nextPage={props.nextPage} prevPage={props.prevPage} />
-      </div>
-    </div>
+    <h1 className="intro">Today's top stories...</h1>
+    <Posts posts={posts} nextPage={nextPage} prevPage={prevPage} />
   </div>
 );
 

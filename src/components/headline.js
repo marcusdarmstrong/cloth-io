@@ -44,7 +44,7 @@ export default class Headline extends React.Component {
               <span className="link-desc">{link} &crarr;</span>
             </a>
             <a href={postLink} className="headline-details">
-              <Avatar name={post.name} hex={post.color} />
+              <Avatar user={post} />
               <div className="byline">
                 <TimeAgo timestamp={ts} />
                 <div className="byline-name">{post.name}</div>

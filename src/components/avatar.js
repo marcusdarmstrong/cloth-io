@@ -1,18 +1,18 @@
 import React from 'react';
+import Bubble from './bubble';
 
-const Avatar = ({ name, hex }) => {
-  const avatar = name.charAt(0).toUpperCase();
-  const color = `#${hex}`;
-  return (
-    <div className="avatar" style={{ backgroundColor: color }}>
-        <span className="avatar-letter">{avatar}</span>
-    </div>
-  );
-};
+const Avatar = ({ user, className, onClick }) =>
+  <Bubble letter={user.name.charAt(0).toUpperCase()}
+    hex={user.color} className={className} onClick={onClick}
+  />;
 
 Avatar.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  hex: React.PropTypes.string.isRequired,
+  user: React.PropTypes.shape({
+    name: React.PropTypes.string.isRequired,
+    color: React.PropTypes.string.isRequired,
+  }).isRequired,
+  className: React.PropTypes.string,
+  onClick: React.PropTypes.func,
 };
 
 export default Avatar;

@@ -1,44 +1,34 @@
 import React from 'react';
-import Comments from './comments';
-import Nav from './nav';
 import uriParser from '../util/uri-parser';
 import Avatar from './avatar';
 import TimeAgo from './time-ago';
 
-const Post = (props) => {
-  const link = (props.post.url) ? uriParser(props.post.url).host : null;
+const Post = ({ post }) => {
+  const link = (post.url) ? uriParser(post.url).host : null;
   const title = (link) ? (
-    <a href={props.post.url} target="_new" className="headline-link">
-      <h1>{props.post.title}</h1>
+    <a href={post.url} target="_new" className="headline-link">
+      <h1>{post.title}</h1>
       <span className="link-desc">{link} &crarr;</span>
     </a>
   ) : (
-    <h1>{props.post.title}</h1>
+    <h1>{post.title}</h1>
   );
 
   return (
-    <div>
-      <Nav {...props} />
-      <div className="spacer">
-        <div className="container">
-          <article className="article">
-            <div className="article-title">{title}</div>
-            <div className="post-attribution">
-              <Avatar name={props.post.user.name} hex={props.post.user.color} />
-              <div className="attribution-info">
-                <span className="attribution-name">{props.post.user.name}</span>
-                <span className="post-time">
-                  <TimeAgo timestamp={props.post.created} />
-                </span>
-              </div>
-            </div>
-            <div className="article-body" dangerouslySetInnerHTML={{ __html: props.post.body }}>
-            </div>
-          </article>
-          <Comments {...props} />
+    <article className="article">
+      <div className="article-title">{title}</div>
+      <div className="post-attribution">
+        <Avatar user={post.user} />
+        <div className="attribution-info">
+          <span className="attribution-name">{post.user.name}</span>
+          <span className="post-time">
+            <TimeAgo timestamp={post.created} />
+          </span>
         </div>
       </div>
-    </div>
+      <div className="article-body" dangerouslySetInnerHTML={{ __html: post.body }}>
+      </div>
+    </article>
   );
 };
 

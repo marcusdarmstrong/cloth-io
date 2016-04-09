@@ -148,7 +148,7 @@ nav {
   margin-left: .5rem;
 }
 
-.avatar {
+.bubble {
   height: 2rem;
   width: 2rem;
   border-radius: 1rem;
@@ -167,33 +167,33 @@ nav {
   font-weight: normal;
 }
 
-.comments .avatar {
+.comments .bubble {
   cursor: pointer;
 }
 
-.comments .avatar:hover .avatar-letter {
+.comments .bubble:hover .bubble-letter {
   display: none;
 }
 
-.comments .avatar:hover {
+.comments .bubble:hover {
   background-color: #666 !important;
 }
 
-.comments .avatar:hover:after {
+.comments .bubble:hover:after {
   content: '—';
   font-weight: bold;
   vertical-align: top;
   line-height: 1.75rem;
 }
 
-.comments .hidden-comment .avatar .avatar-letter {
+.comments .hidden-comment .bubble .bubble-letter {
   display: none;
 }
 
-.comments .hidden-comment .avatar {
+.comments .hidden-comment .bubble {
   background-color: #666 !important;
 }
-.comments .hidden-comment .avatar:after {
+.comments .hidden-comment .bubble:after {
   content: '+';
   font-weight: 100;
   vertical-align: top;
@@ -452,7 +452,7 @@ input[type="submit"].disabled {
   border-color: #830A02;
 }
 
-nav .avatar {
+nav .bubble {
   cursor: pointer;
 }
 
@@ -478,7 +478,7 @@ nav .avatar {
   margin-bottom: 1rem;
 }
 
-.headline .avatar {
+.headline .bubble {
   margin-left: -.5rem;
   float: left;
 }
@@ -540,7 +540,7 @@ nav .avatar {
   line-height: 2rem;
 }
 
-.post-attribution .avatar {
+.post-attribution .bubble {
   float: left;
 }
 
@@ -569,7 +569,7 @@ nav .avatar {
     margin-left: 1.5rem;
   }
 
-  .headline .avatar {
+  .headline .bubble {
     margin-left: -1rem;
   }
 }

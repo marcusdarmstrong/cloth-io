@@ -41,8 +41,8 @@ export default class HiddenComment extends React.Component {
     }
 
     let markup = (<div className={classString}>
-      <div className="author" onClick={this.maximize}>
-        <Avatar name={this.props.comment.user.name} hex={this.props.comment.user.color} />
+      <div className="author">
+        <Avatar user={this.props.comment.user} onClick={this.maximize} />
       </div>
       <div className="comment-container">
         {this.props.comment.descendents + 1} hidden {this.props.comment.descendents === 0 ?

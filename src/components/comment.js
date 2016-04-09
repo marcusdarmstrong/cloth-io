@@ -86,7 +86,7 @@ export default class Comment extends React.Component {
 
     let markup = (<div className={classString}>
       <div className="author" onClick={this.minimize}>
-        <Avatar name={this.props.comment.user.name} hex={this.props.comment.user.color} />
+        <Avatar user={this.props.comment.user} />
       </div>
       <div className="comment-container">
         <div className="comment-header">

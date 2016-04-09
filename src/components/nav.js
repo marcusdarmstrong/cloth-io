@@ -1,12 +1,9 @@
 import React from 'react';
-import Modal from './modal';
 import ScrollWatch from './scroll-watch';
+import Avatar from './avatar';
 
 export default class Nav extends React.Component {
   static propTypes = {
-    modal: React.PropTypes.shape({
-      component: React.PropTypes.func.isRequired,
-    }),
     user: React.PropTypes.shape({
       name: React.PropTypes.string.isRequired,
       color: React.PropTypes.string.isRequired,
@@ -22,9 +19,7 @@ export default class Nav extends React.Component {
     hidden: false,
   };
 
-  showSignoutLink = () => {
-    this.setState({ signOut: true });
-  };
+  showSignoutLink = () => this.setState({ signOut: true });
 
   signOut = () => {
     this.setState({ signOut: false });
@@ -48,15 +43,6 @@ export default class Nav extends React.Component {
   openLoginModal = () => this.props.openModal('login');
 
   render() {
-    let modal = null;
-    if (this.props.modal) {
-      modal = React.createElement(
-        Modal,
-        this.props,
-        React.createElement(this.props.modal.component, this.props)
-      );
-    }
-
     let userNav = (<div className="button pull-right" onClick={this.openLoginModal}>Log in</div>);
     if (this.props.user) {
       if (this.state.signOut) {
@@ -64,15 +50,10 @@ export default class Nav extends React.Component {
           <div className="button pull-right" onClick={this.signOut}>Log out</div>
         );
       } else {
-        const color = `#${this.props.user.color}`;
-        const letter = this.props.user.name.substr(0, 1).toUpperCase();
         userNav = (
-          <div className="avatar pull-right"
-            style={{ backgroundColor: color }}
-            onClick={this.showSignoutLink}
-          >
-            {letter}
-          </div>
+          <Avatar user={this.props.user}
+            onClick={this.showSignoutLink} className="pull-right"
+          />
         );
       }
     }
@@ -87,7 +68,6 @@ export default class Nav extends React.Component {
           {(noShareForm) ? '' : (<a className="button pull-left" href="/share">Share</a>)}
           <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
         </nav>
-        {modal}
       </div>
     );
   }

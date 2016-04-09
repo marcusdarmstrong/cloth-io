@@ -1,6 +1,7 @@
 import React from 'react';
 import ContentEditable from './content-editable';
 import Avatar from './avatar';
+import Bubble from './bubble';
 import fetch from 'isomorphic-fetch';
 
 export default class AddCommentBox extends React.Component {
@@ -100,7 +101,11 @@ export default class AddCommentBox extends React.Component {
     return (
       <div className={className}>
         <div className="author">
-          <Avatar name={(user) ? user.name : '?'} hex={(user) ? user.color : 'ddd'} />
+          {(user) ?
+            <Avatar user={user} />
+            :
+            <Bubble letter="?" hex="ddd" />
+          }
         </div>
         {body}
       </div>
