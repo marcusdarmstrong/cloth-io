@@ -1,12 +1,10 @@
 import { default as getTopPosts, defaultPageSize } from '../loaders/get-top-posts';
 import getUserById from '../loaders/get-user-by-id';
-import connect from '../connection';
 
 export default async (userId, page = 0) => {
-  const db = connect();
   const numPage = Number(page);
 
-  let posts = await getTopPosts(numPage, defaultPageSize + 1, defaultPageSize, db);
+  let posts = await getTopPosts(numPage, defaultPageSize + 1, defaultPageSize);
   let nextPage = undefined;
   const prevPage = (numPage > 0) ? numPage - 1 : undefined;
 
@@ -18,7 +16,7 @@ export default async (userId, page = 0) => {
   return {
     title: 'New York Jets / cloth.io',
     posts,
-    user: await getUserById(userId, db),
+    user: await getUserById(userId),
     route: 'Home',
     nextPage,
     prevPage,

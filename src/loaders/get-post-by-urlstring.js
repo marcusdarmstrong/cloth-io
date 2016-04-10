@@ -1,7 +1,7 @@
-import connect from '../connection';
+import db from '../connection';
 import onError from '../util/on-error';
 
-export default onError(async function getPostByUrlString(urlString, db = connect()) {
+export default onError(async function getPostByUrlString(urlString) {
   const post = await db.one(
     `select p.*, u.name, u.color
       from t_post p join t_user u on u.id = p.user_id

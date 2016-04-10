@@ -34,6 +34,15 @@ export default class Headline extends React.Component {
 
     const link = (post.url) ? uriParser(post.url).host : null;
     const postLink = `/p/${post.urlstring}`;
+    const byline = (
+      <div className="byline">
+        <TimeAgo timestamp={ts} />
+        <div className="byline-name">{post.name}</div>
+        <p className="headline-preview" dangerouslySetInnerHTML={{ __html: preview }}></p>
+        <div className="comment-count">{commentCountText}</div>
+      </div>
+    );
+
     if (link) {
       return (
         <div>
@@ -45,12 +54,7 @@ export default class Headline extends React.Component {
             </a>
             <a href={postLink} className="headline-details">
               <Avatar user={post} />
-              <div className="byline">
-                <TimeAgo timestamp={ts} />
-                <div className="byline-name">{post.name}</div>
-                <p className="headline-preview" dangerouslySetInnerHTML={{ __html: preview }}></p>
-                <div className="comment-count">{commentCountText}</div>
-              </div>
+              {byline}
             </a>
           </div>
         </div>
@@ -63,12 +67,7 @@ export default class Headline extends React.Component {
           <h2>{post.title}</h2>
           <div className="headline-details">
             <Avatar user={post} />
-            <div className="byline">
-              <TimeAgo timestamp={ts} />
-              <div className="byline-name">{post.name}</div>
-              <p className="headline-preview" dangerouslySetInnerHTML={{ __html: preview }}></p>
-              <div className="comment-count">{commentCountText}</div>
-            </div>
+            {byline}
           </div>
         </a>
       </div>

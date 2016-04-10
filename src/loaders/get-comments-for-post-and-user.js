@@ -1,4 +1,4 @@
-import connect from '../connection';
+import db from '../connection';
 import onError from '../util/on-error';
 
 const commentQuery = () =>
@@ -17,7 +17,7 @@ const commentQuery = () =>
     where
       c.post_id=$(postId)`;
 
-export default onError(async function getCommentsForPostAndUser(postId, userId, db = connect()) {
+export default onError(async function getCommentsForPostAndUser(postId, userId) {
   return (await db.any(commentQuery(), { postId, userId })).map(comment => {
     const newComment = comment;
     newComment.id = Number(newComment.id);

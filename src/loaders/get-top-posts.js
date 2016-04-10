@@ -1,10 +1,10 @@
-import connect from '../connection';
+import db from '../connection';
 import onError from '../util/on-error';
 
 export const defaultPageSize = 10;
 
 export default onError(
-  async (page, toFetch = defaultPageSize, pageSize = defaultPageSize, db = connect()) =>
+  async (page, toFetch = defaultPageSize, pageSize = defaultPageSize) =>
   (await db.query(
     `select p.*, u.name, u.color, cc.commentCount
     from t_post p
