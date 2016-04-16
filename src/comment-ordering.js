@@ -38,8 +38,6 @@ function markAndFlatten(buckets, parentId, fork, nestLevel, hidden) { // I think
     result.push(root);
     if (children) {
       root.hasReplies = true;
-      children[children.length - 1].child = true;
-      children[children.length - 1].fork = false;
       const descendents = markAndFlatten(
         buckets,
         root.id,
@@ -47,6 +45,8 @@ function markAndFlatten(buckets, parentId, fork, nestLevel, hidden) { // I think
         childNestLevel + 1,
         root.minimized || root.hidden
       );
+      children[children.length - 1].child = true;
+      children[children.length - 1].fork = false;
       root.descendents = descendents.length;
       result = result.concat(descendents);
     } else {
