@@ -78,7 +78,7 @@ export default class Comment extends React.Component {
         <CommentFrame
           fork={this.props.comment.fork}
           isReply={this.props.comment.child}
-          hasReplies={this.props.comment.hasReplies || this.state.commentBox}
+          hasReplies={this.props.comment.hasReplies || !!this.state.commentBox}
           user={this.props.comment.user}
           onAvatarClick={this.minimize}
         >

@@ -19,7 +19,7 @@ Button.propTypes = {
   href: React.PropTypes.string,
   onClick: React.PropTypes.func,
   classNames: React.PropTypes.arrayOf(React.PropTypes.string),
-  engaged: React.PropTypes.boolean,
+  engaged: React.PropTypes.bool,
 };
 
 export default Button;
