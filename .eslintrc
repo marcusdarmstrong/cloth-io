@@ -1,11 +1,7 @@
 {
-    'extends': 'airbnb',
-    "parser": "babel-eslint",
-    'ecmaFeatures': {
-        'restParams': true,
-        'experimentalObjectRestSpread': true,
-    },
-    'rules': {
-        'no-console': 0
-    },
+  'extends': 'airbnb',
+  'parser': 'babel-eslint',
+  'rules': {
+    'no-console': 0
+  },
 }

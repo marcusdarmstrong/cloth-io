@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './button';
 
 export default class LoginForm extends React.Component {
   static propTypes = {
@@ -62,9 +63,9 @@ export default class LoginForm extends React.Component {
     return (
       <form className="login-form" onSubmit={this.handleSubmit}>
         <div className="create-account-cta">
-          <div className="button pull-right" onClick={this.openSignupModal}>
+          <Button classNames="pull-right" onClick={this.openSignupModal}>
             Create account
-          </div>
+          </Button>
           <div>New here?</div>
         </div>
         {errorState}

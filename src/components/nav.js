@@ -1,6 +1,7 @@
 import React from 'react';
 import ScrollWatch from './scroll-watch';
 import Avatar from './avatar';
+import Button from './button';
 
 export default class Nav extends React.Component {
   static propTypes = {
@@ -43,11 +44,11 @@ export default class Nav extends React.Component {
   openLoginModal = () => this.props.openModal('login');
 
   render() {
-    let userNav = (<div className="button pull-right" onClick={this.openLoginModal}>Log in</div>);
+    let userNav = (<Button classNames="pull-right" onClick={this.openLoginModal}>Log in</Button>);
     if (this.props.user) {
       if (this.state.signOut) {
         userNav = (
-          <div className="button pull-right" onClick={this.signOut}>Log out</div>
+          <Button className="pull-right" onClick={this.signOut}>Log out</Button>
         );
       } else {
         userNav = (
@@ -65,7 +66,7 @@ export default class Nav extends React.Component {
         <ScrollWatch onScroll={this.handleScroll} />
         <nav>
           {userNav}
-          {(noShareForm) ? '' : (<a className="button pull-left" href="/share">Share</a>)}
+          {(noShareForm) ? '' : (<Button className="pull-left" href="/share">Share</Button>)}
           <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
         </nav>
       </div>

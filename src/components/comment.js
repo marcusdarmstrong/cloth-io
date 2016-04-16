@@ -1,7 +1,9 @@
 import React from 'react';
-import TimeAgo from './time-ago';
 import AddCommentBox from './add-comment-box';
-import Avatar from './avatar';
+import CommentFrame from './comment-frame';
+import CommentHeader from './comment-header';
+import CommentIndent from './comment-indent';
+import Button from './button';
 import guid from '../util/guid';
 
 export default class Comment extends React.Component {
@@ -68,54 +70,47 @@ export default class Comment extends React.Component {
   };
 
   render() {
-    let classString = 'comment';
-    if (this.props.comment.hasReplies || this.state.commentBox) {
-      classString += ' has-replies';
-    }
-
-    if (this.props.comment.child) {
-      classString += ' child';
-    } else if (this.props.comment.fork) {
-      classString += ' fork';
-    }
-
-    const replyState = (this.state.commentBox) ?
-      'button pull-right engaged' : 'button pull-right';
     const replyNestLevel = (this.props.comment.hasReplies) ?
       this.props.comment.nestLevel + 1 : this.props.comment.nestLevel;
 
-    let markup = (<div className={classString}>
-      <div className="author" onClick={this.minimize}>
-        <Avatar user={this.props.comment.user} />
-      </div>
-      <div className="comment-container">
-        <div className="comment-header">
-          <TimeAgo timestamp={this.props.comment.created} />
-          <div className="author-name">
-            {this.props.comment.user.name}
-          </div>
-        </div>
-        <div className="comment-text"
-          dangerouslySetInnerHTML={{ __html: this.props.comment.body }}
-        ></div>
-        {(replyNestLevel <= 4) ? (<div className="comment-options">
-          <div className={replyState} onClick={this.toggleReplyBox}>Reply</div>
-        </div>) : null}
-      </div>
-      {(this.state.commentBox) ?
-        <AddCommentBox user={this.props.user} parentComment={this.props.comment}
-          postId={this.props.comment.post_id} openModal={this.props.openModal}
-          onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
-          key={this.state.commentBox} fork={this.props.comment.hasReplies}
-          clientId={this.state.commentBox}
-        />
-        : null
-      }
-    </div>);
-
-    for (let i = this.props.comment.nestLevel; i > 0; i--) {
-      markup = (<div className="reply-container"><div className="reply">{markup}</div></div>);
-    }
-    return markup;
+    return (
+      <CommentIndent nestLevel={this.props.comment.nestLevel}>
+        <CommentFrame
+          fork={this.props.comment.fork}
+          isReply={this.props.comment.child}
+          hasReplies={this.props.comment.hasReplies || this.state.commentBox}
+          user={this.props.comment.user}
+          onAvatarClick={this.minimize}
+        >
+          <CommentHeader
+            name={this.props.comment.user.name}
+            timestamp={this.props.comment.created}
+          />
+          <div className="comment-text"
+            dangerouslySetInnerHTML={{ __html: this.props.comment.body }}
+          ></div>
+          {(replyNestLevel <= 4) ?
+            <div className="comment-options">
+              <Button classNames="pull-right"
+                engaged={!!this.state.commentBox}
+                onClick={this.toggleReplyBox}
+              >
+                Reply
+              </Button>
+            </div>
+            : null
+          }
+          {(this.state.commentBox) ?
+            <AddCommentBox user={this.props.user} parentComment={this.props.comment}
+              postId={this.props.comment.post_id} openModal={this.props.openModal}
+              onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
+              key={this.state.commentBox} fork={this.props.comment.hasReplies}
+              clientId={this.state.commentBox}
+            />
+            : null
+          }
+        </CommentFrame>
+      </CommentIndent>
+    );
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import Avatar from './avatar';
+import CommentFrame from './comment-frame';
+import CommentIndent from './comment-indent';
 
 export default class HiddenComment extends React.Component {
   static propTypes = {
@@ -33,26 +34,20 @@ export default class HiddenComment extends React.Component {
   };
 
   render() {
-    let classString = 'comment hidden-comment';
-    if (this.props.comment.child) {
-      classString += ' child';
-    } else if (this.props.comment.fork) {
-      classString += ' fork';
-    }
+    const hiddenCount = this.props.comment.descendents + 1;
 
-    let markup = (<div className={classString}>
-      <div className="author">
-        <Avatar user={this.props.comment.user} onClick={this.maximize} />
-      </div>
-      <div className="comment-container">
-        {this.props.comment.descendents + 1} hidden {this.props.comment.descendents === 0 ?
-          'comment' : 'comments'}
-      </div>
-    </div>);
-
-    for (let i = this.props.comment.nestLevel; i > 0; i--) {
-      markup = (<div className="reply-container"><div className="reply">{markup}</div></div>);
-    }
-    return markup;
+    return (
+      <CommentIndent nestLevel={this.props.comment.nestLevel}>
+        <CommentFrame
+          isReply={this.props.comment.child}
+          fork={this.props.comment.fork}
+          classNames={['hidden-comment']}
+          onAvatarClick={this.maximize}
+          user={this.props.comment.user}
+        >
+          {hiddenCount} hidden {hiddenCount === 1 ? 'comment' : 'comments'}
+        </CommentFrame>
+      </CommentIndent>
+    );
   }
 }

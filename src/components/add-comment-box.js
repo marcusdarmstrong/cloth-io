@@ -1,7 +1,8 @@
 import React from 'react';
 import ContentEditable from './content-editable';
-import Avatar from './avatar';
-import Bubble from './bubble';
+import CommentFrame from './comment-frame';
+import Button from './button';
+import CommentHeader from './comment-header';
 import fetch from 'isomorphic-fetch';
 
 export default class AddCommentBox extends React.Component {
@@ -62,53 +63,35 @@ export default class AddCommentBox extends React.Component {
   render() {
     const { user, parentComment, fork, socketConnected } = this.props;
 
-    let className = 'add-comment-box';
-    if (fork) {
-      className += ' fork';
-    } else if (parentComment) {
-      className += ' child';
-    }
-
     const disabledCopy = (this.state.sending) ? 'Sending...' : 'Connecting...';
     const postButton = (socketConnected && !this.state.sending) ?
-          (<div className="button pull-right" onClick={this.addComment}>Post Comment</div>)
+          (<Button classNames="pull-right" onClick={this.addComment}>Post Comment</Button>)
           :
-          (<div className="button pull-right disabled">{disabledCopy}</div>);
+          (<Button classNames="pull-right">{disabledCopy}</Button>);
 
-    const body = (user) ? (
-      <div className="add-comment-container">
-        <div className="comment-header">
-          <div className="author-name">
-            {user.name}
-          </div>
-        </div>
+    return (user) ? (
+      <CommentFrame
+        user={user}
+        fork={fork}
+        isReply={!!parentComment}
+        classNames={['add-comment']}
+      >
+        <CommentHeader name={user.name} />
         <div className="textarea-container">
           <ContentEditable onChange={this.handleChange} html={this.state.value}
             autoFocus={(!!parentComment)}
           />
-          <input type="hidden" name="parentId" value={(parentComment) ? parentComment.id : ''} />
         </div>
         <div className="comment-options">{postButton}</div>
-      </div>
+      </CommentFrame>
     ) : (
-      <div className="add-comment-container">
-        <div className="comment-login-cta">
-          <div className="button" onClick={this.openLoginModal}>Log in to comment</div>
-        </div>
-      </div>
-    );
-
-    return (
-      <div className={className}>
-        <div className="author">
-          {(user) ?
-            <Avatar user={user} />
-            :
-            <Bubble letter="?" hex="ddd" />
-          }
-        </div>
-        {body}
-      </div>
+      <CommentFrame
+        fork={fork}
+        isReply={!!parentComment}
+        classNames={['add-comment']}
+      >
+        <Button onClick={this.openLoginModal}>Log in to comment</Button>
+      </CommentFrame>
     );
   }
 }
