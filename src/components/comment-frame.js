@@ -36,7 +36,7 @@ CommentFrame.propTypes = {
   fork: React.PropTypes.bool,
   user: Avatar.propTypes.user,
   children: React.PropTypes.any,
-  classNames: React.PropTypes.arrayOf(React.PropTypes.string),
+  classNames: React.PropTypes.string,
   onAvatarClick: React.PropTypes.func,
 };
 

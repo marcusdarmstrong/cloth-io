@@ -226,7 +226,7 @@ nav {
   border-left: 2px solid #FFF;
 }
 
-.has-replies .comment-container {
+.has-replies > .comment-container {
   border-left: 2px solid #666;
 }
 
