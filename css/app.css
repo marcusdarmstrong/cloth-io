@@ -308,19 +308,10 @@ nav {
   overflow: auto;
 }
 
-.add-comment-box {
-  margin-left: .5rem;
-  padding-top: 1rem;
-}
-
-.add-comment-box.fork {
+.comment-frame.add-comment.fork {
   margin-left: 1rem;
   padding-left: .5rem;
   border-left: 2px solid #666;
-}
-
-.add-comment-box.child {
-  margin-left: 0rem;
 }
 
 .add-comment-container {
