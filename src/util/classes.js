@@ -5,9 +5,9 @@ export default (...classes) => {
     for (let i = classes.length - 1; i >= 0; i--) {
       if (merge) {
         className = `${classes[i]} ${className}`;
-        merge = true;
       } else {
         className = classes[i];
+        merge = true;
       }
     }
   }

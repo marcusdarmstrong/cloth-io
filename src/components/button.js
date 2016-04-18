@@ -11,7 +11,7 @@ const Button = ({ children, onClick, classNames, href, engaged }) => {
     return <div className={cs(className, classNames)} onClick={onClick}>{children}</div>;
   }
   if (engaged) {
-    return <div className={cs('button', 'engaged', classNames)} onClick={onClick}>{children}</div>;
+    return <div className={cs('button', 'engaged', classNames)}>{children}</div>;
   }
   return <div className={cs('button', 'disabled', classNames)}>{children}</div>;
 };
