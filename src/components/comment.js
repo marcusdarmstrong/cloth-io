@@ -75,39 +75,41 @@ export default class Comment extends React.Component {
 
     return (
       <CommentIndent nestLevel={this.props.comment.nestLevel}>
-        <CommentFrame
-          fork={this.props.comment.fork}
-          isReply={this.props.comment.child}
-          hasReplies={this.props.comment.hasReplies || !!this.state.commentBox}
-          user={this.props.comment.user}
-          onAvatarClick={this.minimize}
-        >
-          <CommentHeader
-            name={this.props.comment.user.name}
-            timestamp={this.props.comment.created}
-          />
-          <div className="comment-text"
-            dangerouslySetInnerHTML={{ __html: this.props.comment.body }}
-          ></div>
-          {(replyNestLevel <= 4) &&
-            <div className="comment-options">
-              <Button classNames="pull-right"
-                engaged={!!this.state.commentBox}
-                onClick={this.toggleReplyBox}
-              >
-                Reply
-              </Button>
-            </div>
+        <div>
+          <CommentFrame
+            fork={this.props.comment.fork}
+            isReply={this.props.comment.child}
+            hasReplies={this.props.comment.hasReplies || !!this.state.commentBox}
+            user={this.props.comment.user}
+            onAvatarClick={this.minimize}
+          >
+            <CommentHeader
+              name={this.props.comment.user.name}
+              timestamp={this.props.comment.created}
+            />
+            <div className="comment-text"
+              dangerouslySetInnerHTML={{ __html: this.props.comment.body }}
+            ></div>
+            {(replyNestLevel <= 4) &&
+              <div className="comment-options">
+                <Button classNames="pull-right"
+                  engaged={!!this.state.commentBox}
+                  onClick={this.toggleReplyBox}
+                >
+                  Reply
+                </Button>
+              </div>
+            }
+          </CommentFrame>
+          {(this.state.commentBox) &&
+            <AddCommentBox user={this.props.user} parentComment={this.props.comment}
+              postId={this.props.comment.post_id} openModal={this.props.openModal}
+              onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
+              key={this.state.commentBox} fork={this.props.comment.hasReplies}
+              clientId={this.state.commentBox}
+            />
           }
-        </CommentFrame>
-        {(this.state.commentBox) &&
-          <AddCommentBox user={this.props.user} parentComment={this.props.comment}
-            postId={this.props.comment.post_id} openModal={this.props.openModal}
-            onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
-            key={this.state.commentBox} fork={this.props.comment.hasReplies}
-            clientId={this.state.commentBox}
-          />
-        }
+        </div>
       </CommentIndent>
     );
   }

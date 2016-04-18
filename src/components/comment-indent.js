@@ -10,10 +10,7 @@ const CommentIndent = ({ nestLevel, children }) => {
 
 CommentIndent.propTypes = {
   nestLevel: React.PropTypes.number.isRequired,
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.element,
-    React.PropTypes.arrayOf(React.PropTypes.element),
-  ]),
+  children: React.PropTypes.element.isRequired,
 };
 
 export default CommentIndent;
