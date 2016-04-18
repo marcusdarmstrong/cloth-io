@@ -74,7 +74,7 @@ export default class AddCommentBox extends React.Component {
         user={user}
         fork={fork}
         isReply={!!parentComment}
-        classNames={['add-comment']}
+        classNames={'add-comment'}
       >
         <CommentHeader name={user.name} />
         <div className="textarea-container">
