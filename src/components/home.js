@@ -6,7 +6,7 @@ const Home = ({ posts, nextPage, prevPage }) => (
   <div>
     <h1 className="intro">Today's top stories...</h1>
     <Posts posts={posts} nextPage={nextPage} prevPage={prevPage} />
-    <Parent childData={{ a: 'Hi', b: 'Place', parentData: 'lol' }} />
+    <Parent childData={{ a: 'Hi', b: 'Place' }} />
   </div>
 );
 
