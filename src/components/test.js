@@ -3,7 +3,7 @@ import React from 'react';
 const omit = (obj, keys) => {
   const newObj = {};
   for (const key of Object.keys(obj)) {
-    if (!keys.contains(key)) {
+    if (keys.indexOf(key) === -1) {
       newObj[key] = obj[key];
     }
   }
