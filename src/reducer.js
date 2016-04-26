@@ -12,7 +12,10 @@ export default (state = map(), action) => {
   switch (action.type) {
     case ADD_COMMENT:
       if (action.comment.clientId) {
-        return state.update('received', received => received.push(action.comment.clientId))
+        return state
+          .update('socket', socket =>
+            socket.update('received', received => received.push(action.comment.clientId))
+          )
           .update('comments', comments => fromJS(commentOrdering(
             comments.push(action.comment).toJS()
           ))
