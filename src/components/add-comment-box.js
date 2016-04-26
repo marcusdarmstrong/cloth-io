@@ -20,7 +20,6 @@ export default class AddCommentBox extends React.Component {
     onSubmission: React.PropTypes.func,
     postId: React.PropTypes.number.isRequired,
     socketConnected: React.PropTypes.bool.isRequired,
-    clientId: React.PropTypes.string,
     received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   };
 
@@ -40,7 +39,8 @@ export default class AddCommentBox extends React.Component {
   };
 
   addComment = () => {
-    this.setState({ sending: guid() });
+    const clientId = guid();
+    this.setState({ sending: clientId });
     fetch('/api/addComment', {
       method: 'post',
       headers: {
@@ -52,7 +52,7 @@ export default class AddCommentBox extends React.Component {
         comment: this.state.value,
         parentId: (this.props.parentComment) ? this.props.parentComment.id : null,
         postId: this.props.postId,
-        clientId: this.props.clientId,
+        clientId,
       }),
     }).then(res => res.json())
       .then(data => {
@@ -98,7 +98,7 @@ export default class AddCommentBox extends React.Component {
       <CommentFrame
         fork={fork}
         isReply={!!parentComment}
-        classNames={['add-comment']}
+        classNames={'add-comment'}
       >
         <Button onClick={this.openLoginModal}>Log in to comment</Button>
       </CommentFrame>
