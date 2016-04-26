@@ -34,16 +34,17 @@ export default class HiddenComment extends React.Component {
   };
 
   render() {
-    const hiddenCount = this.props.comment.descendents + 1;
+    const { comment } = this.props;
+    const hiddenCount = comment.descendents + 1;
 
     return (
-      <CommentIndent nestLevel={this.props.comment.nestLevel}>
+      <CommentIndent nestLevel={comment.nestLevel}>
         <CommentFrame
-          isReply={this.props.comment.child}
-          fork={this.props.comment.fork}
-          classNames={['hidden-comment']}
+          isReply={comment.child}
+          fork={comment.fork}
+          classNames={'hidden-comment'}
           onAvatarClick={this.maximize}
-          user={this.props.comment.user}
+          user={comment.user}
         >
           {hiddenCount} hidden {hiddenCount === 1 ? 'comment' : 'comments'}
         </CommentFrame>

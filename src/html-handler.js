@@ -13,8 +13,11 @@ export default (io) => (handler) => onError(async (req, res) => {
   const state = map(await handler(req));
 
   if (state.has('socket')) {
-    const name = state.get('socket');
-    namespaces[name] = io.of(name);
+    const socket = state.get('socket');
+    if (socket.has('name')) {
+      const name = socket.get('name');
+      namespaces[name] = io.of(name);
+    }
   }
 
   const store = createStore(reducer, state);

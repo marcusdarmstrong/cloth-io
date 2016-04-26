@@ -1,5 +1,3 @@
-import configurable from 'pg-promise';
+import pgp from 'pg-promise';
 
-const pgp = configurable({});
-
-export default pgp(process.env.DATABASE_URL);
+export default pgp({})(process.env.DATABASE_URL);

@@ -1,15 +1,12 @@
 import React from 'react';
 
-const Bubble = ({ letter, hex, className, onClick }) => {
-  const color = `#${hex}`;
-  const fullClass = (className) ? `bubble ${className}` : 'bubble';
-
-  return (
-    <div className={fullClass} style={{ backgroundColor: color }} onClick={onClick}>
-        <span className="bubble-letter">{letter}</span>
-    </div>
-  );
-};
+const Bubble = ({ letter, hex, className, onClick }) => (
+  <div className={(className) ? `bubble ${className}` : 'bubble'}
+    style={{ backgroundColor: `#${hex}` }} onClick={onClick}
+  >
+      <span className="bubble-letter">{letter}</span>
+  </div>
+);
 
 Bubble.propTypes = {
   letter: React.PropTypes.string.isRequired,

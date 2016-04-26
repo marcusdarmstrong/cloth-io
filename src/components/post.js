@@ -21,13 +21,10 @@ const Post = ({ post }) => {
         <Avatar user={post.user} />
         <div className="attribution-info">
           <span className="attribution-name">{post.user.name}</span>
-          <span className="post-time">
-            <TimeAgo timestamp={post.created} />
-          </span>
+          <span className="post-time"><TimeAgo timestamp={post.created} /></span>
         </div>
       </div>
-      <div className="article-body" dangerouslySetInnerHTML={{ __html: post.body }}>
-      </div>
+      <div className="article-body" dangerouslySetInnerHTML={{ __html: post.body }}></div>
     </article>
   );
 };

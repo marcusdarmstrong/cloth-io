@@ -2,16 +2,12 @@ import cs from '../util/classes';
 import React from 'react';
 
 const Button = ({ children, onClick, classNames, href, engaged }) => {
+  const className = cs((engaged) ? 'button engaged' : 'button', classNames);
   if (href) {
-    const className = (engaged) ? 'button engaged' : 'button';
-    return <a className={cs(className, classNames)} href={href}>{children}</a>;
+    return <a className={className} href={href}>{children}</a>;
   }
-  if (onClick) {
-    const className = (engaged) ? 'button engaged' : 'button';
-    return <div className={cs(className, classNames)} onClick={onClick}>{children}</div>;
-  }
-  if (engaged) {
-    return <div className={cs('button', 'engaged', classNames)}>{children}</div>;
+  if (onClick || engaged) {
+    return <div className={className} onClick={onClick}>{children}</div>;
   }
   return <div className={cs('button', 'disabled', classNames)}>{children}</div>;
 };

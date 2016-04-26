@@ -44,16 +44,14 @@ export default class Nav extends React.Component {
   openLoginModal = () => this.props.openModal('login');
 
   render() {
-    let userNav = (<Button classNames="pull-right" onClick={this.openLoginModal}>Log in</Button>);
+    let userNav = <Button classNames="pull-right" onClick={this.openLoginModal}>Log in</Button>;
     if (this.props.user) {
       if (this.state.signOut) {
-        userNav = (
-          <Button className="pull-right" onClick={this.signOut}>Log out</Button>
-        );
+        userNav = <Button className="pull-right" onClick={this.signOut}>Log out</Button>;
       } else {
         userNav = (
-          <Avatar user={this.props.user}
-            onClick={this.showSignoutLink} className="pull-right"
+          <Avatar
+            user={this.props.user} onClick={this.showSignoutLink} className="pull-right"
           />
         );
       }
@@ -66,7 +64,7 @@ export default class Nav extends React.Component {
         <ScrollWatch onScroll={this.handleScroll} />
         <nav>
           {userNav}
-          {(noShareForm) ? '' : (<Button className="pull-left" href="/share">Share</Button>)}
+          {(noShareForm) ? null : <Button className="pull-left" href="/share">Share</Button>}
           <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
         </nav>
       </div>

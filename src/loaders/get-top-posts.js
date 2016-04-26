@@ -22,6 +22,12 @@ export default onError(
     newPost.id = Number(newPost.id);
     newPost.created = Number(newPost.created);
     newPost.commentcount = Number(newPost.commentcount);
+    newPost.user = {
+      name: newPost.name,
+      color: newPost.color,
+    };
+    delete newPost.name;
+    delete newPost.color;
     return newPost;
   }),
   []

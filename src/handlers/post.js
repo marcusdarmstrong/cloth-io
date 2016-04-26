@@ -15,9 +15,11 @@ export default async (userId, urlString) => {
     comments: list(commentOrdering(comments)),
     user,
     modal: null,
-    socket: `/comments-${post.id}`,
-    socketConnected: false,
-    received: list(),
+    socket: {
+      name: `/comments-${post.id}`,
+      connected: false,
+      received: list(),
+    },
     route: 'Post',
   };
 };

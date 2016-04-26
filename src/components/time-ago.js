@@ -91,6 +91,6 @@ export default class TimeAgo extends React.Component {
       value = (new Date(then * 1000)).toLocaleDateString();
     }
 
-    return (<div className="comment-timestamp pull-right">{value}</div>);
+    return <div className="comment-timestamp pull-right">{value}</div>;
   }
 }

@@ -2,34 +2,26 @@ import React from 'react';
 import Nav from './nav';
 import Modal from './modal';
 
-const Frame = (props) => {
-  let modal = null;
-  if (props.modal) {
-    modal = React.createElement(
-      Modal,
-      props,
-      React.createElement(props.modal.component, props)
-    );
-  }
-
-  return (
-    <div>
-      <Nav user={props.user} noShareForm={props.noShareForm}
-        openModal={props.openModal} loginUser={props.loginUser}
-      />
-      <div className="spacer">
-        <div className="container">
-          {props.children}
-        </div>
+const Frame = ({ modal, children, ...props }) => (
+  <div>
+    <Nav {...props} />
+    <div className="spacer">
+      <div className="container">
+        {children}
       </div>
-      {modal}
     </div>
-  );
-};
+    {(modal) ? (
+      <Modal title={props.modal.title}>
+        {React.createElement(props.modal.component, props)}
+      </Modal>
+      ) : null}
+  </div>
+);
 
 Frame.propTypes = Object.assign({
   modal: React.PropTypes.shape({
     component: React.PropTypes.func.isRequired,
+    title: React.PropTypes.string.isRequired,
   }),
   children: React.PropTypes.node,
 }, Nav.propTypes);

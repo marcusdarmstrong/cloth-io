@@ -10,18 +10,21 @@ import App from './components/app';
 const state = fromJS(window.__INITIAL_STATE__);
 const store = createStore(reducer, state);
 
-const socketName = state.get('socket');
-if (socketName) {
-  const socket = io(socketName, { 'force new connection': true });
-  socket.on('connect', () => store.dispatch({ type: 'SOCKET_CONNECT' }));
-  const bindAction = actionName => data => store.dispatch({ type: actionName, comment: data });
+const socketData = state.get('socket');
+if (socketData) {
+  const socketName = socketData.get('name');
+  if (socketName) {
+    const socket = io(socketName, { 'force new connection': true });
+    socket.on('connect', () => store.dispatch({ type: 'SOCKET_CONNECT' }));
+    const bindAction = actionName => data => store.dispatch({ type: actionName, comment: data });
 
-  for (const action in actions) {
-    if (actions.hasOwnProperty(action) && (typeof action) === 'string') {
-      socket.on(action, bindAction(action));
+    for (const action in actions) {
+      if (actions.hasOwnProperty(action) && (typeof action) === 'string') {
+        socket.on(action, bindAction(action));
+      }
     }
+    window.socket = socket;
   }
-  window.socket = socket;
 }
 
 ReactDOM.render(
