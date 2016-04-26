@@ -31,7 +31,7 @@ export default (state = map(), action) => {
     case LOGIN_USER:
       return state.set('user', action.user);
     case SOCKET_CONNECT:
-      return state.get('socket').set('connected', true);
+      return state.update('socket', socket => socket.set('connected', true));
     case MINIMIZE_COMMENT:
       return state.update('comments',
         comments => fromJS(
