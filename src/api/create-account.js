@@ -1,5 +1,5 @@
 import { setAuthTokenCookieForUserId } from '../auth-token';
-import connect from '../connection';
+import db from '../connection';
 import getUserByEmail from '../loaders/get-user-by-email';
 import getUserByName from '../loaders/get-user-by-name';
 import onError from '../util/on-error';
@@ -25,13 +25,12 @@ export default onError(async function createAccount(req, res) {
 
   const passHash = createPassHash(name, password);
   const color = passHash.substr(0, 6);
-  const db = connect();
 
-  const emailUser = await getUserByEmail(email, db);
+  const emailUser = await getUserByEmail(email);
   if (emailUser) {
     return res.json({ success: false, emailError: 'Email is already taken.' });
   }
-  const nameUser = await getUserByName(name, db);
+  const nameUser = await getUserByName(name);
   if (nameUser) {
     return res.json({ success: false, nameError: 'Name is already taken.' });
   }

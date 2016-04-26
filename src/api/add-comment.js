@@ -1,4 +1,4 @@
-import connect from '../connection';
+import db from '../connection';
 import getUserById from '../loaders/get-user-by-id';
 import sanitizeHtml from 'sanitize-html';
 
@@ -11,8 +11,7 @@ export default (io) => async (userId, postId, parentId, clientId, text) => {
   });
 
   if (userId && body && body !== '') {
-    const db = connect();
-    const user = await getUserById(userId, db);
+    const user = await getUserById(userId);
     if (user) {
       const insertResult = await db.one(
         `insert into t_comment (user_id, post_id, parent_id, body)

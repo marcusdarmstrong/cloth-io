@@ -1,5 +1,5 @@
 import { validate, URL_REX, TITLE_REX } from '../validator';
-import connect from '../connection';
+import db from '../connection';
 import getUserById from '../loaders/get-user-by-id';
 import sanitizeHtml from 'sanitize-html';
 
@@ -16,7 +16,6 @@ export default async (userId, rawTitle, rawLink, rawBody) => {
   const urlStringRoot = title.toLowerCase().replace(/ /g, '-').replace(/[^a-z-1234567890]/g, '');
 
   if (userId && body && body !== '') {
-    const db = connect();
     const urlStringLike = `${urlStringRoot}%`;
 
     const countResult = await db.one(
