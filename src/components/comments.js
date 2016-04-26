@@ -44,7 +44,7 @@ Comments.propTypes = {
     Comment.propTypes.comment
   ).isRequired,
   openModal: React.PropTypes.func.isRequired,
-  socket: React.PropTypes.socket({
+  socket: React.PropTypes.shape({
     connected: React.PropTypes.bool.isRequired,
     received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   }),
