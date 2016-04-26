@@ -4,7 +4,6 @@ import CommentFrame from './comment-frame';
 import CommentHeader from './comment-header';
 import CommentIndent from './comment-indent';
 import Button from './button';
-import guid from '../util/guid';
 
 export default class Comment extends React.Component {
   static propTypes = {
@@ -36,12 +35,6 @@ export default class Comment extends React.Component {
     commentBox: false,
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (this.state.commentBox && nextProps.received.indexOf(this.state.commentBox) !== -1) {
-      this.setState({ commentBox: false });
-    }
-  }
-
   minimize = () => {
     this.props.minimizeComment(this.props.comment.id);
     fetch('/api/minimizeComment', {
@@ -62,7 +55,7 @@ export default class Comment extends React.Component {
       if (this.state.commentBox) {
         this.setState({ commentBox: false });
       } else {
-        this.setState({ commentBox: guid() });
+        this.setState({ commentBox: true });
       }
     } else {
       this.props.openModal('login');

@@ -4,6 +4,7 @@ import CommentFrame from './comment-frame';
 import Button from './button';
 import CommentHeader from './comment-header';
 import fetch from 'isomorphic-fetch';
+import guid from '../util/guid';
 
 export default class AddCommentBox extends React.Component {
   static propTypes = {
@@ -20,6 +21,7 @@ export default class AddCommentBox extends React.Component {
     postId: React.PropTypes.number.isRequired,
     socketConnected: React.PropTypes.bool.isRequired,
     clientId: React.PropTypes.string,
+    received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   };
 
   state = {
@@ -27,12 +29,18 @@ export default class AddCommentBox extends React.Component {
     sending: false,
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.received.indexOf(this.state.commentBox) !== -1) {
+      this.setState({ value: '', sending: false }, this.props.onSubmission);
+    }
+  }
+
   handleChange = (event) => {
     this.setState({ value: event.target.value });
   };
 
   addComment = () => {
-    this.setState({ sending: true });
+    this.setState({ sending: guid() });
     fetch('/api/addComment', {
       method: 'post',
       headers: {
@@ -49,9 +57,9 @@ export default class AddCommentBox extends React.Component {
     }).then(res => res.json())
       .then(data => {
         if (data.success) {
-          if (this.props.onSubmission) {
+          if (this.props.onSubmission && this.state.sending) {
             this.setState({ value: '', sending: false }, this.props.onSubmission);
-          } else {
+          } else if (this.state.sending) {
             this.setState({ value: '', sending: false });
           }
         }
