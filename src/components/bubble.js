@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Bubble = ({ letter, hex, className, onClick }) => (
-  <div className={(className) ? `bubble ${className}` : 'bubble'}
+  <div
+    className={(className) ? `bubble ${className}` : 'bubble'}
     style={{ backgroundColor: `#${hex}` }} onClick={onClick}
   >
-      <span className="bubble-letter">{letter}</span>
+    <span className="bubble-letter">{letter}</span>
   </div>
 );
 

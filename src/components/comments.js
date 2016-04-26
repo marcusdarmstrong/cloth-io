@@ -8,7 +8,8 @@ const Comments =
     <section className="comments">
       <div className="comment-summary">
         <h2>{comments.length} {(comments.length === 1) ? 'Comment' : 'Comments'}</h2>
-        <AddCommentBox user={user} openModal={openModal} postId={post.id}
+        <AddCommentBox
+          user={user} openModal={openModal} postId={post.id}
           socketConnected={socket.connected}
         />
       </div>
@@ -17,11 +18,13 @@ const Comments =
         if (comment.hidden) {
           return null;
         } else if (comment.minimized) {
-          return (<HiddenComment key={comment.id} comment={comment}
+          return (<HiddenComment
+            key={comment.id} comment={comment}
             maximizeComment={maximizeComment}
           />);
         }
-        return (<Comment key={comment.id} comment={comment} user={user} openModal={openModal}
+        return (<Comment
+          key={comment.id} comment={comment} user={user} openModal={openModal}
           socketConnected={socket.connected} received={socket.received}
           minimizeComment={minimizeComment}
         />);

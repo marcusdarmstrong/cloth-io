@@ -78,7 +78,9 @@ export default class AddCommentBox extends React.Component {
       >
         <CommentHeader name={user.name} />
         <div className="textarea-container">
-          <ContentEditable onChange={this.handleChange} html={this.state.value}
+          <ContentEditable
+            onChange={this.handleChange}
+            html={this.state.value}
             autoFocus={(!!parentComment)}
           />
         </div>

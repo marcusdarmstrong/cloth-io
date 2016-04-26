@@ -1,81 +1,72 @@
 'use strict';
-var gulp = require('gulp');
-var eslint = require('gulp-eslint');
-var uglify = require('gulp-uglify');
-var del = require('del');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var babel = require('gulp-babel');
-var cleanCss = require('gulp-clean-css');
-var rev = require('gulp-rev');
-var insert = require('gulp-insert');
-var rename = require('gulp-rename');
+const gulp = require('gulp');
+const uglify = require('gulp-uglify');
+const del = require('del');
+const browserify = require('browserify');
+const babelify = require('babelify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const babel = require('gulp-babel');
+const cleanCss = require('gulp-clean-css');
+const rev = require('gulp-rev');
+const insert = require('gulp-insert');
+const rename = require('gulp-rename');
+const replace = require('gulp-replace');
 
-gulp.task('clean-manifest', function() {
-  return del(['src/manifest.js']);
-});
+gulp.task('clean-manifest', () => del(['src/manifest.js']));
 
-gulp.task('clean-server', function() {
-  return del(['bin/*.js']);
-});
+gulp.task('clean-server', () => del(['bin/*.js']));
 
-gulp.task('clean-client', function() {
-  return del(['public/*.js', 'public/*.map', 'public/*.css', 'public/*.json']);
-});
+gulp.task('clean-client', () =>
+  del(['public/*.js', 'public/*.map', 'public/*.css', 'public/*.json'])
+);
 
-gulp.task('lint', ['clean-manifest'], function() {
-  return gulp.src(['src/**/*.js'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
-
-gulp.task('client', ['clean-client'], function() {
-  var stream = browserify()
+gulp.task('client', ['clean-client'], () => {
+  let stream = browserify()
     .transform(babelify)
     .require('src/client.js', { entry: true })
     .bundle()
-    .on('error', function handleError(err) {
+    .on('error', (err) => {
       console.error(err.toString());
       this.emit('end');
     })
     .pipe(source('app.js'))
     .pipe(buffer());
 
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV === 'production') {
     stream = stream.pipe(uglify());
   }
 
   return stream.pipe(gulp.dest('public'))
     .pipe(rev())
     .pipe(gulp.dest('public'))
-    .pipe(rev.manifest('public/manifest.json', {base: process.cwd() + '/public', merge: true}))
+    .pipe(rev.manifest('public/manifest.json', { base: `${process.cwd()}/public`, merge: true }))
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('server', ['generate-manifest', 'clean-server'], function() {
-  return gulp.src(['src/**/*.js'])
+gulp.task('server', ['generate-manifest', 'clean-server'], () =>
+  gulp.src(['src/**/*.js'])
     .pipe(babel())
-    .pipe(gulp.dest('bin'));
-});
+    .pipe(gulp.dest('bin'))
+);
 
-gulp.task('generate-manifest', ['css'], function() {
-  return gulp.src(['public/manifest.json'])
+gulp.task('generate-manifest', ['css', 'clean-manifest'], () =>
+  gulp.src(['public/manifest.json'])
     .pipe(insert.wrap('export default ', ';\n'))
+    .pipe(replace('"', '\''))
+    .pipe(replace('\n}', ',\n}'))
     .pipe(rename('manifest.js'))
-    .pipe(gulp.dest('src'));
-});
+    .pipe(gulp.dest('src'))
+);
 
-gulp.task('css', ['client'], function() {
-  return gulp.src('css/**/*.css')
+gulp.task('css', ['client'], () =>
+  gulp.src('css/**/*.css')
     .pipe(cleanCss())
     .pipe(gulp.dest('public'))
     .pipe(rev())
     .pipe(gulp.dest('public'))
-    .pipe(rev.manifest('public/manifest.json', {base: process.cwd() + '/public', merge: true}))
-    .pipe(gulp.dest('public'));
-});
+    .pipe(rev.manifest('public/manifest.json', { base: `${process.cwd()}/public`, merge: true }))
+    .pipe(gulp.dest('public'))
+);
 
-gulp.task('default', ['lint', 'server']);
+gulp.task('default', ['server']);

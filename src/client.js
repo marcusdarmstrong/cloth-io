@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import * as actions from './actions';
 import App from './components/app';
 
-const state = fromJS(window.__INITIAL_STATE__);
+const state = fromJS(window.INITIAL_STATE);
 const store = createStore(reducer, state);
 
 const socketData = state.get('socket');
@@ -18,8 +18,8 @@ if (socketData) {
     socket.on('connect', () => store.dispatch({ type: 'SOCKET_CONNECT' }));
     const bindAction = actionName => data => store.dispatch({ type: actionName, comment: data });
 
-    for (const action in actions) {
-      if (actions.hasOwnProperty(action) && (typeof action) === 'string') {
+    for (const action of Object.keys(actions)) {
+      if ((typeof action) === 'string') {
         socket.on(action, bindAction(action));
       }
     }

@@ -65,7 +65,7 @@ export default class Nav extends React.Component {
         <nav>
           {userNav}
           {(noShareForm) ? null : <Button className="pull-left" href="/share">Share</Button>}
-          <a href="/"><img className="logo" src="/public/images/logo.png" /></a>
+          <a href="/"><img className="logo" src="/public/images/logo.png" alt="cloth.io" /></a>
         </nav>
       </div>
     );

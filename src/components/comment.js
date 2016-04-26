@@ -87,12 +87,14 @@ export default class Comment extends React.Component {
               name={this.props.comment.user.name}
               timestamp={this.props.comment.created}
             />
-            <div className="comment-text"
+            <div
+              className="comment-text"
               dangerouslySetInnerHTML={{ __html: this.props.comment.body }}
             ></div>
             {(replyNestLevel <= 4) &&
               <div className="comment-options">
-                <Button classNames="pull-right"
+                <Button
+                  classNames="pull-right"
                   engaged={!!this.state.commentBox}
                   onClick={this.toggleReplyBox}
                 >
@@ -102,7 +104,8 @@ export default class Comment extends React.Component {
             }
           </CommentFrame>
           {(this.state.commentBox) &&
-            <AddCommentBox user={this.props.user} parentComment={this.props.comment}
+            <AddCommentBox
+              user={this.props.user} parentComment={this.props.comment}
               postId={this.props.comment.post_id} openModal={this.props.openModal}
               onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
               key={this.state.commentBox} fork={this.props.comment.hasReplies}

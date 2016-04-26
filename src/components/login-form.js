@@ -70,11 +70,13 @@ export default class LoginForm extends React.Component {
         </div>
         {errorState}
         <label htmlFor="email">Email address:</label>
-        <input type="email" autoFocus name="email"
+        <input
+          type="email" autoFocus name="email"
           value={this.state.email} onChange={this.handleEmailChange}
         />
         <label htmlFor="password">Password:</label>
-        <input type="password" name="password"
+        <input
+          type="password" name="password"
           value={this.state.password} onChange={this.handlePasswordChange}
         />
         <input type="submit" name="submit" value="Log in" />

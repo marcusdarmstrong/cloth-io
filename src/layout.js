@@ -14,7 +14,7 @@ export default function (title, body, state) {
 <body>
   <div id="react-container">${body}</div>
   <script>
-    window.__INITIAL_STATE__ = ${JSON.stringify(state)}
+    window.INITIAL_STATE = ${JSON.stringify(state)}
   </script>
   <script src="/public/${manifest['app.js']}"></script>
 </body>

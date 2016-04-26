@@ -97,12 +97,14 @@ export default class ShareForm extends React.Component {
       <form className="share-form" onSubmit={this.handleSubmit}>
         {submissionError}
         <label htmlFor="title">Post Title:</label>
-        <input type="text" className={titleClass} autoFocus name="title"
+        <input
+          type="text" className={titleClass} autoFocus name="title"
           value={this.state.title} onChange={this.handleTitleChange}
         />
         <div className={`form-helper${titleClass}`}>{this.state.titleHelperText}</div>
         <label htmlFor="link">Link: (Optional)</label>
-        <input type="url" className={linkClass} name="link"
+        <input
+          type="url" className={linkClass} name="link"
           value={this.state.link} onChange={this.handleLinkChange}
         />
         <div className={`form-helper${linkClass}`}>{this.state.linkHelperText}</div>

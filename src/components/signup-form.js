@@ -131,17 +131,20 @@ export default class SignupForm extends React.Component {
       <form className="login-form" onSubmit={this.handleSubmit}>
         {submissionError}
         <label htmlFor="name">Display name:</label>
-        <input type="text" className={nameClass} autoFocus name="name"
+        <input
+          type="text" className={nameClass} autoFocus name="name"
           value={this.state.name} onChange={this.handleNameChange}
         />
         <div className={`form-helper${nameClass}`}>{this.state.nameHelperText}</div>
         <label htmlFor="email">Email address:</label>
-        <input type="email" className={emailClass} name="email"
+        <input
+          type="email" className={emailClass} name="email"
           value={this.state.email} onChange={this.handleEmailChange}
         />
         <div className={`form-helper${emailClass}`}>{this.state.emailHelperText}</div>
         <label htmlFor="password">Password:</label>
-        <input type="password" className={passwordClass} name="password"
+        <input
+          type="password" className={passwordClass} name="password"
           value={this.state.password} onChange={this.handlePasswordChange}
         />
         <div className={`form-helper${passwordClass}`}>{this.state.passwordHelperText}</div>

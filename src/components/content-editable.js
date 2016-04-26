@@ -40,7 +40,8 @@ export default class ContentEditable extends React.Component {
 
   render() {
     return (
-      <div id="contenteditable"
+      <div
+        id="contenteditable"
         className="textarea"
         onInput={this.emitChange}
         onBlur={this.emitChange}
