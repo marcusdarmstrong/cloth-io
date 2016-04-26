@@ -1,4 +1,4 @@
-import { List as list } from 'immutable';
+import { List as list, Map as map } from 'immutable';
 import commentOrdering from '../comment-ordering';
 import getPostByUrlString from '../loaders/get-post-by-urlstring';
 import getUserById from '../loaders/get-user-by-id';
@@ -15,11 +15,11 @@ export default async (userId, urlString) => {
     comments: list(commentOrdering(comments)),
     user,
     modal: null,
-    socket: {
+    socket: map({
       name: `/comments-${post.id}`,
       connected: false,
       received: list(),
-    },
+    }),
     route: 'Post',
   };
 };
