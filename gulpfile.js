@@ -21,14 +21,19 @@ gulp.task('clean-client', () =>
   del(['public/*.js', 'public/*.map', 'public/*.css', 'public/*.json'])
 );
 
-gulp.task('client', ['clean-client'], () => {
+gulp.task('client', ['clean-client'], function cleanClient() {
+  const that = this;
   let stream = browserify()
     .transform(babelify)
     .require('src/client.js', { entry: true })
     .bundle()
-    .on('error', (err) => {
-      console.error(err.toString());
-      this.emit('end');
+    .on('error', (e) => {
+      if (e.stack) {
+        console.error(e.stack);
+      } else {
+        console.error(e.toString());
+      }
+      that.emit('end');
     })
     .pipe(source('app.js'))
     .pipe(buffer());
