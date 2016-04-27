@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import ContentEditable from './content-editable';
 import CommentFrame from './comment-frame';
@@ -6,39 +8,46 @@ import CommentHeader from './comment-header';
 import fetch from 'isomorphic-fetch';
 import guid from '../util/guid';
 
-export default class AddCommentBox extends React.Component {
-  static propTypes = {
-    user: React.PropTypes.shape({
-      color: React.PropTypes.string.isRequired,
-      name: React.PropTypes.string.isRequired,
-    }),
-    parentComment: React.PropTypes.shape({
-      id: React.PropTypes.number.isRequired,
-    }),
-    fork: React.PropTypes.bool,
-    openModal: React.PropTypes.func.isRequired,
-    onSubmission: React.PropTypes.func,
-    postId: React.PropTypes.number.isRequired,
-    socketConnected: React.PropTypes.bool.isRequired,
-    received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  };
+type Props = {
+  user: {
+    color: string,
+    name: string,
+  },
+  parentComment: {
+    id: number,
+  },
+  fork: boolean,
+  openModal: () => void,
+  onSubmission: () => void,
+  postId: number,
+  socketConnected: boolean,
+  received: string,
+};
 
-  state = {
+type State = {
+  value: string,
+  sending: boolean,
+};
+
+export default class AddCommentBox extends React.Component {
+  state: State = {
     value: '',
     sending: false,
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.received.indexOf(this.state.commentBox) !== -1) {
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.received.indexOf(this.state.value) !== -1) {
       this.setState({ value: '', sending: false }, this.props.onSubmission);
     }
   }
 
-  handleChange = (event) => {
+  props: Props;
+
+  handleChange: (event: { target: { value: string } }) => void = (event) => {
     this.setState({ value: event.target.value });
   };
 
-  addComment = () => {
+  addComment: () => void = () => {
     const clientId = guid();
     this.setState({ sending: clientId });
     fetch('/api/addComment', {
@@ -66,7 +75,7 @@ export default class AddCommentBox extends React.Component {
       });
   };
 
-  openLoginModal = () => this.props.openModal('login');
+  openLoginModal: () => void = () => this.props.openModal('login');
 
   render() {
     const { user, parentComment, fork, socketConnected } = this.props;
