@@ -1,5 +1,10 @@
-export default function onError(func, value = null) {
-  return async (...args) => {
+// @flow
+
+export default function onError<T>(
+  func: (...args: any[]) => Promise<T>,
+  value: T | (...args: any[]) => T
+): (...args: any[]) => Promise<T> {
+  return async (...args: any[]) => {
     try {
       return await func.apply(func, args);
     } catch (e) {

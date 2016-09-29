@@ -1,11 +1,20 @@
+// @flow
 import md5 from 'md5';
 import crypto from 'crypto';
 
 const algorithm = 'aes-256-ctr';
-const password = process.env.AUTH_TOKEN_PASSWORD;
+const password = process.env.AUTH_TOKEN_PASSWORD || '';
 const cookieName = 'auth';
 
-export function createAuthToken(id) {
+type CookieOptions = {
+  maxAge: number,
+  httpOnly: boolean,
+};
+type Response = {
+  cookie: (name: string, value: string, options: CookieOptions) => void,
+};
+
+export function createAuthToken(id: number) {
   if (!id) {
     return null;
   }
@@ -18,7 +27,7 @@ export function createAuthToken(id) {
   return crypted;
 }
 
-export function decodeAuthToken(token) {
+export function decodeAuthToken(token: string) {
   if (!token) {
     return null;
   }
@@ -33,17 +42,20 @@ export function decodeAuthToken(token) {
   return null;
 }
 
-export function readAuthTokenFromCookies(req) {
+export function readAuthTokenFromCookies(req: Request) {
   return req.cookies && decodeAuthToken(req.cookies[cookieName]);
 }
 
-export function setAuthTokenCookieForUserId(res, userId) {
-  res.cookie(cookieName, createAuthToken(userId), {
-    maxAge: 1000 * 60 * 60 * 24 * 365 * 2,
-    httpOnly: true,
-  });
+export function setAuthTokenCookieForUserId(res: Response, userId: number) {
+  const cookieVal = createAuthToken(userId);
+  if (cookieVal) {
+    res.cookie(cookieName, cookieVal, {
+      maxAge: 1000 * 60 * 60 * 24 * 365 * 2,
+      httpOnly: true,
+    });
+  }
 }
 
-export function deleteAuthTokenFromCookies(res) {
+export function deleteAuthTokenFromCookies(res: Response) {
   res.cookie(cookieName, '', { maxAge: 0, httpOnly: true });
 }

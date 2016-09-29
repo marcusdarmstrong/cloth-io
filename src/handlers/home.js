@@ -1,8 +1,10 @@
+// @flow
+
 import { default as getTopPosts, defaultPageSize } from '../loaders/get-top-posts';
 import getUserById from '../loaders/get-user-by-id';
 
-export default async (userId, page = 0) => {
-  const numPage = Number(page);
+export default async (userId: number, page: ?string) => {
+  const numPage = Number(page || 0);
 
   let posts = await getTopPosts(numPage, defaultPageSize + 1, defaultPageSize);
   let nextPage = undefined;

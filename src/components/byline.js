@@ -1,9 +1,16 @@
+// @flow
+
 import React from 'react';
 import TimeAgo from './time-ago';
 import previewer from '../util/previewer';
+import type { Post } from '../entities/post';
+
+type Props = {
+  post: Post,
+};
 
 // This is pretty poorly named. I should work on the dom structure here.
-const Byline = ({ post }) => {
+const Byline = ({ post }: Props) => {
   const { body, commentCount, created, user } = post;
   const preview = previewer(body);
   let commentCountText = 'Read More';

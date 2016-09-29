@@ -1,10 +1,29 @@
+// @flow
+
 import React from 'react';
 import AddCommentBox from './add-comment-box';
 import Comment from './comment';
 import HiddenComment from './hidden-comment';
 
-const Comments =
-  ({ post, user, comments, openModal, socket, minimizeComment, maximizeComment }) => (
+import type { Post } from '../entities/post';
+import type { User } from '../entities/user';
+import type { DisplayableComment } from '../entities/displayable-comment';
+
+type Props = {
+  post: Post,
+  user?: User,
+  comments: DisplayableComment[],
+  socket: {
+    connected: boolean,
+    received: string[],
+  },
+  openModal: () => void,
+  minimizeComment: () => void,
+  maximizeComment: () => void,
+};
+
+export default
+  ({ post, user, comments, openModal, socket, minimizeComment, maximizeComment }: Props) => (
     <section className="comments">
       <div className="comment-summary">
         <h2>{comments.length} {(comments.length === 1) ? 'Comment' : 'Comments'}</h2>
@@ -31,25 +50,3 @@ const Comments =
       })}
     </section>
   );
-
-Comments.propTypes = {
-  post: React.PropTypes.shape({
-    id: React.PropTypes.number.isRequired,
-  }).isRequired,
-  user: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    color: React.PropTypes.string.isRequired,
-  }),
-  comments: React.PropTypes.arrayOf(
-    Comment.propTypes.comment
-  ).isRequired,
-  openModal: React.PropTypes.func.isRequired,
-  socket: React.PropTypes.shape({
-    connected: React.PropTypes.bool.isRequired,
-    received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  }),
-  minimizeComment: React.PropTypes.func.isRequired,
-  maximizeComment: React.PropTypes.func.isRequired,
-};
-
-export default Comments;

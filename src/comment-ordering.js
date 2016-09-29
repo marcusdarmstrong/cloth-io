@@ -1,9 +1,13 @@
+// @flow
+import type { Comment } from './entities/comment';
+
 function sortAndBucket(comments) { // I think O(n log n)
+  const buckets = {};
   if (!comments || (comments && comments.length === 0)) {
-    return { 0: [] };
+    buckets['0'] = [];
+    return buckets;
   }
   comments.sort((b, a) => a.created - b.created);
-  const buckets = {};
   for (let i = 0; i < comments.length; ++i) {
     const comment = comments[i];
     const key = comment.parent_id || 0;
@@ -21,7 +25,7 @@ buckets = {
 };
 */
 function markAndFlatten(buckets, parentId, fork, nestLevel, hidden) { // I think O(n)
-  let result = [];
+  let result: Comment[] = [];
   const bucket = buckets[parentId];
   for (let i = 0; i < bucket.length; ++i) {
     const root = bucket[i];
@@ -45,7 +49,7 @@ function markAndFlatten(buckets, parentId, fork, nestLevel, hidden) { // I think
         childNestLevel + 1,
         root.minimized || root.hidden
       );
-      children[children.length - 1].child = true;
+      children[children.length - 1].isReply = true;
       children[children.length - 1].fork = false;
       root.descendents = descendents.length;
       result = result.concat(descendents);
@@ -56,6 +60,6 @@ function markAndFlatten(buckets, parentId, fork, nestLevel, hidden) { // I think
   return result;
 }
 
-export default function (rawComments) {
+export default function (rawComments: Comment[]) {
   return markAndFlatten(sortAndBucket(rawComments), 0, false, 0, false);
 }

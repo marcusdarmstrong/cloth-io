@@ -1,7 +1,9 @@
+// @flow
+
 const parser =
   /^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/;
 
-export default (uri) => {
+export default (uri: string) => {
   const match = parser.exec(uri);
   return {
     protocol: match[2],

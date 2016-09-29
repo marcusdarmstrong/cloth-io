@@ -1,44 +1,36 @@
+// @flow
+
 import React from 'react';
 import AddCommentBox from './add-comment-box';
 import CommentFrame from './comment-frame';
 import CommentHeader from './comment-header';
 import CommentIndent from './comment-indent';
 import Button from './button';
+import type { DisplayableComment } from '../entities/displayable-comment';
+import type { User } from '../entities/user';
+
+type Props = {
+  comment: DisplayableComment,
+  user?: User,
+  openModal: () => void,
+  socketConnected: boolean,
+  minimizeComment: () => void,
+  received: string[],
+};
 
 export default class Comment extends React.Component {
-  static propTypes = {
-    comment: React.PropTypes.shape({
-      id: React.PropTypes.number.isRequired,
-      user: React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-        color: React.PropTypes.string.isRequired,
-      }).isRequired,
-      created: React.PropTypes.number.isRequired,
-      body: React.PropTypes.string.isRequired,
-      nestLevel: React.PropTypes.number.isRequired,
-      post_id: React.PropTypes.number.isRequired,
-      hasReplies: React.PropTypes.bool,
-      fork: React.PropTypes.bool,
-      child: React.PropTypes.bool,
-    }).isRequired,
-    user: React.PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      color: React.PropTypes.string.isRequired,
-    }),
-    openModal: React.PropTypes.func.isRequired,
-    socketConnected: React.PropTypes.bool.isRequired,
-    minimizeComment: React.PropTypes.func.isRequired,
-    received: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  };
-
-  state = {
+  state: {
+    commentBox: boolean,
+  } = {
     commentBox: false,
   };
 
-  minimize = () => {
+  props: Props;
+
+  minimize: () => void = () => {
     this.props.minimizeComment(this.props.comment.id);
     fetch('/api/minimizeComment', {
-      method: 'post',
+      method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -50,7 +42,7 @@ export default class Comment extends React.Component {
     });
   };
 
-  toggleReplyBox = () => {
+  toggleReplyBox: () => void = () => {
     if (this.props.user) {
       if (this.state.commentBox) {
         this.setState({ commentBox: false });
@@ -71,7 +63,7 @@ export default class Comment extends React.Component {
         <div>
           <CommentFrame
             fork={this.props.comment.fork}
-            isReply={this.props.comment.child}
+            isReply={this.props.comment.isReply}
             hasReplies={this.props.comment.hasReplies || !!this.state.commentBox}
             user={this.props.comment.user}
             onAvatarClick={this.minimize}
@@ -99,7 +91,7 @@ export default class Comment extends React.Component {
           {(this.state.commentBox) &&
             <AddCommentBox
               user={this.props.user} parentComment={this.props.comment}
-              postId={this.props.comment.post_id} openModal={this.props.openModal}
+              postId={this.props.comment.postId} openModal={this.props.openModal}
               onSubmission={this.toggleReplyBox} socketConnected={this.props.socketConnected}
               key={this.state.commentBox} fork={this.props.comment.hasReplies}
               clientId={this.state.commentBox} received={this.props.received}

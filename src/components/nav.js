@@ -1,34 +1,40 @@
+// @flow
+
 import React from 'react';
 import ScrollWatch from './scroll-watch';
 import Avatar from './avatar';
 import Button from './button';
 
-export default class Nav extends React.Component {
-  static propTypes = {
-    user: React.PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      color: React.PropTypes.string.isRequired,
-      status: React.PropTypes.number.isRequired,
-    }),
-    openModal: React.PropTypes.func.isRequired,
-    loginUser: React.PropTypes.func.isRequired,
-    noShareForm: React.PropTypes.bool,
-  };
+import type { User } from '../entities/user';
 
-  state = {
+export type Props = {
+  user?: User,
+  openModal: () => void,
+  loginUser: () => void,
+  noShareForm?: boolean,
+};
+
+export default class Nav extends React.Component {
+
+  state: {
+    signOut: boolean,
+    hidden: boolean,
+  } = {
     signOut: false,
     hidden: false,
   };
 
-  showSignoutLink = () => this.setState({ signOut: true });
+  props: Props;
 
-  signOut = () => {
+  showSignoutLink: () => void = () => this.setState({ signOut: true });
+
+  signOut: () => void = () => {
     this.setState({ signOut: false });
     fetch('/api/signOut', { credentials: 'same-origin' })
       .then(() => this.props.loginUser(null));
   };
 
-  handleScroll = (newTop, diff) => {
+  handleScroll: (newTop: number, diff: number) => void = (newTop, diff) => {
     const delta = Math.abs(diff);
     if (delta <= 5) {
       return;
@@ -41,7 +47,7 @@ export default class Nav extends React.Component {
     }
   };
 
-  openLoginModal = () => this.props.openModal('login');
+  openLoginModal: () => void = () => this.props.openModal('login');
 
   render() {
     let userNav = <Button classNames="pull-right" onClick={this.openLoginModal}>Log in</Button>;

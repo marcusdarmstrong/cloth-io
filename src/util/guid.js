@@ -1,3 +1,5 @@
+// @flow
+
 const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
 export default () => {

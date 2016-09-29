@@ -1,8 +1,20 @@
+// @flow
+
 import React from 'react';
 import Nav from './nav';
+// eslint-disable-next-line
+import type { Props as NavProps } from './nav';
 import Modal from './modal';
 
-const Frame = ({ modal, children, ...props }) => (
+type Props = NavProps & {
+  modal?: {
+    component: () => void,
+    title: string,
+  },
+  children: React.Element | React.Element[],
+};
+
+export default ({ modal, children, ...props }: Props) => (
   <div>
     <Nav {...props} />
     <div className="spacer">
@@ -11,19 +23,9 @@ const Frame = ({ modal, children, ...props }) => (
       </div>
     </div>
     {(modal) ? (
-      <Modal title={props.modal.title}>
-        {React.createElement(props.modal.component, props)}
+      <Modal title={modal.title}>
+        {React.createElement(modal.component, props)}
       </Modal>
       ) : null}
   </div>
 );
-
-Frame.propTypes = Object.assign({
-  modal: React.PropTypes.shape({
-    component: React.PropTypes.func.isRequired,
-    title: React.PropTypes.string.isRequired,
-  }),
-  children: React.PropTypes.node,
-}, Nav.propTypes);
-
-export default Frame;

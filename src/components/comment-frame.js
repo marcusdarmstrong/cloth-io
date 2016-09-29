@@ -1,21 +1,33 @@
+// @flow
+
 import React from 'react';
 import Avatar from './avatar';
 import Bubble from './bubble';
-import cs from '../util/classes';
+import type { User } from '../entities/user';
 
-const CommentFrame = ({ isReply, hasReplies, fork, user, onAvatarClick, classNames, children }) => {
-  let className = 'comment-frame';
+type Props = {
+  isReply?: boolean,
+  hasReplies?: boolean,
+  fork?: boolean,
+  user?: User,
+  children: React.Element | React.Element[] | ?string,
+  onAvatarClick?: () => void,
+  className?: string,
+}
+
+export default ({ isReply, hasReplies, fork, user, onAvatarClick, className, children }: Props) => {
+  let baseClass = 'comment-frame';
   if (hasReplies) {
-    className += ' has-replies';
+    baseClass += ' has-replies';
   }
   if (fork) {
-    className += ' fork';
+    baseClass += ' fork';
   } else if (isReply) {
-    className += ' child';
+    baseClass += ' child';
   }
 
   return (
-    <div className={cs(className, classNames)}>
+    <div className={`${baseClass} ${className}`}>
       <div className="author">
         {(user) ?
           <Avatar user={user} onClick={onAvatarClick} />
@@ -29,15 +41,3 @@ const CommentFrame = ({ isReply, hasReplies, fork, user, onAvatarClick, classNam
     </div>
   );
 };
-
-CommentFrame.propTypes = {
-  isReply: React.PropTypes.bool,
-  hasReplies: React.PropTypes.bool,
-  fork: React.PropTypes.bool,
-  user: Avatar.propTypes.user,
-  children: React.PropTypes.any,
-  classNames: React.PropTypes.string,
-  onAvatarClick: React.PropTypes.func,
-};
-
-export default CommentFrame;

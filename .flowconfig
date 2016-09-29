@@ -1,5 +1,11 @@
 [ignore]
 .*/react/node_modules/.*
+.*/node_modules/babel.*
+.*/node_modules/gulp.*
+.*/bin/.*
+.*/public/.*
+.*/css/.*
+
 
 [options]
 esproposal.class_static_fields=enable

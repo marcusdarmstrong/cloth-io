@@ -1,3 +1,5 @@
+// @flow
+
 import db from '../connection';
 import onError from '../util/on-error';
 
@@ -21,7 +23,8 @@ export default onError(async function getCommentsForPostAndUser(postId, userId) 
   return (await db.any(commentQuery(), { postId, userId })).map(comment => {
     const newComment = comment;
     newComment.id = Number(newComment.id);
-    newComment.post_id = Number(newComment.post_id);
+    newComment.postId = Number(newComment.post_id);
+    delete newComment.post_id;
     newComment.created = Number(newComment.created);
     newComment.minimized = !!newComment.minimized;
     newComment.user = {

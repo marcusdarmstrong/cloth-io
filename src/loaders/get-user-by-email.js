@@ -1,3 +1,5 @@
+// @flow
+
 import db from '../connection';
 import onError from '../util/on-error';
 

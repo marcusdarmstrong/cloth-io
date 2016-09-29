@@ -1,7 +1,14 @@
+// @flow
+
 import React from 'react';
 import TimeAgo from './time-ago';
 
-const CommentHeader = ({ name, timestamp }) => (
+type Props = {
+  name: string,
+  timestamp?: number,
+};
+
+export default ({ name, timestamp }: Props) => (
   <div className="comment-header">
     {(timestamp) ? <TimeAgo timestamp={timestamp} /> : null}
     <div className="author-name">
@@ -9,10 +16,3 @@ const CommentHeader = ({ name, timestamp }) => (
     </div>
   </div>
 );
-
-CommentHeader.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  timestamp: React.PropTypes.number,
-};
-
-export default CommentHeader;

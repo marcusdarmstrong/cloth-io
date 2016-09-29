@@ -1,6 +1,15 @@
+// @flow
+
 import React from 'react';
 
-const Bubble = ({ letter, hex, className, onClick }) => (
+type Props = {
+  letter: string,
+  hex: string,
+  className?: string,
+  onClick?: () => void,
+};
+
+export default ({ letter, hex, className, onClick }: Props) => (
   <div
     className={(className) ? `bubble ${className}` : 'bubble'}
     style={{ backgroundColor: `#${hex}` }} onClick={onClick}
@@ -8,12 +17,3 @@ const Bubble = ({ letter, hex, className, onClick }) => (
     <span className="bubble-letter">{letter}</span>
   </div>
 );
-
-Bubble.propTypes = {
-  letter: React.PropTypes.string.isRequired,
-  hex: React.PropTypes.string.isRequired,
-  className: React.PropTypes.string,
-  onClick: React.PropTypes.func,
-};
-
-export default Bubble;

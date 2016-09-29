@@ -1,48 +1,59 @@
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const OPEN_MODAL = 'OPEN_MODAL';
-export const CLOSE_MODAL = 'CLOSE_MODAL';
-export const LOGIN_USER = 'LOGIN_USER';
-export const SOCKET_CONNECT = 'SOCKET_CONNECT';
-export const MINIMIZE_COMMENT = 'MINIMIZE_COMMENT';
-export const MAXIMIZE_COMMENT = 'MAXIMIZE_COMMENT';
+// @flow
 
-export function addComment(comment) {
+import * as AddComment from './actions/add-comment';
+import * as OpenModal from './actions/open-modal';
+import * as CloseModal from './actions/close-modal';
+import * as LoginUser from './actions/login-user';
+import * as MinimizeComment from './actions/minimize-comment';
+import * as MaximizeComment from './actions/maximize-comment';
+import * as SocketConnect from './actions/socket-connect';
+
+import type { User } from './entities/user';
+import type { Comment } from './entities/comment';
+
+export function addComment(comment: Comment): AddComment.Action {
   return {
-    type: ADD_COMMENT,
+    type: AddComment.TYPE,
     comment,
   };
 }
 
-export function openModal(modalType) {
+export function openModal(modalType: string): OpenModal.Action {
   return {
-    type: OPEN_MODAL,
+    type: OpenModal.TYPE,
     modalType,
   };
 }
 
-export function closeModal() {
+export function closeModal(): CloseModal.Action {
   return {
-    type: CLOSE_MODAL,
+    type: CloseModal.TYPE,
   };
 }
 
-export function loginUser(user) {
+export function loginUser(user: User): LoginUser.Action {
   return {
-    type: LOGIN_USER,
+    type: LoginUser.TYPE,
     user,
   };
 }
 
-export function minimizeComment(commentId) {
+export function minimizeComment(commentId: number): MinimizeComment.Action {
   return {
-    type: MINIMIZE_COMMENT,
+    type: MinimizeComment.TYPE,
     commentId,
   };
 }
 
-export function maximizeComment(commentId) {
+export function maximizeComment(commentId: number): MaximizeComment.Action {
   return {
-    type: MAXIMIZE_COMMENT,
+    type: MaximizeComment.TYPE,
     commentId,
+  };
+}
+
+export function socketConnect(): SocketConnect.Action {
+  return {
+    type: SocketConnect.TYPE,
   };
 }

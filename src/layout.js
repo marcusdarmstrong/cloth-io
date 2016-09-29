@@ -1,6 +1,8 @@
+// @flow
+
 import manifest from './manifest';
 
-export default function (title, body, state) {
+export default function (title: string, body: string, state: Object) {
   return `<!doctype html>
 <html lang="en">
 <head>

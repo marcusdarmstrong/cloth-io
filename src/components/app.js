@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { Provider } from 'react-redux';
 import Route from './route';
@@ -13,7 +15,7 @@ const BoundHome = binder(Home);
 const BoundFrame = binder(Frame);
 const BoundComments = binder(Comments);
 
-const App = ({ store }) =>
+const App = ({ store }: { store: Object }) =>
   (<Provider store={store}>
     <div>
       <Route name="Post">

@@ -1,13 +1,15 @@
+// @flow
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default class ContentEditable extends React.Component {
-  static propTypes = {
-    html: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    autoFocus: React.PropTypes.bool,
-  };
+type Props = {
+  html?: string,
+  onChange?: (event: { target: { value: string } }) => void,
+  autoFocus?: boolean,
+};
 
+export default class ContentEditable extends React.Component {
   componentDidMount() {
     if (this.props.autoFocus && (typeof window.orientation) === 'undefined') {
       // We use orientation as a proxy for devices with an on-screen keyboard.
@@ -16,7 +18,7 @@ export default class ContentEditable extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return nextProps.html !== ReactDOM.findDOMNode(this).innerHTML;
   }
 
@@ -26,7 +28,10 @@ export default class ContentEditable extends React.Component {
     }
   }
 
-  emitChange = () => {
+  props: Props;
+  lastHtml: string;
+
+  emitChange: () => void = () => {
     const html = ReactDOM.findDOMNode(this).innerHTML;
     if (this.props.onChange && html !== this.lastHtml) {
       this.props.onChange({

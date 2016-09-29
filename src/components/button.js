@@ -1,23 +1,26 @@
-import cs from '../util/classes';
+// @flow
+
 import React from 'react';
 
-const Button = ({ children, onClick, classNames, href, engaged }) => {
-  const className = cs((engaged) ? 'button engaged' : 'button', classNames);
+type Props = {
+  children: string,
+  onClick?: () => void,
+  href?: string,
+  className?: string,
+  engaged?: boolean,
+};
+
+export default ({ children, onClick, className, href, engaged }: Props) => {
+  let baseClass = 'button';
+  if (engaged) {
+    baseClass += ' engaged';
+  }
   if (href) {
-    return <a className={className} href={href}>{children}</a>;
+    return <a className={`${baseClass} ${className}`} href={href}>{children}</a>;
   }
   if (onClick || engaged) {
-    return <div className={className} onClick={onClick}>{children}</div>;
+    return <div className={`${baseClass} ${className}`} onClick={onClick}>{children}</div>;
   }
-  return <div className={cs('button', 'disabled', classNames)}>{children}</div>;
+  baseClass += 'disabled';
+  return <div className={`${baseClass} ${className}`}>{children}</div>;
 };
-
-Button.propTypes = {
-  children: React.PropTypes.string.isRequired,
-  href: React.PropTypes.string,
-  onClick: React.PropTypes.func,
-  classNames: React.PropTypes.string,
-  engaged: React.PropTypes.bool,
-};
-
-export default Button;

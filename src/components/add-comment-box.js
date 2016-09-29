@@ -8,25 +8,24 @@ import CommentHeader from './comment-header';
 import fetch from 'isomorphic-fetch';
 import guid from '../util/guid';
 
+import type { User } from '../entities/user';
+
 type Props = {
-  user: {
-    color: string,
-    name: string,
-  },
-  parentComment: {
+  user?: User,
+  parentComment?: {
     id: number,
   },
-  fork: boolean,
+  fork?: boolean,
   openModal: () => void,
-  onSubmission: () => void,
+  onSubmission?: () => void,
   postId: number,
   socketConnected: boolean,
-  received: string,
+  received: string[],
 };
 
 type State = {
   value: string,
-  sending: boolean,
+  sending: boolean | string,
 };
 
 export default class AddCommentBox extends React.Component {
@@ -35,19 +34,24 @@ export default class AddCommentBox extends React.Component {
     sending: false,
   };
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props): void {
     if (nextProps.received.indexOf(this.state.value) !== -1) {
-      this.setState({ value: '', sending: false }, this.props.onSubmission);
+      if (this.props.onSubmission) {
+        this.setState({ value: '', sending: false }, this.props.onSubmission);
+      } else {
+        this.setState({ value: '', sending: false });
+      }
     }
   }
 
   props: Props;
 
-  handleChange: (event: { target: { value: string } }) => void = (event) => {
-    this.setState({ value: event.target.value });
-  };
+  handleChange: (event: { target: { value: string } }) => void =
+    (event: { target: { value: string } }): void => {
+      this.setState({ value: event.target.value });
+    };
 
-  addComment: () => void = () => {
+  addComment: () => void = (): void => {
     const clientId = guid();
     this.setState({ sending: clientId });
     fetch('/api/addComment', {
@@ -63,8 +67,8 @@ export default class AddCommentBox extends React.Component {
         postId: this.props.postId,
         clientId,
       }),
-    }).then(res => res.json())
-      .then(data => {
+    }).then((res: Response): Object => res.json())
+      .then((data: Object): void => {
         if (data.success) {
           if (this.props.onSubmission && this.state.sending) {
             this.setState({ value: '', sending: false }, this.props.onSubmission);
@@ -75,9 +79,9 @@ export default class AddCommentBox extends React.Component {
       });
   };
 
-  openLoginModal: () => void = () => this.props.openModal('login');
+  openLoginModal: () => void = (): void => this.props.openModal('login');
 
-  render() {
+  render(): React.Element {
     const { user, parentComment, fork, socketConnected } = this.props;
 
     const disabledCopy = (this.state.sending) ? 'Sending...' : 'Connecting...';
